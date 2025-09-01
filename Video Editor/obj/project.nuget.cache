@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "DqZTPsmsvqsZZqWxZn4sBGOnF6S+FPSgHv84NclSjKckkC7DVTWD41lErJm91uHgGD4lMjIJHMhQHuM1Q6LSGA==",
+  "success": true,
+  "projectFilePath": "D:\\Study\\Video Editor\\Video Editor\\Video Editor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\op101\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.8\\microsoft.win32.systemevents.9.0.8.nupkg.sha512",
+    "C:\\Users\\op101\\.nuget\\packages\\system.drawing.common\\9.0.8\\system.drawing.common.9.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}

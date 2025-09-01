@@ -1,0 +1,172 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Study\\Video Editor\\Video Editor\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|D:\\Study\\Video Editor\\Video Editor\\main form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|solutionrelative:main form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|d:\\study\\video editor\\video editor\\main form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|solutionrelative:main form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|D:\\Study\\Video Editor\\Video Editor\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|d:\\study\\video editor\\video editor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|D:\\Study\\Video Editor\\Video Editor\\main form.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|solutionrelative:main form.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|D:\\Study\\Video Editor\\Video Editor\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|D:\\Study\\Video Editor\\Video Editor\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|D:\\Study\\Video Editor\\Video Editor\\main form.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|solutionrelative:main form.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|D:\\Study\\Video Editor\\Video Editor\\form1.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{68D218A2-4B82-40A4-A1CE-3E5BF8FA1C36}|Video Editor.csproj|solutionrelative:form1.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Study\\Video Editor\\Video Editor\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Study\\Video Editor\\Video Editor\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-30T18:59:45.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "D:\\Study\\Video Editor\\Video Editor\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Form1.Designer.cs",
+              "ToolTip": "D:\\Study\\Video Editor\\Video Editor\\Form1.Designer.cs",
+              "RelativeToolTip": "Form1.Designer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T20:50:23.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Form1.resx",
+              "DocumentMoniker": "D:\\Study\\Video Editor\\Video Editor\\Form1.resx",
+              "RelativeDocumentMoniker": "Form1.resx",
+              "ToolTip": "D:\\Study\\Video Editor\\Video Editor\\Form1.resx",
+              "RelativeToolTip": "Form1.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-08-21T20:43:48.814Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Main Form.resx",
+              "DocumentMoniker": "D:\\Study\\Video Editor\\Video Editor\\Main Form.resx",
+              "RelativeDocumentMoniker": "Main Form.resx",
+              "ToolTip": "D:\\Study\\Video Editor\\Video Editor\\Main Form.resx",
+              "RelativeToolTip": "Main Form.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-08-21T20:43:43.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Main Form.Designer.cs",
+              "DocumentMoniker": "D:\\Study\\Video Editor\\Video Editor\\Main Form.Designer.cs",
+              "RelativeDocumentMoniker": "Main Form.Designer.cs",
+              "ToolTip": "D:\\Study\\Video Editor\\Video Editor\\Main Form.Designer.cs",
+              "RelativeToolTip": "Main Form.Designer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T09:44:04.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Main Form.cs",
+              "DocumentMoniker": "D:\\Study\\Video Editor\\Video Editor\\Main Form.cs",
+              "RelativeDocumentMoniker": "Main Form.cs",
+              "ToolTip": "D:\\Study\\Video Editor\\Video Editor\\Main Form.cs",
+              "RelativeToolTip": "Main Form.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T06:34:07.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Main Form.cs [Design]",
+              "DocumentMoniker": "D:\\Study\\Video Editor\\Video Editor\\Main Form.cs",
+              "RelativeDocumentMoniker": "Main Form.cs",
+              "ToolTip": "D:\\Study\\Video Editor\\Video Editor\\Main Form.cs [Design]",
+              "RelativeToolTip": "Main Form.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T05:59:30.646Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "D:\\Study\\Video Editor\\Video Editor\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "D:\\Study\\Video Editor\\Video Editor\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T05:27:28.036Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\Study\\Video Editor\\Video Editor\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "D:\\Study\\Video Editor\\Video Editor\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T05:48:38.998Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
