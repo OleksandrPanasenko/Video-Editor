@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "P+vsjO3yuf+q7zKO7GEB8g1umzXfR7xxav4G8FiTr+QRi1SuA3Butp9Htj5sIgZQCsTUx56QBzI+bvFLaMBs/Q==",
+  "success": true,
+  "projectFilePath": "D:\\Study\\VideoEditor\\Infrastructure\\Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\op101\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.8\\microsoft.win32.systemevents.9.0.8.nupkg.sha512",
+    "C:\\Users\\op101\\.nuget\\packages\\system.drawing.common\\9.0.8\\system.drawing.common.9.0.8.nupkg.sha512",
+    "C:\\Users\\op101\\.nuget\\packages\\xabe.ffmpeg\\6.0.2\\xabe.ffmpeg.6.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

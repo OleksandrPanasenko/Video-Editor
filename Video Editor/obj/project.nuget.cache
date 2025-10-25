@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "DqZTPsmsvqsZZqWxZn4sBGOnF6S+FPSgHv84NclSjKckkC7DVTWD41lErJm91uHgGD4lMjIJHMhQHuM1Q6LSGA==",
+  "dgSpecHash": "NaxjrUPHC02K9L+/5hyhZLN11FknaT0wfsRA/xhLe2MBxk9Ls2YlOXLlXd7qP+PwAwd/ViRRp9MksSv/PJ/Oug==",
   "success": true,
   "projectFilePath": "D:\\Study\\Video Editor\\Video Editor\\Video Editor.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\op101\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.8\\microsoft.win32.systemevents.9.0.8.nupkg.sha512",
-    "C:\\Users\\op101\\.nuget\\packages\\system.drawing.common\\9.0.8\\system.drawing.common.9.0.8.nupkg.sha512"
+    "C:\\Users\\op101\\.nuget\\packages\\system.drawing.common\\9.0.8\\system.drawing.common.9.0.8.nupkg.sha512",
+    "C:\\Users\\op101\\.nuget\\packages\\xabe.ffmpeg\\6.0.2\\xabe.ffmpeg.6.0.2.nupkg.sha512"
   ],
   "logs": []
 }

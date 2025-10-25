@@ -1,0 +1,39 @@
+D:\Study\Video Editor\Core\Core\obj\Debug\net8.0\Core.csproj.AssemblyReference.cache
+D:\Study\Video Editor\Core\Core\obj\Debug\net8.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Study\Video Editor\Core\Core\obj\Debug\net8.0\Core.AssemblyInfoInputs.cache
+D:\Study\Video Editor\Core\Core\obj\Debug\net8.0\Core.AssemblyInfo.cs
+D:\Study\Video Editor\Core\Core\obj\Debug\net8.0\Core.csproj.CoreCompileInputs.cache
+D:\Study\Video Editor\Core\Core\obj\Debug\net8.0\Core.sourcelink.json
+D:\Study\Video Editor\Core\Core\bin\Debug\net8.0\Core.deps.json
+D:\Study\Video Editor\Core\Core\bin\Debug\net8.0\Core.dll
+D:\Study\Video Editor\Core\Core\bin\Debug\net8.0\Core.pdb
+D:\Study\Video Editor\Core\Core\obj\Debug\net8.0\Core.dll
+D:\Study\Video Editor\Core\Core\obj\Debug\net8.0\refint\Core.dll
+D:\Study\Video Editor\Core\Core\obj\Debug\net8.0\Core.pdb
+D:\Study\Video Editor\Core\Core\obj\Debug\net8.0\ref\Core.dll
+D:\Study\Video Editor\Core\bin\Debug\net8.0\Core.deps.json
+D:\Study\Video Editor\Core\bin\Debug\net8.0\Core.dll
+D:\Study\Video Editor\Core\bin\Debug\net8.0\Core.pdb
+D:\Study\Video Editor\Core\obj\Debug\net8.0\Core.csproj.AssemblyReference.cache
+D:\Study\Video Editor\Core\obj\Debug\net8.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Study\Video Editor\Core\obj\Debug\net8.0\Core.AssemblyInfoInputs.cache
+D:\Study\Video Editor\Core\obj\Debug\net8.0\Core.AssemblyInfo.cs
+D:\Study\Video Editor\Core\obj\Debug\net8.0\Core.csproj.CoreCompileInputs.cache
+D:\Study\Video Editor\Core\obj\Debug\net8.0\Core.sourcelink.json
+D:\Study\Video Editor\Core\obj\Debug\net8.0\Core.dll
+D:\Study\Video Editor\Core\obj\Debug\net8.0\refint\Core.dll
+D:\Study\Video Editor\Core\obj\Debug\net8.0\Core.pdb
+D:\Study\Video Editor\Core\obj\Debug\net8.0\ref\Core.dll
+D:\Study\VideoEditor\Core\bin\Debug\net8.0\Core.deps.json
+D:\Study\VideoEditor\Core\bin\Debug\net8.0\Core.dll
+D:\Study\VideoEditor\Core\bin\Debug\net8.0\Core.pdb
+D:\Study\VideoEditor\Core\obj\Debug\net8.0\Core.csproj.AssemblyReference.cache
+D:\Study\VideoEditor\Core\obj\Debug\net8.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Study\VideoEditor\Core\obj\Debug\net8.0\Core.AssemblyInfoInputs.cache
+D:\Study\VideoEditor\Core\obj\Debug\net8.0\Core.AssemblyInfo.cs
+D:\Study\VideoEditor\Core\obj\Debug\net8.0\Core.csproj.CoreCompileInputs.cache
+D:\Study\VideoEditor\Core\obj\Debug\net8.0\Core.sourcelink.json
+D:\Study\VideoEditor\Core\obj\Debug\net8.0\Core.dll
+D:\Study\VideoEditor\Core\obj\Debug\net8.0\refint\Core.dll
+D:\Study\VideoEditor\Core\obj\Debug\net8.0\Core.pdb
+D:\Study\VideoEditor\Core\obj\Debug\net8.0\ref\Core.dll
