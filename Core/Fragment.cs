@@ -30,7 +30,21 @@ namespace VideoEditor.Core
         {
             return new Fragment(FilePath, StartTime, EndTime);
         }
-        public enum Type {Video, Audio, Photo, Text};
-        public Type FragmentType { get; set; } = Type.Video;
+        public enum Type {Video, Audio, Image, Text, Unknown};
+        public static Type FileType(string path)
+        {
+            string ext = System.IO.Path.GetExtension(path).ToLowerInvariant();
+
+            if (new[] { ".mp4", ".avi", ".mkv", ".mov" }.Contains(ext))
+                return Type.Video;
+            if (new[] { ".mp3", ".wav", ".flac" }.Contains(ext))
+                return Type.Audio;
+            if (new[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" }.Contains(ext))
+                return Type.Image;
+            if (new[] {".txt", "srt",".ass"}.Contains(ext))
+                return Type.Text;
+            return Type.Unknown;
+        }
+        public Type FragmentType { get { return FileType(FilePath); } }
     }
 }

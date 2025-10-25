@@ -8,16 +8,23 @@ namespace VideoEditor.Core
         public string Name => new string("AddNewFragment");
         private readonly FragmentPlacement FragmentPlacement;
         private readonly Lane Lane;
-        public AddNewFragmentFromFileOperation(Project project, string FilePath, Lane lane)
+        public AddNewFragmentFromFileOperation(Project project, Fragment fragment, Lane lane)
         {
-            
-            TimeSpan duration = GetVideoDuration(FilePath).GetAwaiter().GetResult();
-
-            Fragment fragment = new Fragment(FilePath,duration);//ToDo -- time duration
+            //ToDo -- time duration
             FragmentPlacement = new FragmentPlacement(fragment);
             Lane = lane;
         }
-
+        public static async Task<AddNewFragmentFromFileOperation> CreateAsync(Project project, string filePath, Lane lane)
+        {
+            TimeSpan duration = await GetVideoDuration(filePath);
+            if (duration <= TimeSpan.FromSeconds(1))
+            {
+                //Default photo timespan
+                duration=TimeSpan.FromSeconds(1);
+            }
+            Fragment fragment = new Fragment(filePath, duration);
+            return new AddNewFragmentFromFileOperation(project, fragment, lane);
+        }
         private static async Task<TimeSpan> GetVideoDuration(string filePath)
         {
             IMediaInfo info = await FFmpeg.GetMediaInfo(filePath);

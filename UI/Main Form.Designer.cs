@@ -292,6 +292,7 @@
             tableLayoutPanel29 = new TableLayoutPanel();
             hScrollBar3 = new HScrollBar();
             vScrollBar3 = new VScrollBar();
+            saveFileDialog1 = new SaveFileDialog();
             tabPage10 = new TabPage();
             tabPage14 = new TabPage();
             tabPage14.SuspendLayout();
@@ -354,7 +355,7 @@
             tabPage10.Location = new Point(4, 4);
             tabPage10.Name = "tabPage10";
             tabPage10.Padding = new Padding(3);
-            tabPage10.Size = new Size(192, 330);
+            tabPage10.Size = new Size(192, 297);
             tabPage10.TabIndex = 2;
             tabPage10.UseVisualStyleBackColor = true;
             // 
@@ -366,7 +367,7 @@
             tabPage14.Location = new Point(39, 4);
             tabPage14.Name = "tabPage14";
             tabPage14.Padding = new Padding(3);
-            tabPage14.Size = new Size(335, 330);
+            tabPage14.Size = new Size(335, 297);
             tabPage14.TabIndex = 2;
             tabPage14.UseVisualStyleBackColor = true;
             // 
@@ -409,7 +410,7 @@
             tableLayoutPanel25.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel25.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel25.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel25.Size = new Size(329, 324);
+            tableLayoutPanel25.Size = new Size(329, 291);
             tableLayoutPanel25.TabIndex = 5;
             // 
             // label72
@@ -418,7 +419,7 @@
             label72.Dock = DockStyle.Fill;
             label72.Location = new Point(3, 218);
             label72.Name = "label72";
-            label72.Size = new Size(115, 106);
+            label72.Size = new Size(115, 73);
             label72.TabIndex = 26;
             label72.Text = "Sound volume:";
             // 
@@ -920,7 +921,7 @@
             tabPage15.Location = new Point(39, 4);
             tabPage15.Name = "tabPage15";
             tabPage15.Padding = new Padding(3);
-            tabPage15.Size = new Size(335, 330);
+            tabPage15.Size = new Size(335, 297);
             tabPage15.TabIndex = 3;
             tabPage15.UseVisualStyleBackColor = true;
             // 
@@ -971,7 +972,7 @@
             tableLayoutPanel27.RowStyles.Add(new RowStyle());
             tableLayoutPanel27.RowStyles.Add(new RowStyle());
             tableLayoutPanel27.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel27.Size = new Size(329, 324);
+            tableLayoutPanel27.Size = new Size(329, 291);
             tableLayoutPanel27.TabIndex = 0;
             tableLayoutPanel27.Paint += tableLayoutPanel27_Paint;
             // 
@@ -1510,6 +1511,7 @@
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             listBox1.DragDrop += listBox1_DragDrop;
             listBox1.DragEnter += listBox1_DragEnter;
+            listBox1.MouseDown += listBox1_MouseDown;
             // 
             // tabPage9
             // 
@@ -1517,7 +1519,7 @@
             tabPage9.Location = new Point(4, 4);
             tabPage9.Name = "tabPage9";
             tabPage9.Padding = new Padding(3);
-            tabPage9.Size = new Size(192, 330);
+            tabPage9.Size = new Size(192, 297);
             tabPage9.TabIndex = 1;
             tabPage9.UseVisualStyleBackColor = true;
             // 
@@ -1527,7 +1529,7 @@
             tabPage11.Location = new Point(4, 4);
             tabPage11.Name = "tabPage11";
             tabPage11.Padding = new Padding(3);
-            tabPage11.Size = new Size(192, 330);
+            tabPage11.Size = new Size(192, 297);
             tabPage11.TabIndex = 3;
             tabPage11.UseVisualStyleBackColor = true;
             // 
@@ -1699,11 +1701,14 @@
             // 
             // LanePanel
             // 
+            LanePanel.AllowDrop = true;
             LanePanel.Dock = DockStyle.Fill;
             LanePanel.Location = new Point(3, 3);
             LanePanel.Name = "LanePanel";
             LanePanel.Size = new Size(912, 179);
             LanePanel.TabIndex = 2;
+            LanePanel.DragDrop += LanePanel_DragDrop;
+            LanePanel.DragEnter += LanePanel_DragEnter;
             LanePanel.Paint += panel1_Paint;
             LanePanel.MouseClick += LanePanel_MouseClick;
             LanePanel.MouseDown += LanePanel_MouseDown;
@@ -2079,6 +2084,7 @@
             button13.TabIndex = 0;
             button13.Text = "Export";
             button13.UseVisualStyleBackColor = false;
+            button13.Click += button13_Click;
             // 
             // button14
             // 
@@ -3578,5 +3584,6 @@
         private TextBox textBox12;
         private Label label101;
         private TextBox textBox13;
+        private SaveFileDialog saveFileDialog1;
     }
 }

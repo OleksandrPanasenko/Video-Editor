@@ -83,3 +83,7 @@ D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video Editor.pdb
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video Editor.genruntimeconfig.cache
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\ref\Video Editor.dll
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.CreateProject.resources
+D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.IO.Pipelines.dll
+D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.Text.Encodings.Web.dll
+D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.Text.Json.dll
+D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll

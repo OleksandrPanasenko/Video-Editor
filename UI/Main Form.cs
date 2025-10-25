@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace VideoEditor.UI
         public Main_Form()
         {
             InitializeComponent();
-         
+
             RefreshFiles();
 
         }
@@ -38,7 +39,7 @@ namespace VideoEditor.UI
 
         }
 
-        private void listBox1_DragDrop(object sender, DragEventArgs e)
+        private async void listBox1_DragDrop(object sender, DragEventArgs e)
         {
             string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             if (fileList != null & fileList.Length > 0)
@@ -54,13 +55,9 @@ namespace VideoEditor.UI
                     MessageBox.Show($"File not found {fileList[0]}");
                     return;
                 }
-                IOperation Test = new AddNewFragmentFromFileOperation(Project, fileList[0], Project.Lanes[0]);
-                Project.History.Execute(Test);
 
-                LanePanel.Invalidate();
-                LanePanel.Update();
-                LanePanel.Refresh();
-                
+
+
             }
             //MessageBox.Show("You drag and dropped");
         }
@@ -144,7 +141,7 @@ namespace VideoEditor.UI
 
         private void Main_Form_DragDrop(object sender, DragEventArgs e)
         {
-            
+
         }
 
         private void listBox1_DragEnter(object sender, DragEventArgs e)
@@ -153,6 +150,68 @@ namespace VideoEditor.UI
                 e.Effect = DragDropEffects.Copy; // allows drop
             else
                 e.Effect = DragDropEffects.None; // not allowed
+        }
+
+        private void listBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            int index = listBox1.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
+            {
+                listBox1.DoDragDrop(index, DragDropEffects.Copy);
+            }
+        }
+
+        private void LanePanel_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(int)))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private async void LanePanel_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data != null & e.Data.GetData(typeof(int)) != null)
+            {
+                int index = (int)e.Data.GetData(typeof(int));
+                if (index >= 0 & index < Project.MediaFiles.Count())
+                {
+                    Point relativePoint = LanePanel.PointToClient(new Point(e.X, e.Y));
+                    Project.SelectionManager.SelectObject(relativePoint);
+                    if (Project.SelectionManager.SelectedLane != null)
+                    {
+                        var operation = await AddNewFragmentFromFileOperation.CreateAsync(Project, Project.MediaFiles[index], Project.SelectionManager.SelectedLane);
+
+                        Project.History.Execute(operation);
+
+
+                        //LanePanel.Invalidate();
+                        LanePanel.Update();
+                        LanePanel.Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Lane not selected, point[{relativePoint.X},{relativePoint.Y}]");
+                    }
+                }
+            }
+        }
+
+        private async void button13_Click(object sender, EventArgs e)
+        {
+            using (var dlg=new SaveFileDialog())
+            {
+                if (dlg != null) {
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        await Project.engine.RenderAsync(dlg.FileName);
+                    }
+                }
+            }
         }
     }
 }

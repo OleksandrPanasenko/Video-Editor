@@ -9,6 +9,7 @@
       "Core/1.0.0": {
         "dependencies": {
           "System.Drawing.Common": "9.0.8",
+          "System.Text.Json": "9.0.10",
           "Xabe.FFmpeg": "6.0.2"
         },
         "runtime": {
@@ -46,6 +47,42 @@
           }
         }
       },
+      "System.IO.Pipelines/9.0.10": {
+        "runtime": {
+          "lib/net8.0/System.IO.Pipelines.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.1025.47515"
+          }
+        }
+      },
+      "System.Text.Encodings.Web/9.0.10": {
+        "runtime": {
+          "lib/net8.0/System.Text.Encodings.Web.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.1025.47515"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll": {
+            "rid": "browser",
+            "assetType": "runtime",
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.1025.47515"
+          }
+        }
+      },
+      "System.Text.Json/9.0.10": {
+        "dependencies": {
+          "System.IO.Pipelines": "9.0.10",
+          "System.Text.Encodings.Web": "9.0.10"
+        },
+        "runtime": {
+          "lib/net8.0/System.Text.Json.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.1025.47515"
+          }
+        }
+      },
       "Xabe.FFmpeg/6.0.2": {
         "runtime": {
           "lib/netstandard2.0/Xabe.FFmpeg.dll": {
@@ -75,6 +112,27 @@
       "sha512": "sha512-ineIJmF+yuBEHGft9R153J9kmBFaeEfFL5Put5nzENneRcGGPUb3MvM8zrZ5pERQ0jPPSE3Wqw/clXvOq2F/Kw==",
       "path": "system.drawing.common/9.0.8",
       "hashPath": "system.drawing.common.9.0.8.nupkg.sha512"
+    },
+    "System.IO.Pipelines/9.0.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lwI0mhHcCxMtNSxB5ate9Gc9petWovRBUprtjz2yiIDDZPGBIaUiqNzQHJzjPuzTnvNbEMilpAXjDguKsU/2Fg==",
+      "path": "system.io.pipelines/9.0.10",
+      "hashPath": "system.io.pipelines.9.0.10.nupkg.sha512"
+    },
+    "System.Text.Encodings.Web/9.0.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-znmiJFUa0GGwq7t6ShUKBDRlPsNJaudNFI7rVeyGnRBhiRMegBvu2GRcadThP/QX/a5UpGgZbe6tolDooobj/Q==",
+      "path": "system.text.encodings.web/9.0.10",
+      "hashPath": "system.text.encodings.web.9.0.10.nupkg.sha512"
+    },
+    "System.Text.Json/9.0.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XM02ZBnzxk7Ti6l9YRy8Bp639wANqJzJzw4W4VYiCh+HXY9hBOWkGB4k89OLP/s/RxgM02P4a/mWcJTgFiLf1Q==",
+      "path": "system.text.json/9.0.10",
+      "hashPath": "system.text.json.9.0.10.nupkg.sha512"
     },
     "Xabe.FFmpeg/6.0.2": {
       "type": "package",

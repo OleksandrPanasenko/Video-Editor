@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "YWetz6Sc2CTTncyvo6ijCL6ilMoxKKPozd72LzzgHIIUuEW64U69Ut43DCh0GsszCKrAWbaXP8ymfYTHLgWATg==",
+  "dgSpecHash": "9v+s5v5UMJSaLmOfTK9qI4mK2gr6KTNYDcuVbx4WWa/nDRgnXEgaY5W7F0LVbHYuPm/dbjksEGnJYjpDhqdpEQ==",
   "success": true,
   "projectFilePath": "D:\\Study\\VideoEditor\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\op101\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.8\\microsoft.win32.systemevents.9.0.8.nupkg.sha512",
     "C:\\Users\\op101\\.nuget\\packages\\system.drawing.common\\9.0.8\\system.drawing.common.9.0.8.nupkg.sha512",
+    "C:\\Users\\op101\\.nuget\\packages\\system.io.pipelines\\9.0.10\\system.io.pipelines.9.0.10.nupkg.sha512",
+    "C:\\Users\\op101\\.nuget\\packages\\system.text.encodings.web\\9.0.10\\system.text.encodings.web.9.0.10.nupkg.sha512",
+    "C:\\Users\\op101\\.nuget\\packages\\system.text.json\\9.0.10\\system.text.json.9.0.10.nupkg.sha512",
     "C:\\Users\\op101\\.nuget\\packages\\xabe.ffmpeg\\6.0.2\\xabe.ffmpeg.6.0.2.nupkg.sha512"
   ],
   "logs": []

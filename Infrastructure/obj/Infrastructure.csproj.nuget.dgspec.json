@@ -53,6 +53,10 @@
               "target": "Package",
               "version": "[9.0.8, )"
             },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
             "Xabe.FFmpeg": {
               "target": "Package",
               "version": "[6.0.2, )"
