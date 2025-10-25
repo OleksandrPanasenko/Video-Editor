@@ -208,7 +208,9 @@ namespace VideoEditor.UI
                 if (dlg != null) {
                     if (dlg.ShowDialog() == DialogResult.OK)
                     {
+                        MessageBox.Show($"Started rendering {dlg.FileName}");
                         await Project.engine.RenderAsync(dlg.FileName);
+                        MessageBox.Show($"Saved as {dlg.FileName}");
                     }
                 }
             }

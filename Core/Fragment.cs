@@ -35,11 +35,11 @@ namespace VideoEditor.Core
         {
             string ext = System.IO.Path.GetExtension(path).ToLowerInvariant();
 
-            if (new[] { ".mp4", ".avi", ".mkv", ".mov" }.Contains(ext))
+            if (new[] { ".mp4", ".avi", ".mkv", ".mov", ".gif" }.Contains(ext))
                 return Type.Video;
             if (new[] { ".mp3", ".wav", ".flac" }.Contains(ext))
                 return Type.Audio;
-            if (new[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" }.Contains(ext))
+            if (new[] { ".jpg", ".jpeg", ".png", ".bmp"}.Contains(ext))
                 return Type.Image;
             if (new[] {".txt", "srt",".ass"}.Contains(ext))
                 return Type.Text;

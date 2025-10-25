@@ -15,7 +15,6 @@ namespace VideoEditor.Core
         public FragmentPlacement? SelectedFragment { get; set; }
         public TimeSpan? SelectedTime { get; set; }
         public Lane? SelectedLane { get; set; }
-        public String? SelectedMedia { get; set; }
     
         //public bool IsDragging { get; set; }
         public ProjectConfig? Params { get { return Project.Configuration; }}
@@ -37,7 +36,7 @@ namespace VideoEditor.Core
             }
             else
             {
-                int laneIndex = (int)((y + Params.LanePanelScrollY) / (Params.LaneHeight + Params.LaneSpacing));
+                int laneIndex = (int)((y + Params.LanePanelScrollY-Params.TimeRulerHeight) / (Params.LaneHeight + Params.LaneSpacing));
                 if (laneIndex >= Project.Lanes.Count)
                 {
                     ClearSelection();

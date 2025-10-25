@@ -23,6 +23,7 @@
             {
                 Project.AddMediaFile(filePath);
             }
+            Project.MediaFiles.Sort();
         }
         public void Undo()
         {

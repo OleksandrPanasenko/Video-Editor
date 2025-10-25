@@ -11,17 +11,13 @@ using Xabe.FFmpeg;
 namespace Videoeditor.Core { 
     public class Engine
     {
+
         Project _project { get => ProjectContext.CurrentProject; }
         public void EditVideo(string inputPath, string outputPath)
         {
-            // Example: Use FFmpeg to trim a video
-            /*var ffmpeg = new NReco.VideoConverter.FFMpegConverter();
-            ffmpeg.ConvertMedia(inputPath, null, outputPath, null, new NReco.VideoConverter.ConvertSettings()
-            {
-                CustomOutputArgs = "-ss 00:00:10 -t 00:00:20" // Trim from 10s to 30s
-            });*/
+            
         }
-        //Render video ito mp4 format
+        //Render video
         public async Task RenderAsync(string outputPath)
         {
             //Create temporary directory for render
@@ -43,11 +39,11 @@ namespace Videoeditor.Core {
                 // Convert all inputs to video clips
                 if (fragment.FragmentType == Fragment.Type.Image)
                 {
-                    await RunFFmpegAsync($"-loop 1 -t {fragment.Duration.TotalSeconds} -i \"{input}\" -vf scale=1280:720,fps=30 -y \"{tempOut}\"");
+                    await RunFFmpegAsync($"-framerate 1 -t {fragment.Duration.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)} -i \"{input}\" -vf scale=1280:720,fps=30,format=yuv420p -y \"{tempOut}\"");
                 }
                 else if (fragment.FragmentType == Fragment.Type.Audio)
                 {
-                    await RunFFmpegAsync($"-loop 1 -f lavfi -i color=c=black:s=1280x720:d={fragment.Duration.TotalSeconds} -i \"{input}\" -shortest -c:v libx264 -c:a aac -y \"{tempOut}\"");
+                    await RunFFmpegAsync($"-f lavfi -i \"color=c=black:s=1280x720:d={fragment.Duration.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)}\" -i \"{input}\" -shortest -c:v libx264 -c:a aac -y \"{tempOut}\"");
                 }
                 else // video
                 {
@@ -60,14 +56,15 @@ namespace Videoeditor.Core {
             await File.WriteAllTextAsync(listFile, sb.ToString());
 
             // Concatenate all parts
-            await RunFFmpegAsync($"-f concat -safe 0 -i \"{listFile}\" -c copy -y \"{outputPath}\"");
+            await RunFFmpegAsync($"-f concat -safe 0 -i \"{listFile}\" -c:v libx264 -pix_fmt yuv420p -c:a aac -y \"{outputPath}\"");
         }
 
         private static async Task RunFFmpegAsync(string arguments)
         {
+            var ffmpegPath = @"C:\ffmpeg\ffmpeg.exe";
             var psi = new ProcessStartInfo
             {
-                FileName = "ffmpeg",
+                FileName = ffmpegPath,
                 Arguments = arguments,
                 UseShellExecute = false,
                 RedirectStandardError = true,
@@ -75,8 +72,19 @@ namespace Videoeditor.Core {
                 CreateNoWindow = true
             };
 
-            using var proc = Process.Start(psi);
+            using var proc = new Process{StartInfo= psi };
+            proc.Start();
+
+            var stdOutTask = Task.Run(() => proc.StandardOutput.ReadToEndAsync());
+            var stdErrTask = Task.Run(() => proc.StandardError.ReadToEndAsync());
+
             await proc.WaitForExitAsync();
+
+            string stdOut = await stdOutTask;
+            string stdErr = await stdErrTask;
+
+            if (proc.ExitCode != 0)
+                throw new Exception($"FFmpeg failed with code {proc.ExitCode}: {stdErr}");
         }
 
         public void RenderVideo(string projectFilePath, string outputPath)

@@ -1,4 +1,5 @@
 using System.Drawing;
+using Videoeditor.Core;
 
 namespace VideoEditor.Core
 {
@@ -13,6 +14,7 @@ namespace VideoEditor.Core
         public List<string> MediaFiles { get; set; } = new List<string>();
         public History History;
         public Graphics Graphics { get; set; }
+        public Engine engine=new Engine();
         public void AddMediaFile(string filePath)
         {
             if (!MediaFiles.Contains(filePath))

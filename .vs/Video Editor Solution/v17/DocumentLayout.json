@@ -3,20 +3,36 @@
   "WorkspaceRootPath": "D:\\Study\\VideoEditor\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|d:\\study\\videoeditor\\core\\fragment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\fragment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|D:\\Study\\VideoEditor\\core\\operations\\addmultiplefilesoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\operations\\addmultiplefilesoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|d:\\study\\videoeditor\\core\\renderlanepanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\renderlanepanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|D:\\Study\\VideoEditor\\core\\operations\\addfileoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\operations\\addfileoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|d:\\study\\videoeditor\\ui\\main form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|solutionrelative:ui\\main form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|D:\\Study\\VideoEditor\\ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|solutionrelative:ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|D:\\Study\\VideoEditor\\core\\engine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\engine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|D:\\Study\\VideoEditor\\core\\selectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\selectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|d:\\study\\videoeditor\\core\\fragment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\fragment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|D:\\Study\\VideoEditor\\ui\\main form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -27,12 +43,12 @@
       "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|d:\\study\\videoeditor\\core\\operations\\addnewfragmentfromfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\operations\\addnewfragmentfromfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|D:\\Study\\VideoEditor\\ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|solutionrelative:ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|D:\\Study\\VideoEditor\\core\\operations\\addfileoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\operations\\addfileoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|d:\\study\\videoeditor\\core\\operations\\addnewfragmentfromfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\operations\\addnewfragmentfromfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|D:\\Study\\VideoEditor\\core\\config\\projectconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -43,24 +59,12 @@
       "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\renderoperations\\irenderoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|D:\\Study\\VideoEditor\\core\\operations\\addmultiplefilesoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\operations\\addmultiplefilesoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|D:\\Study\\VideoEditor\\core\\config\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\config\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|D:\\Study\\VideoEditor\\ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|solutionrelative:ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|D:\\Study\\VideoEditor\\ui\\createproject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|solutionrelative:ui\\createproject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|D:\\Study\\VideoEditor\\ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|solutionrelative:ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C68DA57E-4396-4F6F-B263-ED5A24BF282D}|UI\\Video Editor.csproj|D:\\Study\\VideoEditor\\ui\\createproject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -83,10 +87,6 @@
       "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\fragmentplacement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|D:\\Study\\VideoEditor\\core\\engine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\engine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|D:\\Study\\VideoEditor\\core\\core.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
       "RelativeMoniker": "D:0:0:{AF2095F2-8D93-4111-8C0A-50DCE233AEDD}|Core\\Core.csproj|solutionrelative:core\\core.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     }
@@ -98,7 +98,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -106,24 +106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Fragment.cs",
-              "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Fragment.cs",
-              "RelativeDocumentMoniker": "Core\\Fragment.cs",
-              "ToolTip": "D:\\Study\\VideoEditor\\Core\\Fragment.cs",
-              "RelativeToolTip": "Core\\Fragment.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAADwvy8AAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T18:14:19.929Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "Main Form.cs [Design]",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\UI\\Main Form.cs",
               "RelativeDocumentMoniker": "UI\\Main Form.cs",
@@ -135,46 +118,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Project.cs",
-              "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Project.cs",
-              "RelativeDocumentMoniker": "Core\\Project.cs",
-              "ToolTip": "D:\\Study\\VideoEditor\\Core\\Project.cs",
-              "RelativeToolTip": "Core\\Project.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACcAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T19:45:40.241Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Main Form.cs",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\UI\\Main Form.cs",
               "RelativeDocumentMoniker": "UI\\Main Form.cs",
               "ToolTip": "D:\\Study\\VideoEditor\\UI\\Main Form.cs",
               "RelativeToolTip": "UI\\Main Form.cs",
-              "ViewState": "AQIAAJcAAAAAAAAAAAAswMUAAABjAAAA",
+              "ViewState": "AQIAALwAAAAAAAAAAAAAANIAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T18:40:40.731Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AddNewFragmentFromFile.cs",
-              "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Operations\\AddNewFragmentFromFile.cs",
-              "RelativeDocumentMoniker": "Core\\Operations\\AddNewFragmentFromFile.cs",
-              "ToolTip": "D:\\Study\\VideoEditor\\Core\\Operations\\AddNewFragmentFromFile.cs",
-              "RelativeToolTip": "Core\\Operations\\AddNewFragmentFromFile.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAyAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T10:15:17.539Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "AddFileOperation.cs",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Operations\\AddFileOperation.cs",
               "RelativeDocumentMoniker": "Core\\Operations\\AddFileOperation.cs",
@@ -193,27 +150,121 @@
               "RelativeDocumentMoniker": "Core\\RenderLanePanel.cs",
               "ToolTip": "D:\\Study\\VideoEditor\\Core\\RenderLanePanel.cs",
               "RelativeToolTip": "Core\\RenderLanePanel.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAAjwHcAAABNAAAA",
+              "ViewState": "AQIAABYAAAAAAAAAAAAewHcAAABNAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-25T09:19:51.506Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
+              "Title": "Engine.cs",
+              "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Engine.cs",
+              "RelativeDocumentMoniker": "Core\\Engine.cs",
+              "ToolTip": "D:\\Study\\VideoEditor\\Core\\Engine.cs",
+              "RelativeToolTip": "Core\\Engine.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAnwC0AAADJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T18:44:49.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "D:\\Study\\VideoEditor\\UI\\Form1.cs",
+              "RelativeDocumentMoniker": "UI\\Form1.cs",
+              "ToolTip": "D:\\Study\\VideoEditor\\UI\\Form1.cs [Design]",
+              "RelativeToolTip": "UI\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T20:20:23.787Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\Study\\VideoEditor\\UI\\Form1.cs",
+              "RelativeDocumentMoniker": "UI\\Form1.cs",
+              "ToolTip": "D:\\Study\\VideoEditor\\UI\\Form1.cs",
+              "RelativeToolTip": "UI\\Form1.cs",
+              "ViewState": "AQIAACUAAAAAAAAAAAAAwD0AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T20:42:08.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AddMultipleFilesOperation.cs",
+              "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Operations\\AddMultipleFilesOperation.cs",
+              "RelativeDocumentMoniker": "Core\\Operations\\AddMultipleFilesOperation.cs",
+              "ToolTip": "D:\\Study\\VideoEditor\\Core\\Operations\\AddMultipleFilesOperation.cs",
+              "RelativeToolTip": "Core\\Operations\\AddMultipleFilesOperation.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T19:37:18.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "SelectionManager.cs",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\SelectionManager.cs",
               "RelativeDocumentMoniker": "Core\\SelectionManager.cs",
               "ToolTip": "D:\\Study\\VideoEditor\\Core\\SelectionManager.cs",
               "RelativeToolTip": "Core\\SelectionManager.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAyAAAA",
+              "ViewState": "AQIAABAAAAAAAAAAAAA5wCYAAABZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T21:46:49.858Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
+              "Title": "Fragment.cs",
+              "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Fragment.cs",
+              "RelativeDocumentMoniker": "Core\\Fragment.cs",
+              "ToolTip": "D:\\Study\\VideoEditor\\Core\\Fragment.cs",
+              "RelativeToolTip": "Core\\Fragment.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAowCUAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T18:14:19.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Project.cs",
+              "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Project.cs",
+              "RelativeDocumentMoniker": "Core\\Project.cs",
+              "ToolTip": "D:\\Study\\VideoEditor\\Core\\Project.cs",
+              "RelativeToolTip": "Core\\Project.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T19:45:40.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AddNewFragmentFromFile.cs",
+              "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Operations\\AddNewFragmentFromFile.cs",
+              "RelativeDocumentMoniker": "Core\\Operations\\AddNewFragmentFromFile.cs",
+              "ToolTip": "D:\\Study\\VideoEditor\\Core\\Operations\\AddNewFragmentFromFile.cs",
+              "RelativeToolTip": "Core\\Operations\\AddNewFragmentFromFile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T10:15:17.539Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "ProjectConfig.cs",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Config\\ProjectConfig.cs",
               "RelativeDocumentMoniker": "Core\\Config\\ProjectConfig.cs",
@@ -226,7 +277,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "IRenderOperations.cs",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\RenderOperations\\IRenderOperations.cs",
               "RelativeDocumentMoniker": "Core\\RenderOperations\\IRenderOperations.cs",
@@ -239,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "Config.cs",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Config\\Config.cs",
               "RelativeDocumentMoniker": "Core\\Config\\Config.cs",
@@ -252,45 +303,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AddMultipleFilesOperation.cs",
-              "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Operations\\AddMultipleFilesOperation.cs",
-              "RelativeDocumentMoniker": "Core\\Operations\\AddMultipleFilesOperation.cs",
-              "ToolTip": "D:\\Study\\VideoEditor\\Core\\Operations\\AddMultipleFilesOperation.cs",
-              "RelativeToolTip": "Core\\Operations\\AddMultipleFilesOperation.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T19:37:18.38Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "D:\\Study\\VideoEditor\\UI\\Form1.cs",
-              "RelativeDocumentMoniker": "UI\\Form1.cs",
-              "ToolTip": "D:\\Study\\VideoEditor\\UI\\Form1.cs [Design]",
-              "RelativeToolTip": "UI\\Form1.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T20:20:23.787Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\Study\\VideoEditor\\UI\\Form1.cs",
-              "RelativeDocumentMoniker": "UI\\Form1.cs",
-              "ToolTip": "D:\\Study\\VideoEditor\\UI\\Form1.cs",
-              "RelativeToolTip": "UI\\Form1.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAAAAEUAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T20:42:08.188Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "CreateProject.cs",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\UI\\CreateProject.cs",
               "RelativeDocumentMoniker": "UI\\CreateProject.cs",
@@ -303,7 +316,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "CreateProject.cs [Design]",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\UI\\CreateProject.cs",
               "RelativeDocumentMoniker": "UI\\CreateProject.cs",
@@ -315,7 +328,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "ProjectContext.cs",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\ProjectContext.cs",
               "RelativeDocumentMoniker": "Core\\ProjectContext.cs",
@@ -328,7 +341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "Video Editor.csproj",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\UI\\Video Editor.csproj",
               "RelativeDocumentMoniker": "UI\\Video Editor.csproj",
@@ -341,7 +354,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "FragmentPlacement.cs",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\FragmentPlacement.cs",
               "RelativeDocumentMoniker": "Core\\FragmentPlacement.cs",
@@ -366,7 +379,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "ConfigManager.cs",
               "DocumentMoniker": "D:\\Study\\VideoEditor\\Infrastructure\\ConfigManager.cs",
               "RelativeDocumentMoniker": "Infrastructure\\ConfigManager.cs",
@@ -375,19 +388,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T19:05:00.461Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Engine.cs",
-              "DocumentMoniker": "D:\\Study\\VideoEditor\\Core\\Engine.cs",
-              "RelativeDocumentMoniker": "Core\\Engine.cs",
-              "ToolTip": "D:\\Study\\VideoEditor\\Core\\Engine.cs",
-              "RelativeToolTip": "Core\\Engine.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T18:44:49.039Z",
               "EditorCaption": ""
             }
           ]
