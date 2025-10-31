@@ -7,7 +7,7 @@ namespace VideoEditor.Core
     {
         public string Name => "Cut";
         Project Project;
-        Lane Lane
+        Lane Lane;
         FragmentPlacement FragmentPlacement;
         public CutOperation(Project project, Lane lane, FragmentPlacement fragmentPlacement)
         {

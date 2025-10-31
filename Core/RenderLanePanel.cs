@@ -100,8 +100,29 @@ namespace VideoEditor.Core
         internal void RenderTimeMarker(TimeSpan? time)
         {
             if (time == null) return;
+            TimeSpan? Time = Project.SelectionManager.SelectedTime;
             //render time marker line
-            //render time label
+            if (Time != null)
+            {
+                using (var Brush=new SolidBrush(Config.TimePointerColor)) { 
+                    Rectangle rect = new Rectangle(
+                        (int)(TimeToX((TimeSpan)Time) - (Params.TimeMarkerWidth / 2)),
+                        Params.TimeRulerHeight,
+                        Params.TimeMarkerWidth,
+                        Params.LanePanelHeight-Params.TimeRulerHeight);
+                    g.FillRectangle(Brush, rect);
+
+                    //render time label
+                    using (Font font = new Font("Segoe UI", Params.TimeRulerHeight / 3 / 2,FontStyle.Bold))
+                    {
+                        string text = Time.ToString();
+                        var size = g.MeasureString(text, font);
+                        g.DrawString(text, font, Brush, (int)TimeToX((TimeSpan)Time) - size.Width / 2, Params.TimeRulerHeight/2);
+                    }
+                }
+            }
+            
+
         }
         internal void RenderLaneLabels()
         {

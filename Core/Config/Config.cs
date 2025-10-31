@@ -30,6 +30,8 @@ namespace VideoEditor.Core
 
 
         public static Color TimePointerColor = Color.FromArgb(231, 76, 60);
+        
+
         public static Color ButtonBackgroundColor = Color.FromArgb(68, 68, 68);
         public static Color ButtonHoverColor = Color.FromArgb(102, 102, 102);
         public static Color ButtonPressedColor = Color.FromArgb(136, 136, 136);

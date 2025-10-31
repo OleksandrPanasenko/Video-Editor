@@ -23,5 +23,6 @@ namespace VideoEditor.Core
         public float LaneTimeScale { get; set; } = 100; // pixels per second
         public int LaneLabelWidth { get; set; } = 100;
         public int TimeRulerHeight { get; set; } = 48;
+        public int TimeMarkerWidth { get; set; } = 4;
     }
 }

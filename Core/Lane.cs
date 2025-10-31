@@ -77,5 +77,16 @@ namespace VideoEditor.Core
                 else return null; // No fragment found in the specified time range
             }
         }
+
+        public Lane DeepCopy()
+        {
+            Lane NewLane = new Lane(Name + "_copy");
+            foreach (var placement in Fragments)
+            {
+                var newPlacement = placement.DeepCopy();
+                NewLane.AddFragment(newPlacement,newPlacement.Position);
+            }
+            return NewLane;
+        }
     }
 }

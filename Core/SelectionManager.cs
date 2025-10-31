@@ -46,9 +46,18 @@ namespace VideoEditor.Core
                     return;
                 }
                 SelectedLane = Project.Lanes[laneIndex];
-                TimeSpan time = TimeSpan.FromSeconds((x + Params.LanePanelScrollX-Params.LaneLabelWidth) / Params.LaneTimeScale);// Maybe make ScrollX in seconds?
-                SelectedTime = time;
-                SelectedFragment = SelectedLane[time];
+                if (x > Params.LaneLabelWidth)
+                {
+
+                    TimeSpan time = TimeSpan.FromSeconds((x + Params.LanePanelScrollX - Params.LaneLabelWidth) / Params.LaneTimeScale);// Maybe make ScrollX in seconds?
+                    SelectedTime = time;
+                    SelectedFragment = SelectedLane[time];
+                }
+                else
+                {
+                    SelectedFragment=null;
+                    SelectedTime=null;
+                }
             }
         }
         public void SelectObject(Point point)
