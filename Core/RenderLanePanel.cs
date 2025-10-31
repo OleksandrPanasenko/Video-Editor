@@ -35,11 +35,11 @@ namespace VideoEditor.Core
         internal void RenderLane(Lane lane, int laneIndex)
         {
             //render lane background
-            using(var brush = new SolidBrush(Config.LaneBackgroundColor))
+            using (var brush = (new SolidBrush(lane == Project.SelectionManager.SelectedLane ? Config.LaneBackgroundColor : Config.LaneSelectedBackgroundColor)))
 
             using (var pen = new Pen(Config.LaneBorderColor))
             {
-                Rectangle rect=(new Rectangle(0, (int)(laneIndex * (Params.LaneHeight + Params.LaneSpacing) - Params.LanePanelScrollY+Params.TimeRulerHeight), Params.LanePanelWidth-Params.LaneLabelWidth, Params.LaneHeight));
+                Rectangle rect = (new Rectangle(0 + Params.LaneLabelWidth, (int)(laneIndex * (Params.LaneHeight + Params.LaneSpacing) - Params.LanePanelScrollY + Params.TimeRulerHeight), Params.LanePanelWidth - Params.LaneLabelWidth, Params.LaneHeight));
                 g.FillRectangle(brush, rect);
                 g.DrawRectangle(pen, rect);
             }
@@ -60,21 +60,30 @@ namespace VideoEditor.Core
                 Fragment.Type.Video => Config.VideoBlockColor,
                 Fragment.Type.Audio => Config.AudioBlockColor,
                 Fragment.Type.Text => Config.TextBlockColor,
-                //Fragment.Type.Photo => Config.PhotoBlockColor,
+                Fragment.Type.Image => Config.ImageBlockColor,
                 _ => Config.VideoBlockColor
-            } ;
+            };
             //render fragment background
-            using(var brush= new SolidBrush(fragmentColor))
-            using(var pen= new Pen(Config.LaneBorderColor))
-            using(var textBrush= new SolidBrush(Color.Black))
+            using (var brush = new SolidBrush(fragmentColor))
+            using (var pen = new Pen(Config.LaneBorderColor))
+            using (var textBrush = new SolidBrush(Color.Black))
             {
-                Rectangle rect= new Rectangle(
+                Rectangle rect = new Rectangle(
                 (int)(fragment.Position.TotalSeconds * Params.LaneTimeScale - Params.LanePanelScrollX + Params.LaneLabelWidth),
-                (int)(laneIndex * (Params.LaneHeight + Params.LaneSpacing) - Params.LanePanelScrollY+Params.TimeRulerHeight),
+                (int)(laneIndex * (Params.LaneHeight + Params.LaneSpacing) - Params.LanePanelScrollY + Params.TimeRulerHeight),
                 (int)(fragment.Fragment.Duration.TotalSeconds * Params.LaneTimeScale),
                 Params.LaneHeight);
                 g.FillRectangle(brush, rect);
                 g.DrawRectangle(pen, rect);
+
+                if (fragment == Project.SelectionManager.SelectedFragment)
+                {
+                    using (var selectFrame = new Pen(Config.SelectionHighlightColor, 2))
+                    {
+                        g.DrawRectangle(selectFrame, rect);
+                    }
+                }
+                
 
                 //render fragment name
                 StringFormat format = new StringFormat
@@ -86,6 +95,7 @@ namespace VideoEditor.Core
                 g.DrawString(fragment.Fragment.Name, Config.FragmentNameFont, textBrush, rect, format);
             }
             //render fragment border
+            
         }
         internal void RenderTimeMarker(TimeSpan? time)
         {
@@ -109,7 +119,7 @@ namespace VideoEditor.Core
             using (Font font= new Font("Segoe UI", Params.TimeRulerHeight / 3 / 2))
             using (var brush= new SolidBrush(Config.TimeRulerColor))
             {
-                for (double t = EarliestMark(interval); t < XToTime(Params.LanePanelWidth).Seconds; t += interval)
+                for (double t = EarliestMark(interval); t < XToTime(Params.LanePanelWidth+ Params.LanePanelScrollX).TotalSeconds; t += interval)
                 {
                     int x = (int)TimeToX(TimeSpan.FromSeconds(t));
                     g.DrawLine(pen, x, 0, x, Params.TimeRulerHeight * 2 / 3);
@@ -117,7 +127,7 @@ namespace VideoEditor.Core
                     var size=g.MeasureString(text, font);
                     g.DrawString(text, font, brush, x-size.Width/2, 0);
                 }
-                for (double t = EarliestMark(interval/5); t < XToTime(Params.LanePanelWidth).Seconds; t += interval/5)
+                for (double t = EarliestMark(interval/5); t < XToTime(Params.LanePanelWidth).TotalSeconds; t += interval/5)
                 {
                     int x = (int)TimeToX(TimeSpan.FromSeconds(t));
                     g.DrawLine(pen, x, 0, x, Params.TimeRulerHeight * 1 / 3);

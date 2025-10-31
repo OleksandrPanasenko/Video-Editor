@@ -4,6 +4,8 @@ namespace VideoEditor.Core
     {
         public string Name { get; set; }
         public List<FragmentPlacement> Fragments { get; set; } = new List<FragmentPlacement>();
+        public TimeSpan? LaneStart { get { return Fragments.Count == 0 ? null : Fragments[0].Position; } }
+        public TimeSpan? LaneEnd { get { return Fragments.Count == 0 ? null : Fragments[Fragments.Count-1].EndPosition; } }
         public Lane(string name)
         {
             Name = name;

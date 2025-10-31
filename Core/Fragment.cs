@@ -3,6 +3,7 @@ namespace VideoEditor.Core
     public class Fragment
     {
         public string FilePath { get; set; }
+        public TimeSpan FileDuration { get; set; }
         public string FileName { get; set; }
         public string Name
         {
@@ -25,6 +26,7 @@ namespace VideoEditor.Core
             FilePath = filePath;
             StartTime = TimeSpan.Zero;
             EndTime = duration;
+            FileDuration= duration;
         }
         public Fragment CopyFragment()
         {
@@ -46,5 +48,7 @@ namespace VideoEditor.Core
             return Type.Unknown;
         }
         public Type FragmentType { get { return FileType(FilePath); } }
+        //Empty constructor for deserialisation
+        public Fragment() { }
     }
 }

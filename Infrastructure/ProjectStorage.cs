@@ -18,6 +18,7 @@ namespace VideoEditor.Infrastructure
             {
                 WriteIndented = true
             });
+            
             string file_path = Path.Combine(path, project.Name+".vep");
             File.WriteAllText(file_path, json);
         }

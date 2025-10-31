@@ -20,7 +20,7 @@ namespace VideoEditor.Core
         public double LanePanelScrollY { get; set; } = 0;
         public int LaneHeight { get; set; } = 100;
         public int LaneSpacing { get; set; } = 10;
-        public int LaneTimeScale { get; set; } = 100; // pixels per second
+        public float LaneTimeScale { get; set; } = 100; // pixels per second
         public int LaneLabelWidth { get; set; } = 100;
         public int TimeRulerHeight { get; set; } = 48;
     }

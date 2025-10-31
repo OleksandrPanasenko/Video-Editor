@@ -7,24 +7,29 @@
         private readonly TimeSpan OldEnd;
         private readonly TimeSpan NewStart;
         private readonly TimeSpan NewEnd;
-        private readonly Fragment Fragment;
-        public TrimOperation(Project project, Fragment fragment, TimeSpan newStart, TimeSpan newEnd)
+        private readonly FragmentPlacement FragmentPlacement;
+        public TrimOperation(Project project, FragmentPlacement fragmentPlacement, TimeSpan newStart, TimeSpan newEnd)
         {
-            Fragment = fragment;
+            FragmentPlacement = fragmentPlacement;
+            var fragment = fragmentPlacement.Fragment;
+            
             OldStart = fragment.StartTime;
             OldEnd = fragment.EndTime;
-            NewStart = newStart;
-            NewEnd = newEnd;
+
+            NewStart = newStart > TimeSpan.Zero||fragment.FragmentType==Fragment.Type.Image ? NewStart:TimeSpan.Zero;//Image can be extended
+            NewEnd = newEnd<fragment.FileDuration || fragment.FragmentType == Fragment.Type.Image ? NewEnd : TimeSpan.Zero;//Image can be extended
         }
         public void Apply()
         {
-            Fragment.StartTime = NewStart;
-            Fragment.EndTime = NewEnd;
+            FragmentPlacement.Position += NewStart - OldStart;
+
+            FragmentPlacement.Fragment.StartTime = NewStart;
+            FragmentPlacement.Fragment.EndTime = NewEnd;
         }
         public void Undo()
         {
-            Fragment.StartTime = OldEnd;
-            Fragment.EndTime = OldStart;
+            FragmentPlacement.Fragment.StartTime = OldEnd;
+            FragmentPlacement.Fragment.EndTime = OldStart;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Text.Json.Serialization;
 using Videoeditor.Core;
 
 namespace VideoEditor.Core
@@ -8,13 +9,41 @@ namespace VideoEditor.Core
     {
         public string Name { get; set; }
         public string Path { get; set; }
-        internal ProjectConfig Configuration { get; set; } = new ProjectConfig();
+        public ProjectConfig Configuration { get; set; } = new ProjectConfig();
         public SelectionManager SelectionManager { get; set; }
         public List<Lane> Lanes { get; set; } = new List<Lane>();
         public List<string> MediaFiles { get; set; } = new List<string>();
         public History History;
+        [JsonIgnore]
         public Graphics Graphics { get; set; }
-        public Engine engine=new Engine();
+        public Engine engine = new Engine();
+        public TimeSpan ProjectStart{ get {
+                var Start=TimeSpan.Zero;
+                foreach (var lane in Lanes)
+                {
+                    if (lane.LaneStart!=null & lane.LaneStart > Start)
+                    {
+                        Start = (TimeSpan)lane.LaneStart;
+                    }
+                }
+                return Start;
+            } }
+        public TimeSpan ProjectEnd
+        {
+            get
+            {
+                var End = TimeSpan.Zero;
+                foreach (var lane in Lanes)
+                {
+                    if (lane.LaneEnd != null & lane.LaneEnd > End)
+                    {
+                        End = (TimeSpan)lane.LaneEnd;
+                    }
+                }
+                return End;
+            }
+        }
+        public TimeSpan ProjectDuration { get { return ProjectEnd - ProjectStart; } }
         public void AddMediaFile(string filePath)
         {
             if (!MediaFiles.Contains(filePath))
@@ -39,12 +68,19 @@ namespace VideoEditor.Core
             var lane = new Lane($"Lane {laneNumber}");
             Lanes.Add(lane);
         }
+        public void RemoveLane(int laneNumber)
+        {
+            Lanes.RemoveAt(laneNumber);
+        }
         //Render 
         public void RenderPanel()
         {
             var renderer = new RenderLanePanel(this, Graphics);
             renderer.Render();
         }
+
+        
+
         public Project()
         {
             History = new History(Config.MaxUndoSteps);

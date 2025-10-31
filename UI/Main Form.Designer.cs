@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            TabPage tabPage10;
             TabPage tabPage14;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Form));
             tableLayoutPanel25 = new TableLayoutPanel();
@@ -50,6 +49,49 @@
             button17 = new Button();
             trackBar3 = new TrackBar();
             tableLayoutPanel1 = new TableLayoutPanel();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            button5 = new Button();
+            tabControl5 = new TabControl();
+            tabPage12 = new TabPage();
+            flowLayoutPanel8 = new FlowLayoutPanel();
+            button6 = new Button();
+            button7 = new Button();
+            button28 = new Button();
+            button29 = new Button();
+            button30 = new Button();
+            tabPage16 = new TabPage();
+            flowLayoutPanel9 = new FlowLayoutPanel();
+            button3 = new Button();
+            button31 = new Button();
+            button34 = new Button();
+            button33 = new Button();
+            tabPage17 = new TabPage();
+            flowLayoutPanel10 = new FlowLayoutPanel();
+            label1 = new Label();
+            button1 = new Button();
+            imageList1 = new ImageList(components);
+            button2 = new Button();
+            button4 = new Button();
+            label102 = new Label();
+            button32 = new Button();
+            imageList4 = new ImageList(components);
+            button35 = new Button();
+            tableLayoutPanel30 = new TableLayoutPanel();
+            flowLayoutPanel2 = new FlowLayoutPanel();
+            button8 = new Button();
+            imageList2 = new ImageList(components);
+            button9 = new Button();
+            button10 = new Button();
+            button11 = new Button();
+            button12 = new Button();
+            tableLayoutPanel8 = new TableLayoutPanel();
+            hScrollBar1 = new HScrollBar();
+            vScrollBar1 = new VScrollBar();
+            LanePanel = new Panel();
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            toolStripStatusLabel2 = new ToolStripStatusLabel();
+            toolStripStatusLabel3 = new ToolStripStatusLabel();
             tableLayoutPanel4 = new TableLayoutPanel();
             tabControl4 = new TabControl();
             tabPage13 = new TabPage();
@@ -101,7 +143,6 @@
             label87 = new Label();
             label86 = new Label();
             button27 = new Button();
-            imageList3 = new ImageList(components);
             label83 = new Label();
             button26 = new Button();
             label79 = new Label();
@@ -121,39 +162,11 @@
             button20 = new Button();
             button21 = new Button();
             button22 = new Button();
-            imageList1 = new ImageList(components);
             axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             tabControl3 = new TabControl();
             tabPage8 = new TabPage();
             listBox1 = new ListBox();
             tabPage9 = new TabPage();
-            tabPage11 = new TabPage();
-            statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
-            toolStripStatusLabel2 = new ToolStripStatusLabel();
-            toolStripStatusLabel3 = new ToolStripStatusLabel();
-            toolStripStatusLabel4 = new ToolStripStatusLabel();
-            tableLayoutPanel5 = new TableLayoutPanel();
-            flowLayoutPanel2 = new FlowLayoutPanel();
-            button8 = new Button();
-            imageList2 = new ImageList(components);
-            button9 = new Button();
-            button10 = new Button();
-            button11 = new Button();
-            button12 = new Button();
-            tableLayoutPanel8 = new TableLayoutPanel();
-            hScrollBar1 = new HScrollBar();
-            vScrollBar1 = new VScrollBar();
-            LanePanel = new Panel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            label1 = new Label();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
-            button7 = new Button();
             tableLayoutPanel6 = new TableLayoutPanel();
             menuStrip1 = new MenuStrip();
             toolStripMenuItem1 = new ToolStripMenuItem();
@@ -197,6 +210,16 @@
             flowLayoutPanel3 = new FlowLayoutPanel();
             button13 = new Button();
             button14 = new Button();
+            flowLayoutPanel11 = new FlowLayoutPanel();
+            button36 = new Button();
+            button37 = new Button();
+            button38 = new Button();
+            button39 = new Button();
+            button40 = new Button();
+            tableLayoutPanel31 = new TableLayoutPanel();
+            hScrollBar4 = new HScrollBar();
+            vScrollBar4 = new VScrollBar();
+            panel1 = new Panel();
             tableLayoutPanel2 = new TableLayoutPanel();
             axWindowsMediaPlayer2 = new AxWMPLib.AxWindowsMediaPlayer();
             tableLayoutPanel3 = new TableLayoutPanel();
@@ -293,12 +316,24 @@
             hScrollBar3 = new HScrollBar();
             vScrollBar3 = new VScrollBar();
             saveFileDialog1 = new SaveFileDialog();
-            tabPage10 = new TabPage();
+            tableLayoutPanel5 = new TableLayoutPanel();
             tabPage14 = new TabPage();
             tabPage14.SuspendLayout();
             tableLayoutPanel25.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar3).BeginInit();
             tableLayoutPanel1.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            tabControl5.SuspendLayout();
+            tabPage12.SuspendLayout();
+            flowLayoutPanel8.SuspendLayout();
+            tabPage16.SuspendLayout();
+            flowLayoutPanel9.SuspendLayout();
+            tabPage17.SuspendLayout();
+            flowLayoutPanel10.SuspendLayout();
+            tableLayoutPanel30.SuspendLayout();
+            flowLayoutPanel2.SuspendLayout();
+            tableLayoutPanel8.SuspendLayout();
+            statusStrip1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             tabControl4.SuspendLayout();
             tabPage13.SuspendLayout();
@@ -314,14 +349,11 @@
             ((System.ComponentModel.ISupportInitialize)axWindowsMediaPlayer1).BeginInit();
             tabControl3.SuspendLayout();
             tabPage8.SuspendLayout();
-            statusStrip1.SuspendLayout();
-            tableLayoutPanel5.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
-            tableLayoutPanel8.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
             tableLayoutPanel6.SuspendLayout();
             menuStrip1.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
+            flowLayoutPanel11.SuspendLayout();
+            tableLayoutPanel31.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)axWindowsMediaPlayer2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)axWindowsMediaPlayer3).BeginInit();
             tabControl1.SuspendLayout();
@@ -348,17 +380,6 @@
             tableLayoutPanel29.SuspendLayout();
             SuspendLayout();
             // 
-            // tabPage10
-            // 
-            tabPage10.Font = new Font("Segoe UI", 1.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tabPage10.ImageKey = "Robot.ico";
-            tabPage10.Location = new Point(4, 4);
-            tabPage10.Name = "tabPage10";
-            tabPage10.Padding = new Padding(3);
-            tabPage10.Size = new Size(192, 297);
-            tabPage10.TabIndex = 2;
-            tabPage10.UseVisualStyleBackColor = true;
-            // 
             // tabPage14
             // 
             tabPage14.Controls.Add(tableLayoutPanel25);
@@ -367,7 +388,7 @@
             tabPage14.Location = new Point(39, 4);
             tabPage14.Name = "tabPage14";
             tabPage14.Padding = new Padding(3);
-            tabPage14.Size = new Size(335, 297);
+            tabPage14.Size = new Size(335, 217);
             tabPage14.TabIndex = 2;
             tabPage14.UseVisualStyleBackColor = true;
             // 
@@ -410,7 +431,7 @@
             tableLayoutPanel25.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel25.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel25.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel25.Size = new Size(329, 291);
+            tableLayoutPanel25.Size = new Size(329, 211);
             tableLayoutPanel25.TabIndex = 5;
             // 
             // label72
@@ -419,7 +440,7 @@
             label72.Dock = DockStyle.Fill;
             label72.Location = new Point(3, 218);
             label72.Name = "label72";
-            label72.Size = new Size(115, 73);
+            label72.Size = new Size(115, 20);
             label72.TabIndex = 26;
             label72.Text = "Sound volume:";
             // 
@@ -570,23 +591,504 @@
             // 
             tableLayoutPanel1.AllowDrop = true;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 0, 1);
+            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 2);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel30, 0, 3);
             tableLayoutPanel1.Controls.Add(statusStrip1, 0, 4);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel5, 0, 2);
-            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 3);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel6, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.ForeColor = SystemColors.ActiveCaptionText;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 5;
+            tableLayoutPanel1.RowCount = 6;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 37F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 59.8076935F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 40.1923065F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Size = new Size(995, 620);
             tableLayoutPanel1.TabIndex = 0;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(button5);
+            flowLayoutPanel1.Controls.Add(tabControl5);
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.Location = new Point(3, 271);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(989, 68);
+            flowLayoutPanel1.TabIndex = 9;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(3, 0);
+            button5.Margin = new Padding(3, 0, 3, 0);
+            button5.Name = "button5";
+            button5.Size = new Size(112, 28);
+            button5.TabIndex = 5;
+            button5.Text = "Add transition";
+            button5.UseVisualStyleBackColor = true;
+            // 
+            // tabControl5
+            // 
+            tabControl5.Controls.Add(tabPage12);
+            tabControl5.Controls.Add(tabPage16);
+            tabControl5.Controls.Add(tabPage17);
+            tabControl5.Location = new Point(118, 0);
+            tabControl5.Margin = new Padding(0);
+            tabControl5.Name = "tabControl5";
+            tabControl5.Padding = new Point(6, 0);
+            tabControl5.SelectedIndex = 0;
+            tabControl5.Size = new Size(333, 65);
+            tabControl5.TabIndex = 6;
+            // 
+            // tabPage12
+            // 
+            tabPage12.Controls.Add(flowLayoutPanel8);
+            tabPage12.Location = new Point(4, 27);
+            tabPage12.Name = "tabPage12";
+            tabPage12.Padding = new Padding(3);
+            tabPage12.Size = new Size(325, 34);
+            tabPage12.TabIndex = 0;
+            tabPage12.Text = "Select";
+            tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel8
+            // 
+            flowLayoutPanel8.Controls.Add(button6);
+            flowLayoutPanel8.Controls.Add(button7);
+            flowLayoutPanel8.Controls.Add(button28);
+            flowLayoutPanel8.Controls.Add(button29);
+            flowLayoutPanel8.Controls.Add(button30);
+            flowLayoutPanel8.Dock = DockStyle.Left;
+            flowLayoutPanel8.Location = new Point(3, 3);
+            flowLayoutPanel8.Margin = new Padding(0);
+            flowLayoutPanel8.Name = "flowLayoutPanel8";
+            flowLayoutPanel8.Size = new Size(319, 28);
+            flowLayoutPanel8.TabIndex = 2;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(3, 0);
+            button6.Margin = new Padding(3, 0, 3, 0);
+            button6.Name = "button6";
+            button6.Size = new Size(56, 28);
+            button6.TabIndex = 7;
+            button6.Text = "Copy";
+            button6.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            button7.Location = new Point(65, 0);
+            button7.Margin = new Padding(3, 0, 3, 0);
+            button7.Name = "button7";
+            button7.Size = new Size(56, 28);
+            button7.TabIndex = 8;
+            button7.Text = "Cut";
+            button7.UseVisualStyleBackColor = true;
+            // 
+            // button28
+            // 
+            button28.Location = new Point(127, 0);
+            button28.Margin = new Padding(3, 0, 3, 0);
+            button28.Name = "button28";
+            button28.Size = new Size(56, 28);
+            button28.TabIndex = 9;
+            button28.Text = "Paste";
+            button28.UseVisualStyleBackColor = true;
+            // 
+            // button29
+            // 
+            button29.Location = new Point(189, 0);
+            button29.Margin = new Padding(3, 0, 3, 0);
+            button29.Name = "button29";
+            button29.Size = new Size(63, 28);
+            button29.TabIndex = 10;
+            button29.Text = "Delete";
+            button29.UseVisualStyleBackColor = true;
+            // 
+            // button30
+            // 
+            button30.Location = new Point(258, 0);
+            button30.Margin = new Padding(3, 0, 3, 0);
+            button30.Name = "button30";
+            button30.Size = new Size(58, 28);
+            button30.TabIndex = 11;
+            button30.Text = "Split";
+            button30.UseVisualStyleBackColor = true;
+            // 
+            // tabPage16
+            // 
+            tabPage16.Controls.Add(flowLayoutPanel9);
+            tabPage16.Location = new Point(4, 27);
+            tabPage16.Name = "tabPage16";
+            tabPage16.Padding = new Padding(3);
+            tabPage16.Size = new Size(325, 34);
+            tabPage16.TabIndex = 1;
+            tabPage16.Text = "Edit";
+            tabPage16.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel9
+            // 
+            flowLayoutPanel9.Controls.Add(button3);
+            flowLayoutPanel9.Controls.Add(button31);
+            flowLayoutPanel9.Controls.Add(button34);
+            flowLayoutPanel9.Controls.Add(button33);
+            flowLayoutPanel9.Dock = DockStyle.Left;
+            flowLayoutPanel9.Location = new Point(3, 3);
+            flowLayoutPanel9.Margin = new Padding(0);
+            flowLayoutPanel9.Name = "flowLayoutPanel9";
+            flowLayoutPanel9.Size = new Size(319, 28);
+            flowLayoutPanel9.TabIndex = 3;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(3, 0);
+            button3.Margin = new Padding(3, 0, 3, 0);
+            button3.Name = "button3";
+            button3.Size = new Size(56, 28);
+            button3.TabIndex = 7;
+            button3.Text = "Move";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // button31
+            // 
+            button31.Location = new Point(65, 0);
+            button31.Margin = new Padding(3, 0, 3, 0);
+            button31.Name = "button31";
+            button31.Size = new Size(48, 28);
+            button31.TabIndex = 8;
+            button31.Text = "Trim";
+            button31.UseVisualStyleBackColor = true;
+            // 
+            // button34
+            // 
+            button34.Location = new Point(119, 0);
+            button34.Margin = new Padding(3, 0, 3, 0);
+            button34.Name = "button34";
+            button34.Size = new Size(58, 28);
+            button34.TabIndex = 11;
+            button34.Text = "Split";
+            button34.UseVisualStyleBackColor = true;
+            // 
+            // button33
+            // 
+            button33.Location = new Point(183, 0);
+            button33.Margin = new Padding(3, 0, 3, 0);
+            button33.Name = "button33";
+            button33.Size = new Size(73, 28);
+            button33.TabIndex = 10;
+            button33.Text = "Double";
+            button33.UseVisualStyleBackColor = true;
+            // 
+            // tabPage17
+            // 
+            tabPage17.Controls.Add(flowLayoutPanel10);
+            tabPage17.Location = new Point(4, 27);
+            tabPage17.Name = "tabPage17";
+            tabPage17.Padding = new Padding(3);
+            tabPage17.Size = new Size(325, 34);
+            tabPage17.TabIndex = 2;
+            tabPage17.Text = "Navigate/Zoom";
+            tabPage17.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel10
+            // 
+            flowLayoutPanel10.Controls.Add(label1);
+            flowLayoutPanel10.Controls.Add(button1);
+            flowLayoutPanel10.Controls.Add(button2);
+            flowLayoutPanel10.Controls.Add(button4);
+            flowLayoutPanel10.Controls.Add(label102);
+            flowLayoutPanel10.Controls.Add(button32);
+            flowLayoutPanel10.Controls.Add(button35);
+            flowLayoutPanel10.Dock = DockStyle.Left;
+            flowLayoutPanel10.Location = new Point(3, 3);
+            flowLayoutPanel10.Margin = new Padding(0);
+            flowLayoutPanel10.Name = "flowLayoutPanel10";
+            flowLayoutPanel10.Size = new Size(319, 28);
+            flowLayoutPanel10.TabIndex = 5;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Left;
+            label1.Font = new Font("Segoe UI", 9F);
+            label1.Location = new Point(3, 1);
+            label1.Name = "label1";
+            label1.Size = new Size(51, 26);
+            label1.TabIndex = 3;
+            label1.Text = "Time:";
+            // 
+            // button1
+            // 
+            button1.ImageKey = "Glass plus.png";
+            button1.ImageList = imageList1;
+            button1.Location = new Point(57, 0);
+            button1.Margin = new Padding(0);
+            button1.Name = "button1";
+            button1.Size = new Size(28, 28);
+            button1.TabIndex = 1;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "Folder.ico");
+            imageList1.Images.SetKeyName(1, "Music.ico");
+            imageList1.Images.SetKeyName(2, "Plugin.ico");
+            imageList1.Images.SetKeyName(3, "Robot.ico");
+            imageList1.Images.SetKeyName(4, "Text lines.ico");
+            imageList1.Images.SetKeyName(5, "Text symbol.ico");
+            imageList1.Images.SetKeyName(6, "Video.ico");
+            imageList1.Images.SetKeyName(7, "Glass minus.png");
+            imageList1.Images.SetKeyName(8, "Glass plus.png");
+            // 
+            // button2
+            // 
+            button2.ImageKey = "Glass minus.png";
+            button2.ImageList = imageList1;
+            button2.Location = new Point(85, 0);
+            button2.Margin = new Padding(0);
+            button2.Name = "button2";
+            button2.Size = new Size(28, 28);
+            button2.TabIndex = 2;
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(116, 0);
+            button4.Margin = new Padding(3, 0, 3, 0);
+            button4.Name = "button4";
+            button4.Size = new Size(72, 28);
+            button4.TabIndex = 9;
+            button4.Text = "Fit time";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // label102
+            // 
+            label102.Anchor = AnchorStyles.Left;
+            label102.Location = new Point(194, 1);
+            label102.Name = "label102";
+            label102.Size = new Size(54, 26);
+            label102.TabIndex = 10;
+            label102.Text = "Lanes:";
+            // 
+            // button32
+            // 
+            button32.ImageKey = "arrows-breake-v-icon-size_24.ico";
+            button32.ImageList = imageList4;
+            button32.Location = new Point(251, 0);
+            button32.Margin = new Padding(0);
+            button32.Name = "button32";
+            button32.Size = new Size(28, 28);
+            button32.TabIndex = 11;
+            button32.UseVisualStyleBackColor = true;
+            button32.Click += button32_Click;
+            // 
+            // imageList4
+            // 
+            imageList4.ColorDepth = ColorDepth.Depth32Bit;
+            imageList4.ImageStream = (ImageListStreamer)resources.GetObject("imageList4.ImageStream");
+            imageList4.TransparentColor = Color.Transparent;
+            imageList4.Images.SetKeyName(0, "arrows-breake-v-icon-size_24.ico");
+            imageList4.Images.SetKeyName(1, "arrows-merge-alt-v-icon-size_24.ico");
+            // 
+            // button35
+            // 
+            button35.ImageKey = "arrows-merge-alt-v-icon-size_24.ico";
+            button35.ImageList = imageList4;
+            button35.Location = new Point(279, 0);
+            button35.Margin = new Padding(0);
+            button35.Name = "button35";
+            button35.Size = new Size(28, 28);
+            button35.TabIndex = 12;
+            button35.UseVisualStyleBackColor = true;
+            button35.Click += button35_Click;
+            // 
+            // tableLayoutPanel30
+            // 
+            tableLayoutPanel30.ColumnCount = 2;
+            tableLayoutPanel30.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
+            tableLayoutPanel30.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel30.Controls.Add(flowLayoutPanel2, 0, 0);
+            tableLayoutPanel30.Controls.Add(tableLayoutPanel8, 1, 0);
+            tableLayoutPanel30.Dock = DockStyle.Fill;
+            tableLayoutPanel30.Location = new Point(3, 345);
+            tableLayoutPanel30.Name = "tableLayoutPanel30";
+            tableLayoutPanel30.RowCount = 1;
+            tableLayoutPanel30.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel30.Size = new Size(989, 225);
+            tableLayoutPanel30.TabIndex = 8;
+            // 
+            // flowLayoutPanel2
+            // 
+            flowLayoutPanel2.Controls.Add(button8);
+            flowLayoutPanel2.Controls.Add(button9);
+            flowLayoutPanel2.Controls.Add(button10);
+            flowLayoutPanel2.Controls.Add(button11);
+            flowLayoutPanel2.Controls.Add(button12);
+            flowLayoutPanel2.Dock = DockStyle.Left;
+            flowLayoutPanel2.Location = new Point(0, 0);
+            flowLayoutPanel2.Margin = new Padding(0);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new Size(30, 225);
+            flowLayoutPanel2.TabIndex = 1;
+            // 
+            // button8
+            // 
+            button8.ImageKey = "Plus.ico";
+            button8.ImageList = imageList2;
+            button8.Location = new Point(0, 0);
+            button8.Margin = new Padding(0);
+            button8.Name = "button8";
+            button8.Size = new Size(26, 26);
+            button8.TabIndex = 2;
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
+            // 
+            // imageList2
+            // 
+            imageList2.ColorDepth = ColorDepth.Depth32Bit;
+            imageList2.ImageStream = (ImageListStreamer)resources.GetObject("imageList2.ImageStream");
+            imageList2.TransparentColor = Color.Transparent;
+            imageList2.Images.SetKeyName(0, "Copy.ico");
+            imageList2.Images.SetKeyName(1, "Down.ico");
+            imageList2.Images.SetKeyName(2, "Plus.ico");
+            imageList2.Images.SetKeyName(3, "Trash.ico");
+            imageList2.Images.SetKeyName(4, "Up.ico");
+            // 
+            // button9
+            // 
+            button9.ImageKey = "Trash.ico";
+            button9.ImageList = imageList2;
+            button9.Location = new Point(0, 26);
+            button9.Margin = new Padding(0);
+            button9.Name = "button9";
+            button9.Size = new Size(26, 26);
+            button9.TabIndex = 3;
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += button9_Click;
+            // 
+            // button10
+            // 
+            button10.ImageKey = "Up.ico";
+            button10.ImageList = imageList2;
+            button10.Location = new Point(0, 52);
+            button10.Margin = new Padding(0);
+            button10.Name = "button10";
+            button10.Size = new Size(26, 26);
+            button10.TabIndex = 4;
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
+            // 
+            // button11
+            // 
+            button11.ImageKey = "Down.ico";
+            button11.ImageList = imageList2;
+            button11.Location = new Point(0, 78);
+            button11.Margin = new Padding(0);
+            button11.Name = "button11";
+            button11.Size = new Size(26, 26);
+            button11.TabIndex = 5;
+            button11.UseVisualStyleBackColor = true;
+            button11.Click += button11_Click;
+            // 
+            // button12
+            // 
+            button12.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button12.ImageKey = "Copy.ico";
+            button12.ImageList = imageList2;
+            button12.Location = new Point(0, 104);
+            button12.Margin = new Padding(0);
+            button12.Name = "button12";
+            button12.Size = new Size(26, 26);
+            button12.TabIndex = 6;
+            button12.UseVisualStyleBackColor = true;
+            button12.Click += button12_Click;
+            // 
+            // tableLayoutPanel8
+            // 
+            tableLayoutPanel8.ColumnCount = 2;
+            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            tableLayoutPanel8.Controls.Add(hScrollBar1, 0, 1);
+            tableLayoutPanel8.Controls.Add(vScrollBar1, 1, 0);
+            tableLayoutPanel8.Controls.Add(LanePanel, 0, 0);
+            tableLayoutPanel8.Dock = DockStyle.Fill;
+            tableLayoutPanel8.Location = new Point(33, 3);
+            tableLayoutPanel8.Name = "tableLayoutPanel8";
+            tableLayoutPanel8.RowCount = 2;
+            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel8.RowStyles.Add(new RowStyle());
+            tableLayoutPanel8.Size = new Size(953, 219);
+            tableLayoutPanel8.TabIndex = 2;
+            // 
+            // hScrollBar1
+            // 
+            hScrollBar1.Dock = DockStyle.Bottom;
+            hScrollBar1.Location = new Point(0, 207);
+            hScrollBar1.Name = "hScrollBar1";
+            hScrollBar1.Size = new Size(943, 12);
+            hScrollBar1.TabIndex = 0;
+            hScrollBar1.Scroll += hScrollBar1_Scroll;
+            hScrollBar1.ValueChanged += hSc;
+            // 
+            // vScrollBar1
+            // 
+            vScrollBar1.Dock = DockStyle.Fill;
+            vScrollBar1.Location = new Point(943, 0);
+            vScrollBar1.Name = "vScrollBar1";
+            vScrollBar1.Size = new Size(10, 207);
+            vScrollBar1.TabIndex = 1;
+            vScrollBar1.Scroll += vScrollBar1_Scroll;
+            // 
+            // LanePanel
+            // 
+            LanePanel.AllowDrop = true;
+            LanePanel.Dock = DockStyle.Fill;
+            LanePanel.Location = new Point(3, 3);
+            LanePanel.Name = "LanePanel";
+            LanePanel.Size = new Size(937, 201);
+            LanePanel.TabIndex = 2;
+            LanePanel.SizeChanged += LanePanel_SizeChanged;
+            LanePanel.Click += LanePanel_Click;
+            LanePanel.DragDrop += LanePanel_DragDrop;
+            LanePanel.DragEnter += LanePanel_DragEnter;
+            LanePanel.Paint += LanePanel_Paint;
+            LanePanel.MouseDown += LanePanel_MouseDown;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabel2, toolStripStatusLabel3 });
+            statusStrip1.Location = new Point(0, 573);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(995, 26);
+            statusStrip1.TabIndex = 7;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(52, 20);
+            toolStripStatusLabel1.Text = "Status:";
+            // 
+            // toolStripStatusLabel2
+            // 
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new Size(169, 20);
+            toolStripStatusLabel2.Text = "Project: myvideo.project";
+            // 
+            // toolStripStatusLabel3
+            // 
+            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            toolStripStatusLabel3.Size = new Size(112, 20);
+            toolStripStatusLabel3.Text = "Autosave: 00:01";
             // 
             // tableLayoutPanel4
             // 
@@ -604,7 +1106,7 @@
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
-            tableLayoutPanel4.Size = new Size(995, 311);
+            tableLayoutPanel4.Size = new Size(995, 231);
             tableLayoutPanel4.TabIndex = 1;
             // 
             // tabControl4
@@ -620,7 +1122,7 @@
             tabControl4.Multiline = true;
             tabControl4.Name = "tabControl4";
             tabControl4.SelectedIndex = 0;
-            tabControl4.Size = new Size(378, 305);
+            tabControl4.Size = new Size(378, 225);
             tabControl4.SizeMode = TabSizeMode.Fixed;
             tabControl4.TabIndex = 3;
             // 
@@ -631,7 +1133,7 @@
             tabPage13.Location = new Point(39, 4);
             tabPage13.Name = "tabPage13";
             tabPage13.Padding = new Padding(3);
-            tabPage13.Size = new Size(335, 297);
+            tabPage13.Size = new Size(335, 217);
             tabPage13.TabIndex = 1;
             tabPage13.UseVisualStyleBackColor = true;
             // 
@@ -681,7 +1183,7 @@
             tableLayoutPanel24.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel24.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel24.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel24.Size = new Size(329, 291);
+            tableLayoutPanel24.Size = new Size(329, 211);
             tableLayoutPanel24.TabIndex = 4;
             // 
             // label6
@@ -878,6 +1380,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(202, 27);
             textBox1.TabIndex = 1;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // textBox2
             // 
@@ -886,6 +1389,9 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(202, 27);
             textBox2.TabIndex = 13;
+            textBox2.TextChanged += textBox2_TextChanged;
+            textBox2.KeyDown += textBox2_KeyDown;
+            textBox2.Leave += textBox2_Leave;
             // 
             // textBox3
             // 
@@ -894,6 +1400,10 @@
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(202, 27);
             textBox3.TabIndex = 15;
+            textBox3.TextChanged += textBox3_TextChanged;
+            textBox3.KeyDown += textBox3_KeyDown;
+            textBox3.KeyPress += textBox3_KeyPress;
+            textBox3.Leave += textBox3_Leave;
             // 
             // button15
             // 
@@ -904,6 +1414,7 @@
             button15.TabIndex = 18;
             button15.Text = "Reset Trim";
             button15.UseVisualStyleBackColor = true;
+            button15.Click += button15_Click;
             // 
             // trackBar1
             // 
@@ -921,7 +1432,7 @@
             tabPage15.Location = new Point(39, 4);
             tabPage15.Name = "tabPage15";
             tabPage15.Padding = new Padding(3);
-            tabPage15.Size = new Size(335, 297);
+            tabPage15.Size = new Size(335, 217);
             tabPage15.TabIndex = 3;
             tabPage15.UseVisualStyleBackColor = true;
             // 
@@ -972,7 +1483,7 @@
             tableLayoutPanel27.RowStyles.Add(new RowStyle());
             tableLayoutPanel27.RowStyles.Add(new RowStyle());
             tableLayoutPanel27.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel27.Size = new Size(329, 291);
+            tableLayoutPanel27.Size = new Size(329, 211);
             tableLayoutPanel27.TabIndex = 0;
             tableLayoutPanel27.Paint += tableLayoutPanel27_Paint;
             // 
@@ -1191,27 +1702,11 @@
             button27.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
             button27.ForeColor = Color.White;
             button27.ImageKey = "dropper.ico";
-            button27.ImageList = imageList3;
             button27.Location = new Point(92, 178);
             button27.Name = "button27";
             button27.Size = new Size(30, 30);
             button27.TabIndex = 11;
             button27.UseVisualStyleBackColor = false;
-            // 
-            // imageList3
-            // 
-            imageList3.ColorDepth = ColorDepth.Depth32Bit;
-            imageList3.ImageStream = (ImageListStreamer)resources.GetObject("imageList3.ImageStream");
-            imageList3.TransparentColor = Color.Transparent;
-            imageList3.Images.SetKeyName(0, "Text_align_centre.ico");
-            imageList3.Images.SetKeyName(1, "Text_align_left.ico");
-            imageList3.Images.SetKeyName(2, "Text_align_right.ico");
-            imageList3.Images.SetKeyName(3, "Text_align_width.ico");
-            imageList3.Images.SetKeyName(4, "Text_bold.ico");
-            imageList3.Images.SetKeyName(5, "Text_crosseed.ico");
-            imageList3.Images.SetKeyName(6, "Text_italic.ico");
-            imageList3.Images.SetKeyName(7, "Text_underlined.ico");
-            imageList3.Images.SetKeyName(8, "dropper.ico");
             // 
             // label83
             // 
@@ -1229,7 +1724,6 @@
             button26.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
             button26.ForeColor = Color.White;
             button26.ImageKey = "dropper.ico";
-            button26.ImageList = imageList3;
             button26.Location = new Point(92, 142);
             button26.Name = "button26";
             button26.Size = new Size(30, 30);
@@ -1264,7 +1758,6 @@
             button19.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
             button19.ForeColor = Color.White;
             button19.ImageKey = "Text_align_left.ico";
-            button19.ImageList = imageList3;
             button19.Location = new Point(3, 3);
             button19.Name = "button19";
             button19.Size = new Size(30, 30);
@@ -1278,7 +1771,6 @@
             button23.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
             button23.ForeColor = Color.White;
             button23.ImageKey = "Text_align_centre.ico";
-            button23.ImageList = imageList3;
             button23.Location = new Point(39, 3);
             button23.Name = "button23";
             button23.Size = new Size(30, 30);
@@ -1292,7 +1784,6 @@
             button24.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
             button24.ForeColor = Color.White;
             button24.ImageKey = "Text_align_right.ico";
-            button24.ImageList = imageList3;
             button24.Location = new Point(75, 3);
             button24.Name = "button24";
             button24.Size = new Size(30, 30);
@@ -1306,7 +1797,6 @@
             button25.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
             button25.ForeColor = Color.White;
             button25.ImageKey = "Text_align_width.ico";
-            button25.ImageList = imageList3;
             button25.Location = new Point(111, 3);
             button25.Name = "button25";
             button25.Size = new Size(30, 30);
@@ -1393,7 +1883,6 @@
             button18.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
             button18.ForeColor = Color.White;
             button18.ImageKey = "Text_bold.ico";
-            button18.ImageList = imageList3;
             button18.Location = new Point(3, 3);
             button18.Name = "button18";
             button18.Size = new Size(30, 30);
@@ -1407,7 +1896,6 @@
             button20.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
             button20.ForeColor = Color.White;
             button20.ImageKey = "Text_italic.ico";
-            button20.ImageList = imageList3;
             button20.Location = new Point(39, 3);
             button20.Name = "button20";
             button20.Size = new Size(30, 30);
@@ -1421,7 +1909,6 @@
             button21.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
             button21.ForeColor = Color.White;
             button21.ImageKey = "Text_underlined.ico";
-            button21.ImageList = imageList3;
             button21.Location = new Point(75, 3);
             button21.Name = "button21";
             button21.Size = new Size(30, 30);
@@ -1435,27 +1922,11 @@
             button22.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
             button22.ForeColor = Color.White;
             button22.ImageKey = "Text_crosseed.ico";
-            button22.ImageList = imageList3;
             button22.Location = new Point(111, 3);
             button22.Name = "button22";
             button22.Size = new Size(30, 30);
             button22.TabIndex = 3;
             button22.UseVisualStyleBackColor = false;
-            // 
-            // imageList1
-            // 
-            imageList1.ColorDepth = ColorDepth.Depth32Bit;
-            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
-            imageList1.TransparentColor = Color.Transparent;
-            imageList1.Images.SetKeyName(0, "Folder.ico");
-            imageList1.Images.SetKeyName(1, "Music.ico");
-            imageList1.Images.SetKeyName(2, "Plugin.ico");
-            imageList1.Images.SetKeyName(3, "Robot.ico");
-            imageList1.Images.SetKeyName(4, "Text lines.ico");
-            imageList1.Images.SetKeyName(5, "Text symbol.ico");
-            imageList1.Images.SetKeyName(6, "Video.ico");
-            imageList1.Images.SetKeyName(7, "Glass minus.png");
-            imageList1.Images.SetKeyName(8, "Glass plus.png");
             // 
             // axWindowsMediaPlayer1
             // 
@@ -1464,7 +1935,7 @@
             axWindowsMediaPlayer1.Location = new Point(244, 3);
             axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             axWindowsMediaPlayer1.OcxState = (AxHost.State)resources.GetObject("axWindowsMediaPlayer1.OcxState");
-            axWindowsMediaPlayer1.Size = new Size(364, 305);
+            axWindowsMediaPlayer1.Size = new Size(364, 225);
             axWindowsMediaPlayer1.TabIndex = 1;
             // 
             // tabControl3
@@ -1473,28 +1944,28 @@
             tabControl3.AllowDrop = true;
             tabControl3.Controls.Add(tabPage8);
             tabControl3.Controls.Add(tabPage9);
-            tabControl3.Controls.Add(tabPage10);
-            tabControl3.Controls.Add(tabPage11);
             tabControl3.Dock = DockStyle.Fill;
             tabControl3.ImageList = imageList1;
             tabControl3.ItemSize = new Size(35, 35);
             tabControl3.Location = new Point(3, 3);
             tabControl3.Multiline = true;
             tabControl3.Name = "tabControl3";
+            tabControl3.Padding = new Point(0, 0);
             tabControl3.SelectedIndex = 0;
-            tabControl3.Size = new Size(235, 305);
+            tabControl3.Size = new Size(235, 225);
             tabControl3.SizeMode = TabSizeMode.Fixed;
             tabControl3.TabIndex = 2;
+            tabControl3.TabStop = false;
             // 
             // tabPage8
             // 
             tabPage8.AllowDrop = true;
             tabPage8.Controls.Add(listBox1);
-            tabPage8.ImageKey = "Folder.ico";
+            tabPage8.ImageIndex = 0;
             tabPage8.Location = new Point(4, 4);
             tabPage8.Name = "tabPage8";
             tabPage8.Padding = new Padding(3);
-            tabPage8.Size = new Size(192, 297);
+            tabPage8.Size = new Size(192, 217);
             tabPage8.TabIndex = 0;
             tabPage8.UseVisualStyleBackColor = true;
             // 
@@ -1506,7 +1977,7 @@
             listBox1.Items.AddRange(new object[] { "File1.mp3" });
             listBox1.Location = new Point(3, 3);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(186, 291);
+            listBox1.Size = new Size(186, 211);
             listBox1.TabIndex = 0;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             listBox1.DragDrop += listBox1_DragDrop;
@@ -1519,297 +1990,9 @@
             tabPage9.Location = new Point(4, 4);
             tabPage9.Name = "tabPage9";
             tabPage9.Padding = new Padding(3);
-            tabPage9.Size = new Size(192, 297);
+            tabPage9.Size = new Size(192, 217);
             tabPage9.TabIndex = 1;
             tabPage9.UseVisualStyleBackColor = true;
-            // 
-            // tabPage11
-            // 
-            tabPage11.ImageKey = "Plugin.ico";
-            tabPage11.Location = new Point(4, 4);
-            tabPage11.Name = "tabPage11";
-            tabPage11.Padding = new Padding(3);
-            tabPage11.Size = new Size(192, 297);
-            tabPage11.TabIndex = 3;
-            tabPage11.UseVisualStyleBackColor = true;
-            // 
-            // statusStrip1
-            // 
-            statusStrip1.ImageScalingSize = new Size(20, 20);
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabel2, toolStripStatusLabel3, toolStripStatusLabel4 });
-            statusStrip1.Location = new Point(0, 594);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(995, 26);
-            statusStrip1.TabIndex = 4;
-            statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(52, 20);
-            toolStripStatusLabel1.Text = "Status:";
-            toolStripStatusLabel1.Click += toolStripStatusLabel1_Click;
-            // 
-            // toolStripStatusLabel2
-            // 
-            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new Size(169, 20);
-            toolStripStatusLabel2.Text = "Project: myvideo.project";
-            // 
-            // toolStripStatusLabel3
-            // 
-            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            toolStripStatusLabel3.Size = new Size(112, 20);
-            toolStripStatusLabel3.Text = "Autosave: 00:01";
-            // 
-            // toolStripStatusLabel4
-            // 
-            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            toolStripStatusLabel4.Size = new Size(55, 20);
-            toolStripStatusLabel4.Text = "AI: idle";
-            // 
-            // tableLayoutPanel5
-            // 
-            tableLayoutPanel5.ColumnCount = 2;
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel5.Controls.Add(flowLayoutPanel2, 0, 0);
-            tableLayoutPanel5.Controls.Add(tableLayoutPanel8, 1, 0);
-            tableLayoutPanel5.Dock = DockStyle.Fill;
-            tableLayoutPanel5.Location = new Point(3, 351);
-            tableLayoutPanel5.Name = "tableLayoutPanel5";
-            tableLayoutPanel5.RowCount = 1;
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel5.Size = new Size(989, 203);
-            tableLayoutPanel5.TabIndex = 2;
-            tableLayoutPanel5.Paint += tableLayoutPanel5_Paint;
-            // 
-            // flowLayoutPanel2
-            // 
-            flowLayoutPanel2.Controls.Add(button8);
-            flowLayoutPanel2.Controls.Add(button9);
-            flowLayoutPanel2.Controls.Add(button10);
-            flowLayoutPanel2.Controls.Add(button11);
-            flowLayoutPanel2.Controls.Add(button12);
-            flowLayoutPanel2.Dock = DockStyle.Left;
-            flowLayoutPanel2.Location = new Point(0, 0);
-            flowLayoutPanel2.Margin = new Padding(0);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(55, 203);
-            flowLayoutPanel2.TabIndex = 1;
-            // 
-            // button8
-            // 
-            button8.ImageKey = "Plus.ico";
-            button8.ImageList = imageList2;
-            button8.Location = new Point(0, 0);
-            button8.Margin = new Padding(0);
-            button8.Name = "button8";
-            button8.Size = new Size(26, 26);
-            button8.TabIndex = 2;
-            button8.UseVisualStyleBackColor = true;
-            // 
-            // imageList2
-            // 
-            imageList2.ColorDepth = ColorDepth.Depth32Bit;
-            imageList2.ImageStream = (ImageListStreamer)resources.GetObject("imageList2.ImageStream");
-            imageList2.TransparentColor = Color.Transparent;
-            imageList2.Images.SetKeyName(0, "Copy.ico");
-            imageList2.Images.SetKeyName(1, "Down.ico");
-            imageList2.Images.SetKeyName(2, "Plus.ico");
-            imageList2.Images.SetKeyName(3, "Trash.ico");
-            imageList2.Images.SetKeyName(4, "Up.ico");
-            // 
-            // button9
-            // 
-            button9.ImageKey = "Trash.ico";
-            button9.ImageList = imageList2;
-            button9.Location = new Point(26, 0);
-            button9.Margin = new Padding(0);
-            button9.Name = "button9";
-            button9.Size = new Size(26, 26);
-            button9.TabIndex = 3;
-            button9.UseVisualStyleBackColor = true;
-            // 
-            // button10
-            // 
-            button10.ImageKey = "Up.ico";
-            button10.ImageList = imageList2;
-            button10.Location = new Point(0, 26);
-            button10.Margin = new Padding(0);
-            button10.Name = "button10";
-            button10.Size = new Size(26, 26);
-            button10.TabIndex = 4;
-            button10.UseVisualStyleBackColor = true;
-            // 
-            // button11
-            // 
-            button11.ImageKey = "Down.ico";
-            button11.ImageList = imageList2;
-            button11.Location = new Point(26, 26);
-            button11.Margin = new Padding(0);
-            button11.Name = "button11";
-            button11.Size = new Size(26, 26);
-            button11.TabIndex = 5;
-            button11.UseVisualStyleBackColor = true;
-            button11.Click += button11_Click;
-            // 
-            // button12
-            // 
-            button12.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button12.ImageKey = "Copy.ico";
-            button12.ImageList = imageList2;
-            button12.Location = new Point(0, 52);
-            button12.Margin = new Padding(0);
-            button12.Name = "button12";
-            button12.Size = new Size(26, 26);
-            button12.TabIndex = 6;
-            button12.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel8
-            // 
-            tableLayoutPanel8.ColumnCount = 2;
-            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
-            tableLayoutPanel8.Controls.Add(hScrollBar1, 0, 1);
-            tableLayoutPanel8.Controls.Add(vScrollBar1, 1, 0);
-            tableLayoutPanel8.Controls.Add(LanePanel, 0, 0);
-            tableLayoutPanel8.Dock = DockStyle.Fill;
-            tableLayoutPanel8.Location = new Point(58, 3);
-            tableLayoutPanel8.Name = "tableLayoutPanel8";
-            tableLayoutPanel8.RowCount = 2;
-            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel8.RowStyles.Add(new RowStyle());
-            tableLayoutPanel8.Size = new Size(928, 197);
-            tableLayoutPanel8.TabIndex = 2;
-            // 
-            // hScrollBar1
-            // 
-            hScrollBar1.Dock = DockStyle.Bottom;
-            hScrollBar1.Location = new Point(0, 185);
-            hScrollBar1.Name = "hScrollBar1";
-            hScrollBar1.Size = new Size(918, 12);
-            hScrollBar1.TabIndex = 0;
-            // 
-            // vScrollBar1
-            // 
-            vScrollBar1.Dock = DockStyle.Fill;
-            vScrollBar1.Location = new Point(918, 0);
-            vScrollBar1.Name = "vScrollBar1";
-            vScrollBar1.Size = new Size(10, 185);
-            vScrollBar1.TabIndex = 1;
-            // 
-            // LanePanel
-            // 
-            LanePanel.AllowDrop = true;
-            LanePanel.Dock = DockStyle.Fill;
-            LanePanel.Location = new Point(3, 3);
-            LanePanel.Name = "LanePanel";
-            LanePanel.Size = new Size(912, 179);
-            LanePanel.TabIndex = 2;
-            LanePanel.DragDrop += LanePanel_DragDrop;
-            LanePanel.DragEnter += LanePanel_DragEnter;
-            LanePanel.Paint += panel1_Paint;
-            LanePanel.MouseClick += LanePanel_MouseClick;
-            LanePanel.MouseDown += LanePanel_MouseDown;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Controls.Add(label1);
-            flowLayoutPanel1.Controls.Add(button1);
-            flowLayoutPanel1.Controls.Add(button2);
-            flowLayoutPanel1.Controls.Add(button3);
-            flowLayoutPanel1.Controls.Add(button4);
-            flowLayoutPanel1.Controls.Add(button5);
-            flowLayoutPanel1.Controls.Add(button6);
-            flowLayoutPanel1.Controls.Add(button7);
-            flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.Location = new Point(3, 560);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(989, 28);
-            flowLayoutPanel1.TabIndex = 5;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Dock = DockStyle.Left;
-            label1.Location = new Point(3, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(52, 28);
-            label1.TabIndex = 0;
-            label1.Text = "Zoom:";
-            // 
-            // button1
-            // 
-            button1.ImageKey = "Glass plus.png";
-            button1.ImageList = imageList1;
-            button1.Location = new Point(58, 0);
-            button1.Margin = new Padding(0);
-            button1.Name = "button1";
-            button1.Size = new Size(28, 28);
-            button1.TabIndex = 1;
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.ImageKey = "Glass minus.png";
-            button2.ImageList = imageList1;
-            button2.Location = new Point(86, 0);
-            button2.Margin = new Padding(0);
-            button2.Name = "button2";
-            button2.Size = new Size(28, 28);
-            button2.TabIndex = 2;
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(117, 0);
-            button3.Margin = new Padding(3, 0, 3, 0);
-            button3.Name = "button3";
-            button3.Size = new Size(56, 28);
-            button3.TabIndex = 3;
-            button3.Text = "Split";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(179, 0);
-            button4.Margin = new Padding(3, 0, 3, 0);
-            button4.Name = "button4";
-            button4.Size = new Size(56, 28);
-            button4.TabIndex = 4;
-            button4.Text = "Cut";
-            button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            button5.Location = new Point(241, 0);
-            button5.Margin = new Padding(3, 0, 3, 0);
-            button5.Name = "button5";
-            button5.Size = new Size(112, 28);
-            button5.TabIndex = 5;
-            button5.Text = "Add transition";
-            button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            button6.Location = new Point(359, 0);
-            button6.Margin = new Padding(3, 0, 3, 0);
-            button6.Name = "button6";
-            button6.Size = new Size(84, 28);
-            button6.TabIndex = 6;
-            button6.Text = "Voiceover";
-            button6.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            button7.Location = new Point(449, 0);
-            button7.Margin = new Padding(3, 0, 3, 0);
-            button7.Name = "button7";
-            button7.Size = new Size(100, 28);
-            button7.TabIndex = 7;
-            button7.Text = "AI caption";
-            button7.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel6
             // 
@@ -2097,6 +2280,118 @@
             button14.Text = "Save project";
             button14.UseVisualStyleBackColor = false;
             button14.Click += button14_Click;
+            // 
+            // flowLayoutPanel11
+            // 
+            flowLayoutPanel11.Controls.Add(button36);
+            flowLayoutPanel11.Controls.Add(button37);
+            flowLayoutPanel11.Controls.Add(button38);
+            flowLayoutPanel11.Controls.Add(button39);
+            flowLayoutPanel11.Controls.Add(button40);
+            flowLayoutPanel11.Dock = DockStyle.Left;
+            flowLayoutPanel11.Location = new Point(0, 0);
+            flowLayoutPanel11.Margin = new Padding(0);
+            flowLayoutPanel11.Name = "flowLayoutPanel11";
+            flowLayoutPanel11.Size = new Size(30, 225);
+            flowLayoutPanel11.TabIndex = 1;
+            // 
+            // button36
+            // 
+            button36.ImageKey = "Plus.ico";
+            button36.ImageList = imageList2;
+            button36.Location = new Point(0, 0);
+            button36.Margin = new Padding(0);
+            button36.Name = "button36";
+            button36.Size = new Size(26, 26);
+            button36.TabIndex = 2;
+            button36.UseVisualStyleBackColor = true;
+            // 
+            // button37
+            // 
+            button37.ImageKey = "Trash.ico";
+            button37.ImageList = imageList2;
+            button37.Location = new Point(0, 26);
+            button37.Margin = new Padding(0);
+            button37.Name = "button37";
+            button37.Size = new Size(26, 26);
+            button37.TabIndex = 3;
+            button37.UseVisualStyleBackColor = true;
+            // 
+            // button38
+            // 
+            button38.ImageKey = "Up.ico";
+            button38.ImageList = imageList2;
+            button38.Location = new Point(0, 52);
+            button38.Margin = new Padding(0);
+            button38.Name = "button38";
+            button38.Size = new Size(26, 26);
+            button38.TabIndex = 4;
+            button38.UseVisualStyleBackColor = true;
+            // 
+            // button39
+            // 
+            button39.ImageKey = "Down.ico";
+            button39.ImageList = imageList2;
+            button39.Location = new Point(0, 78);
+            button39.Margin = new Padding(0);
+            button39.Name = "button39";
+            button39.Size = new Size(26, 26);
+            button39.TabIndex = 5;
+            button39.UseVisualStyleBackColor = true;
+            // 
+            // button40
+            // 
+            button40.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button40.ImageKey = "Copy.ico";
+            button40.ImageList = imageList2;
+            button40.Location = new Point(0, 104);
+            button40.Margin = new Padding(0);
+            button40.Name = "button40";
+            button40.Size = new Size(26, 26);
+            button40.TabIndex = 6;
+            button40.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel31
+            // 
+            tableLayoutPanel31.ColumnCount = 2;
+            tableLayoutPanel31.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel31.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            tableLayoutPanel31.Controls.Add(hScrollBar4, 0, 1);
+            tableLayoutPanel31.Controls.Add(vScrollBar4, 1, 0);
+            tableLayoutPanel31.Controls.Add(panel1, 0, 0);
+            tableLayoutPanel31.Dock = DockStyle.Fill;
+            tableLayoutPanel31.Location = new Point(33, 3);
+            tableLayoutPanel31.Name = "tableLayoutPanel31";
+            tableLayoutPanel31.RowCount = 2;
+            tableLayoutPanel31.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel31.RowStyles.Add(new RowStyle());
+            tableLayoutPanel31.Size = new Size(953, 219);
+            tableLayoutPanel31.TabIndex = 2;
+            // 
+            // hScrollBar4
+            // 
+            hScrollBar4.Dock = DockStyle.Bottom;
+            hScrollBar4.Location = new Point(0, 207);
+            hScrollBar4.Name = "hScrollBar4";
+            hScrollBar4.Size = new Size(943, 12);
+            hScrollBar4.TabIndex = 0;
+            // 
+            // vScrollBar4
+            // 
+            vScrollBar4.Dock = DockStyle.Fill;
+            vScrollBar4.Location = new Point(943, 0);
+            vScrollBar4.Name = "vScrollBar4";
+            vScrollBar4.Size = new Size(10, 207);
+            vScrollBar4.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            panel1.AllowDrop = true;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(3, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(937, 201);
+            panel1.TabIndex = 2;
             // 
             // tableLayoutPanel2
             // 
@@ -3229,6 +3524,19 @@
             vScrollBar3.Size = new Size(10, 101);
             vScrollBar3.TabIndex = 1;
             // 
+            // tableLayoutPanel5
+            // 
+            tableLayoutPanel5.ColumnCount = 2;
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel5.Dock = DockStyle.Fill;
+            tableLayoutPanel5.Location = new Point(0, 0);
+            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            tableLayoutPanel5.RowCount = 1;
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel5.Size = new Size(200, 100);
+            tableLayoutPanel5.TabIndex = 0;
+            // 
             // Main_Form
             // 
             AllowDrop = true;
@@ -3241,12 +3549,27 @@
             Load += Main_Form_Load;
             Shown += Main_Form_Shown;
             DragDrop += Main_Form_DragDrop;
+            KeyDown += Main_Form_KeyDown;
+            KeyPress += Main_Form_KeyPress;
             tabPage14.ResumeLayout(false);
             tableLayoutPanel25.ResumeLayout(false);
             tableLayoutPanel25.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar3).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
+            tabControl5.ResumeLayout(false);
+            tabPage12.ResumeLayout(false);
+            flowLayoutPanel8.ResumeLayout(false);
+            tabPage16.ResumeLayout(false);
+            flowLayoutPanel9.ResumeLayout(false);
+            tabPage17.ResumeLayout(false);
+            flowLayoutPanel10.ResumeLayout(false);
+            tableLayoutPanel30.ResumeLayout(false);
+            flowLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel8.ResumeLayout(false);
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             tableLayoutPanel4.ResumeLayout(false);
             tabControl4.ResumeLayout(false);
             tabPage13.ResumeLayout(false);
@@ -3266,18 +3589,13 @@
             ((System.ComponentModel.ISupportInitialize)axWindowsMediaPlayer1).EndInit();
             tabControl3.ResumeLayout(false);
             tabPage8.ResumeLayout(false);
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
-            tableLayoutPanel5.ResumeLayout(false);
-            flowLayoutPanel2.ResumeLayout(false);
-            tableLayoutPanel8.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
             tableLayoutPanel6.ResumeLayout(false);
             tableLayoutPanel6.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             flowLayoutPanel3.ResumeLayout(false);
+            flowLayoutPanel11.ResumeLayout(false);
+            tableLayoutPanel31.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)axWindowsMediaPlayer2).EndInit();
             ((System.ComponentModel.ISupportInitialize)axWindowsMediaPlayer3).EndInit();
             tabControl1.ResumeLayout(false);
@@ -3341,35 +3659,11 @@
         private TableLayoutPanel tableLayoutPanel4;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
         private TabControl tabControl3;
-        private TabPage tabPage8;
         private TabPage tabPage9;
-        private TableLayoutPanel tableLayoutPanel5;
-        private TabPage tabPage10;
-        private TabPage tabPage11;
         private TabControl tabControl4;
         private TabPage tabPage13;
         private TabPage tabPage15;
-        private StatusStrip statusStrip1;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private ToolStripStatusLabel toolStripStatusLabel1;
-        private ToolStripStatusLabel toolStripStatusLabel2;
-        private ToolStripStatusLabel toolStripStatusLabel3;
-        private ToolStripStatusLabel toolStripStatusLabel4;
-        private Label label1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private Button button6;
-        private Button button7;
-        private FlowLayoutPanel flowLayoutPanel2;
-        private Button button8;
         private ImageList imageList2;
-        private Button button9;
-        private Button button10;
-        private Button button11;
-        private Button button12;
         private TableLayoutPanel tableLayoutPanel6;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem toolStripMenuItem1;
@@ -3413,7 +3707,6 @@
         private FlowLayoutPanel flowLayoutPanel3;
         private Button button13;
         private Button button14;
-        private ListBox listBox1;
         private TableLayoutPanel tableLayoutPanel11;
         private Label label25;
         private Label label26;
@@ -3542,7 +3835,6 @@
         private FlowLayoutPanel flowLayoutPanel5;
         private Label label78;
         private Label label79;
-        private ImageList imageList3;
         private Button button19;
         private Button button23;
         private Button button24;
@@ -3551,10 +3843,6 @@
         private Button button21;
         private Button button22;
         private ColorDialog colorDialog1;
-        private TableLayoutPanel tableLayoutPanel8;
-        private HScrollBar hScrollBar1;
-        private VScrollBar vScrollBar1;
-        private Panel LanePanel;
         private TableLayoutPanel tableLayoutPanel28;
         private HScrollBar hScrollBar2;
         private VScrollBar vScrollBar2;
@@ -3585,5 +3873,59 @@
         private Label label101;
         private TextBox textBox13;
         private SaveFileDialog saveFileDialog1;
+        private ImageList imageList4;
+        private TabPage tabPage8;
+        private ListBox listBox1;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel toolStripStatusLabel2;
+        private ToolStripStatusLabel toolStripStatusLabel3;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Button button5;
+        private TabControl tabControl5;
+        private TabPage tabPage12;
+        private FlowLayoutPanel flowLayoutPanel8;
+        private Button button6;
+        private Button button7;
+        private Button button28;
+        private Button button29;
+        private Button button30;
+        private TabPage tabPage16;
+        private FlowLayoutPanel flowLayoutPanel9;
+        private Button button3;
+        private Button button31;
+        private Button button34;
+        private Button button33;
+        private TabPage tabPage17;
+        private FlowLayoutPanel flowLayoutPanel10;
+        private Label label1;
+        private Button button1;
+        private Button button2;
+        private Button button4;
+        private Label label102;
+        private Button button32;
+        private Button button35;
+        private TableLayoutPanel tableLayoutPanel30;
+        private FlowLayoutPanel flowLayoutPanel11;
+        private Button button36;
+        private Button button37;
+        private Button button38;
+        private Button button39;
+        private Button button40;
+        private TableLayoutPanel tableLayoutPanel31;
+        private HScrollBar hScrollBar4;
+        private VScrollBar vScrollBar4;
+        private Panel panel1;
+        private TableLayoutPanel tableLayoutPanel5;
+        private FlowLayoutPanel flowLayoutPanel2;
+        private Button button8;
+        private Button button9;
+        private Button button10;
+        private Button button11;
+        private Button button12;
+        private TableLayoutPanel tableLayoutPanel8;
+        private HScrollBar hScrollBar1;
+        private VScrollBar vScrollBar1;
+        private Panel LanePanel;
     }
 }

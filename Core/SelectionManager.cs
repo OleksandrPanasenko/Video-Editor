@@ -15,7 +15,10 @@ namespace VideoEditor.Core
         public FragmentPlacement? SelectedFragment { get; set; }
         public TimeSpan? SelectedTime { get; set; }
         public Lane? SelectedLane { get; set; }
-    
+
+        public FragmentPlacement? MemoryFragment { get; set; }
+        public TimeSpan? DraggFragmentTime { get; set; }
+
         //public bool IsDragging { get; set; }
         public ProjectConfig? Params { get { return Project.Configuration; }}
         public SelectionManager(Project project)
