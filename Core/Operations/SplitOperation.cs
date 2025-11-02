@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VideoEditor.Core.Operations
 {
-    public class SplitOperation
+    public class SplitOperation:IOperation
     {
         public string Name => new string("Split");
         private readonly FragmentPlacement First;
@@ -17,10 +17,13 @@ namespace VideoEditor.Core.Operations
 
         public SplitOperation(Project project, Lane lane, FragmentPlacement placement, TimeSpan cutOffset)
         {
+            if (placement==null) throw new ArgumentNullException(nameof(placement));
             Project = project;
             Lane = lane;
-            First = placement;
-            Second = new FragmentPlacement(placement.Fragment.CopyFragment());
+            First = placement;    
+            Second = placement.DeepCopy();
+            
+            CutOffset = cutOffset;
         }
         public void Apply()
         {

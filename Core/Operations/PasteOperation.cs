@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VideoEditor.Core.Operations
 {
-    internal class PasteOperation : IOperation
+    public class PasteOperation : IOperation
     {
         FragmentPlacement FragmentPlacement;
         Lane Lane;
@@ -14,7 +14,7 @@ namespace VideoEditor.Core.Operations
         public string Name => "Paste";
         public PasteOperation(FragmentPlacement fragmentPlacement, Lane lane, TimeSpan insertTime)
         {
-            FragmentPlacement = fragmentPlacement;
+            FragmentPlacement = fragmentPlacement.DeepCopy();
             Lane = lane;
             InsertTime = insertTime;
         }

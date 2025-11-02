@@ -22,8 +22,34 @@ namespace VideoEditor.Core
         {
             if (this[position,position+ NewPlacement.Fragment.Duration] != null)
             {
-                throw new InvalidOperationException("Cannot add fragment: Time position overlaps with an existing fragment.");
+                FragmentPlacement existing = this[position, position + NewPlacement.Fragment.Duration][0];
+                if (position >= (existing.Position + existing.EndPosition) / 2)
+                {
+                    //Try to append after
+                    if (this[existing.EndPosition,existing.EndPosition+NewPlacement.Fragment.Duration] == null)
+                    {
+                        position = existing.EndPosition;
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Cannot add fragment: Time position overlaps with an existing fragment.");
+                    }
+                }
+                else
+                {
+                    //Try to append before
+                    if (existing.Position>=NewPlacement.Fragment.Duration && this[existing.Position - NewPlacement.Fragment.Duration, existing.Position] == null)
+                    {
+                        position = existing.Position - NewPlacement.Fragment.Duration;
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Cannot add fragment: Time position overlaps with an existing fragment.");
+                    }
+                }
+                
             }
+            NewPlacement.Position = position;
             Fragments.Add(NewPlacement);
             Fragments = Fragments.OrderBy(f => f.Position).ToList();
         }

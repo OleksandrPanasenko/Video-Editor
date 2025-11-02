@@ -9,28 +9,29 @@ namespace VideoEditor.Core.Operations
     public class MoveLaneUpOperation:IOperation
     {
         string IOperation.Name => "MoveLaneUp";
-        Project project;
-        Lane lane;
-        int laneIndex;
-        public MoveLaneUpOperation()
+        Project Project;
+        Lane Lane;
+        int LaneIndex;
+        public MoveLaneUpOperation(Project project, Lane lane)
         {
-
+            Project = project;
+            Lane = lane;
         }
         public void Apply()
         {
-            if (project != null && project.Lanes.Contains(lane))
+            if (Project != null && Project.Lanes.Contains(Lane))
             {
-                laneIndex = project.Lanes.IndexOf(lane);
-                project.RemoveLane(laneIndex);
-                project.Lanes.Insert(laneIndex == 0 ? 0 : laneIndex - 1, lane);
+                LaneIndex = Project.Lanes.IndexOf(Lane);
+                Project.RemoveLane(LaneIndex);
+                Project.Lanes.Insert(LaneIndex == 0 ? 0 : LaneIndex - 1, Lane);
             }
         }
         public void Undo()
         {
-            if (laneIndex > 0)
+            if (LaneIndex > 0)
             {
-                project.RemoveLane(laneIndex - 1);
-                project.Lanes.Insert(laneIndex, lane);
+                Project.RemoveLane(LaneIndex - 1);
+                Project.Lanes.Insert(LaneIndex, Lane);
             }
         }
     }

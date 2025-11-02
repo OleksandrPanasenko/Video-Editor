@@ -13,6 +13,11 @@ namespace VideoEditor.Core
         public TimeSpan StartTime { get; set; } // Start time in milliseconds
         public TimeSpan EndTime { get; set; } // End time in milliseconds
         public TimeSpan Duration => EndTime - StartTime; // Duration in milliseconds
+
+        public float Volume = 1;
+        public float Opacity = 1;
+        public bool Muted { get; set; }
+        public bool Hidden { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
         public Fragment(string filePath, TimeSpan startTime, TimeSpan endTime)
@@ -28,10 +33,7 @@ namespace VideoEditor.Core
             EndTime = duration;
             FileDuration= duration;
         }
-        public Fragment CopyFragment()
-        {
-            return new Fragment(FilePath, StartTime, EndTime);
-        }
+        
         public enum Type {Video, Audio, Image, Text, Unknown};
         public static Type FileType(string path)
         {

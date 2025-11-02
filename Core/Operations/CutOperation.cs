@@ -11,7 +11,9 @@ namespace VideoEditor.Core
         FragmentPlacement FragmentPlacement;
         public CutOperation(Project project, Lane lane, FragmentPlacement fragmentPlacement)
         {
-
+            Project = project;
+            Lane = lane;
+            FragmentPlacement = fragmentPlacement;
         }
         public void Apply()
         {
@@ -22,6 +24,7 @@ namespace VideoEditor.Core
         public void Undo()
         {
             //TODO Paste
+            
         }
     }
 }

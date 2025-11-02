@@ -15,7 +15,7 @@ namespace VideoEditor.Core.Operations
             Project = project;
             if (Project != null&& fragmentPlacement!=null) {
                 OldCopy = Project.SelectionManager.MemoryFragment;
-                NewCopy = fragmentPlacement.DeepCopy();
+                NewCopy = fragmentPlacement;
             }
         }
 

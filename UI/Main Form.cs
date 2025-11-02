@@ -10,7 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VideoEditor.Core;
+using VideoEditor.Core.Operations;
 using VideoEditor.Infrastructure;
+using EditAction = VideoEditor.Core.SelectionManager.EditAction;
 
 namespace VideoEditor.UI
 {
@@ -18,25 +20,15 @@ namespace VideoEditor.UI
     {
         public Project Project { get { return ProjectContext.CurrentProject; } }
         public event Action? MainOpened;
+
+        public enum LaneInteractionMode { Select, Edit, Navigate }
+        public LaneInteractionMode CurrentMode { get; set; } = LaneInteractionMode.Select;
+        public EditAction PendingEdit => Project.SelectionManager.PendingEdit;
         public Main_Form()
         {
             InitializeComponent();
 
             RefreshFiles();
-
-        }
-        private void toolStripComboBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -60,6 +52,7 @@ namespace VideoEditor.UI
 
 
             }
+            //else if ()
             //MessageBox.Show("You drag and dropped");
         }
 
@@ -84,6 +77,7 @@ namespace VideoEditor.UI
             Graphics g = e.Graphics;
             Project.Graphics = g;
             Project.RenderPanel();
+            UpdateScrolls();
             /*using(Brush brush=new SolidBrush(Color.CornflowerBlue))
             {
                 g.FillRectangle(brush, 0, 0, 100, 48);
@@ -99,11 +93,41 @@ namespace VideoEditor.UI
         private void LanePanel_MouseDown(object sender, MouseEventArgs e)
         {
             //Select lane or Fragment
-            Project.SelectionManager.SelectObject(e.X, e.Y);
+            if (CurrentMode == LaneInteractionMode.Select)
+            {
+                Project.SelectionManager.SelectObject(e.X, e.Y);
 
-            LanePanel.Update();
-            LanePanel.Refresh();
-            RefreshFragmentParametres();
+                LanePanel.Update();
+                LanePanel.Refresh();
+                RefreshFragmentParametres();
+            }
+            if (CurrentMode == LaneInteractionMode.Edit)
+            {
+                Project.SelectionManager.SelectObject(e.X, e.Y);
+                Project.SelectionManager.DragStartTime = Project.SelectionManager.SelectedTime;
+
+                LanePanel.Update();
+                LanePanel.Refresh();
+
+                if (Project.SelectionManager.SelectedFragment != null)
+                {
+                    Project.SelectionManager.PendingEdit = EditAction.Move;
+                }
+                else
+                {
+                    Project.SelectionManager.ClearSelection();
+                }
+            }
+            else
+            {
+                Project.SelectionManager.SelectObject(e.X, e.Y); 
+            }
+
+            //Move Fragment
+
+            //Trim Fragment
+
+            //Navigate
         }
 
         private void LanePanel_MouseClick(object sender, MouseEventArgs e)
@@ -112,10 +136,7 @@ namespace VideoEditor.UI
             //currentProject.
         }
 
-        private void button11_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void Main_Form_Shown(object sender, EventArgs e)
         {
@@ -133,13 +154,14 @@ namespace VideoEditor.UI
             {
                 ProjectStorage.Save(Project, Project.Path);
             }
-            catch(ArgumentException ex) {
+            catch (ArgumentException ex)
+            {
 
                 MessageBox.Show($"Save failed: {ex.Message}\n\n{ex.StackTrace}");
                 throw;
 
             }
-}
+        }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -438,6 +460,17 @@ namespace VideoEditor.UI
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //Reset trim
+            var FragmentPlacement = Project.SelectionManager.SelectedFragment;
+            if (Project.SelectionManager.SelectedFragment != null)
+            {
+                var Trim = new TrimOperation(Project, FragmentPlacement, TimeSpan.Zero, FragmentPlacement.Fragment.EndTime);
+                Project.History.Execute(Trim);
+                RefreshFragmentParametres();
+
+                LanePanel.Update();
+                LanePanel.Refresh();
+            }
 
         }
 
@@ -453,15 +486,27 @@ namespace VideoEditor.UI
 
         private void textBox2_Leave(object sender, EventArgs e)
         {
+            //Trim start
             var fragmentPlacement = Project.SelectionManager.SelectedFragment;
             if (fragmentPlacement == null) return;
 
             if (TimeSpan.TryParse(textBox2.Text, out var ts))
             {
-                fragmentPlacement.Fragment.StartTime = ts;
+                if (ts >= fragmentPlacement.Fragment.EndTime)
+                {
+                    RefreshFragmentParametres();
+                    MessageBox.Show("Start time should be less than end");
+                }
+                else
+                {
+                    var Trim = new TrimOperation(Project, fragmentPlacement, ts, fragmentPlacement.Fragment.EndTime);
+                    Project.History.Execute(Trim);
+                    RefreshFragmentParametres();
 
-                LanePanel.Update();
-                LanePanel.Refresh();
+                    LanePanel.Update();
+                    LanePanel.Refresh();
+                }
+
             }
             else
             {
@@ -471,15 +516,25 @@ namespace VideoEditor.UI
 
         private void textBox3_Leave(object sender, EventArgs e)
         {
+            //Trim end
             var fragmentPlacement = Project.SelectionManager.SelectedFragment;
             if (fragmentPlacement == null) return;
 
-            if (TimeSpan.TryParse(textBox3.Text, out var ts))
+            if (TimeSpan.TryParse(textBox3.Text, out var te))
             {
-                fragmentPlacement.Fragment.EndTime = ts;
+                if (te <= fragmentPlacement.Fragment.StartTime)
+                {
+                    MessageBox.Show("End time should be greater than start");
+                }
+                else
+                {
+                    var Trim = new TrimOperation(Project, fragmentPlacement, fragmentPlacement.Fragment.StartTime, te);
+                    Project.History.Execute(Trim);
+                    RefreshFragmentParametres();
 
-                LanePanel.Update();
-                LanePanel.Refresh();
+                    LanePanel.Update();
+                    LanePanel.Refresh();
+                }
             }
             else
             {
@@ -514,15 +569,12 @@ namespace VideoEditor.UI
             Graphics g = e.Graphics;
             Project.Graphics = g;
             Project.RenderPanel();
+            UpdateScrolls();
         }
 
         private void LanePanel_MouseDown_1(object sender, MouseEventArgs e)
         {
-            Project.SelectionManager.SelectObject(e.X, e.Y);
 
-            LanePanel.Update();
-            LanePanel.Refresh();
-            RefreshFragmentParametres();
         }
 
         private void hSc(object sender, EventArgs e)
@@ -532,12 +584,43 @@ namespace VideoEditor.UI
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //Move lane up
+            if (Project.SelectionManager.SelectedLane != null)
+            {
+                var MoveUp = new MoveLaneUpOperation(Project, Project.SelectionManager.SelectedLane);
+                Project.History.Execute(MoveUp);
 
+                LanePanel.Update();
+                LanePanel.Refresh();
+            }
+
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //Move lane down
+            if (Project.SelectionManager.SelectedLane != null)
+            {
+                var MoveDown = new MoveLaneDownOperation(Project, Project.SelectionManager.SelectedLane);
+                Project.History.Execute(MoveDown);
+
+                LanePanel.Update();
+                LanePanel.Refresh();
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //Double lane
+            if (Project.SelectionManager.SelectedLane != null)
+            {
+                var DoubleLane = new DoubleLaneOperation(Project, Project.SelectionManager.SelectedLane);
+                Project.History.Execute(DoubleLane);
 
+                LanePanel.Update();
+                LanePanel.Refresh();
+            }
         }
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
@@ -550,7 +633,7 @@ namespace VideoEditor.UI
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
         }
 
         private void textBox3_KeyDown(object sender, KeyEventArgs e)
@@ -558,6 +641,169 @@ namespace VideoEditor.UI
             if (e.KeyCode == Keys.Enter)
             {
                 textBox3_Leave(sender, e);
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //Copy
+            if (Project.SelectionManager.SelectedFragment != null)
+            {
+                var Copy = new CopyOperation(Project, Project.SelectionManager.SelectedFragment);
+                Project.History.Execute(Copy);
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //Cut
+            if (Project.SelectionManager.SelectedFragment != null && Project.SelectionManager.SelectedLane != null)
+            {
+                var Cut = new CutOperation(Project, Project.SelectionManager.SelectedLane, Project.SelectionManager.SelectedFragment);
+                Project.History.Execute(Cut);
+
+                LanePanel.Update();
+                LanePanel.Refresh();
+            }
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            //Paste
+            if (Project.SelectionManager.MemoryFragment != null && Project.SelectionManager.SelectedLane != null && Project.SelectionManager.SelectedTime != null)
+            {
+                var Paste = new PasteOperation(Project.SelectionManager.MemoryFragment, Project.SelectionManager.SelectedLane, (TimeSpan)Project.SelectionManager.SelectedTime);
+                Project.History.Execute(Paste);
+
+                LanePanel.Update();
+                LanePanel.Refresh();
+            }
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            //Delete
+            if (Project.SelectionManager.SelectedFragment != null && Project.SelectionManager.SelectedLane != null)
+            {
+                var Delete = new DeleteFragmentOperation(Project.SelectionManager.SelectedFragment, Project.SelectionManager.SelectedLane);
+                Project.History.Execute(Delete);
+
+                LanePanel.Update();
+                LanePanel.Refresh();
+            }
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            //Split
+            if (Project.SelectionManager.SelectedFragment != null && Project.SelectionManager.SelectedTime != null && Project.SelectionManager.SelectedLane != null)
+            {
+                var SelectedTime = Project.SelectionManager.SelectedTime;
+                var SelectedFragment = Project.SelectionManager.SelectedFragment;
+                if (SelectedTime > SelectedFragment.Position && SelectedTime < SelectedFragment.EndPosition)
+                {
+                    var CutOffset = Project.SelectionManager.SelectedTime - SelectedFragment.Position + SelectedFragment.Fragment.StartTime;
+
+                    var Split = new SplitOperation(Project, Project.SelectionManager.SelectedLane, SelectedFragment, (TimeSpan)CutOffset);
+                    Project.History.Execute(Split);
+
+                    LanePanel.Update();
+                    LanePanel.Refresh();
+                }
+            }
+        }
+
+
+
+        private void LanePanel_DragOver(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void LanePanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            //Drop fragment to new place
+            if (CurrentMode == LaneInteractionMode.Edit)
+            {
+                if (PendingEdit == EditAction.Move && Project.SelectionManager.SelectedFragment != null && Project.SelectionManager.SelectedTime != null)
+                {
+                    var GrabbedTime = Project.SelectionManager.DragStartTime;
+                    var MovedFragment = Project.SelectionManager.SelectedFragment;
+                    var MovedFragmentLane = Project.SelectionManager.SelectedLane;
+
+                    Project.SelectionManager.SelectObject(e.X, e.Y);
+                    if (Project.SelectionManager.SelectedLane != null)
+                    {
+
+                        var Move = new MoveFragmentOperation(MovedFragmentLane, Project.SelectionManager.SelectedLane, (TimeSpan)GrabbedTime, (TimeSpan)Project.SelectionManager.SelectedTime);
+                        Project.History.Execute(Move);
+
+
+                        Project.SelectionManager.PendingEdit = EditAction.None;
+
+                        LanePanel.Update();
+                        LanePanel.Refresh();
+                    }
+                }
+            }
+            else if (CurrentMode == LaneInteractionMode.Navigate)
+            {
+                var FormerTime = Project.SelectionManager.SelectedTime;
+                Project.SelectionManager.SelectObject(e.X, e.Y);
+                var RecentTime = Project.SelectionManager.SelectedTime;
+                if (FormerTime != null && RecentTime != null)
+                {
+                    Project.Configuration.LanePanelScrollX += ((TimeSpan)(FormerTime - RecentTime)).TotalSeconds * Project.Configuration.LaneTimeScale;
+                    if (Project.Configuration.LanePanelScrollX < 0)
+                    {
+                        Project.Configuration.LanePanelScrollX = 0;
+                    }
+
+                    LanePanel.Update();
+                    LanePanel.Refresh();
+                }
+            }
+        }
+
+        private void tabControl5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Set new mode
+            switch (tabControl5.SelectedIndex)
+            {
+                case 0:
+                    CurrentMode = LaneInteractionMode.Select;
+                    break;
+                case 1:
+                    CurrentMode = LaneInteractionMode.Edit;
+                    break;
+                case 2:
+                    CurrentMode = LaneInteractionMode.Navigate;
+                    break;
+                default:
+                    CurrentMode = LaneInteractionMode.Select;
+                    break;
+            }
+        }
+
+        private void LanePanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            switch (CurrentMode)
+            {
+                case LaneInteractionMode.Select:
+                    LanePanel.Cursor = Cursors.Default;
+                    break;
+                case LaneInteractionMode.Navigate:
+                    LanePanel.Cursor = Cursors.Hand;
+                    break;
+                case LaneInteractionMode.Edit:
+                    LanePanel.Cursor = Cursors.SizeAll;
+                    Project.SelectionManager.SelectTime(e.X,e.Y);
+
+                    LanePanel.Update();
+                    LanePanel.Refresh();
+                    break;
+                default: Cursor = Cursors.Default;
+                    break;
             }
         }
     }

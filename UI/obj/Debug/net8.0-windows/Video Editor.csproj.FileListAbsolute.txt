@@ -87,3 +87,6 @@ D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.IO.Pipelines.dll
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.Text.Encodings.Web.dll
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.Text.Json.dll
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.Export.resources
+D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.RenderProgress.resources
+D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.Settings.resources

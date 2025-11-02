@@ -642,6 +642,7 @@
             tabControl5.SelectedIndex = 0;
             tabControl5.Size = new Size(333, 65);
             tabControl5.TabIndex = 6;
+            tabControl5.SelectedIndexChanged += tabControl5_SelectedIndexChanged;
             // 
             // tabPage12
             // 
@@ -677,6 +678,7 @@
             button6.TabIndex = 7;
             button6.Text = "Copy";
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // button7
             // 
@@ -687,6 +689,7 @@
             button7.TabIndex = 8;
             button7.Text = "Cut";
             button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // button28
             // 
@@ -697,6 +700,7 @@
             button28.TabIndex = 9;
             button28.Text = "Paste";
             button28.UseVisualStyleBackColor = true;
+            button28.Click += button28_Click;
             // 
             // button29
             // 
@@ -707,6 +711,7 @@
             button29.TabIndex = 10;
             button29.Text = "Delete";
             button29.UseVisualStyleBackColor = true;
+            button29.Click += button29_Click;
             // 
             // button30
             // 
@@ -717,6 +722,7 @@
             button30.TabIndex = 11;
             button30.Text = "Split";
             button30.UseVisualStyleBackColor = true;
+            button30.Click += button30_Click;
             // 
             // tabPage16
             // 
@@ -1059,8 +1065,11 @@
             LanePanel.Click += LanePanel_Click;
             LanePanel.DragDrop += LanePanel_DragDrop;
             LanePanel.DragEnter += LanePanel_DragEnter;
+            LanePanel.DragOver += LanePanel_DragOver;
             LanePanel.Paint += LanePanel_Paint;
             LanePanel.MouseDown += LanePanel_MouseDown;
+            LanePanel.MouseMove += LanePanel_MouseMove;
+            LanePanel.MouseUp += LanePanel_MouseUp;
             // 
             // statusStrip1
             // 

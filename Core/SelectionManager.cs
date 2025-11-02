@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,10 +15,12 @@ namespace VideoEditor.Core
         public Project? Project { get; set; }
         public FragmentPlacement? SelectedFragment { get; set; }
         public TimeSpan? SelectedTime { get; set; }
+        public TimeSpan? DragStartTime { get; set; }
         public Lane? SelectedLane { get; set; }
 
         public FragmentPlacement? MemoryFragment { get; set; }
-        public TimeSpan? DraggFragmentTime { get; set; }
+        public enum EditAction {None, Move, Split, TrimStart, TrimEnd }
+        public EditAction PendingEdit { get; set; }= EditAction.None;
 
         //public bool IsDragging { get; set; }
         public ProjectConfig? Params { get { return Project.Configuration; }}
@@ -58,6 +61,14 @@ namespace VideoEditor.Core
                     SelectedFragment=null;
                     SelectedTime=null;
                 }
+            }
+        }
+        public void SelectTime(int x, int y)
+        {
+            if (y > Params.TimeRulerHeight || x > Params.LaneLabelWidth || y < Params.LanePanelHeight || x < Params.LanePanelWidth)
+            {
+                TimeSpan time = TimeSpan.FromSeconds((x + Params.LanePanelScrollX - Params.LaneLabelWidth) / Params.LaneTimeScale);// Maybe make ScrollX in seconds?
+                SelectedTime = time;
             }
         }
         public void SelectObject(Point point)
