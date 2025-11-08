@@ -27,12 +27,7 @@ namespace VideoEditor.Core
 
         public FragmentPlacement DeepCopy()
         {
-            Fragment fragment = new Fragment();
-            fragment.StartTime = Fragment.StartTime;
-            fragment.EndTime = Fragment.EndTime;
-            fragment.Name = Fragment.Name;
-            fragment.FilePath = Fragment.FilePath;
-            fragment.FileDuration = Fragment.FileDuration;
+            Fragment fragment = Fragment.DeepCopy();
 
             FragmentPlacement newPlacement= new FragmentPlacement(fragment, Position, X,Y);
             return newPlacement;

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Video_Editor;
 using VideoEditor.Core;
 using VideoEditor.Core.Operations;
 using VideoEditor.Infrastructure;
@@ -29,6 +30,10 @@ namespace VideoEditor.UI
             InitializeComponent();
 
             RefreshFiles();
+
+            Project.Configuration.LanePanelWidth = LanePanel.Width;
+            Project.Configuration.LanePanelHeight = LanePanel.Height;
+            UpdateScrolls();
 
         }
 
@@ -120,7 +125,7 @@ namespace VideoEditor.UI
             }
             else
             {
-                Project.SelectionManager.SelectObject(e.X, e.Y); 
+                Project.SelectionManager.SelectObject(e.X, e.Y);
             }
 
             //Move Fragment
@@ -153,6 +158,10 @@ namespace VideoEditor.UI
             try
             {
                 ProjectStorage.Save(Project, Project.Path);
+
+                var RecentProjects = ConfigManager.LoadRecent();
+                RecentProjects.AddProject(Project);
+                ConfigManager.SaveRecent(RecentProjects);
             }
             catch (ArgumentException ex)
             {
@@ -240,7 +249,7 @@ namespace VideoEditor.UI
 
         private async void button13_Click(object sender, EventArgs e)
         {
-            using (var dlg = new SaveFileDialog())
+            /*using (var dlg = new SaveFileDialog())
             {
                 if (dlg != null)
                 {
@@ -251,7 +260,8 @@ namespace VideoEditor.UI
                         MessageBox.Show($"Saved as {dlg.FileName}");
                     }
                 }
-            }
+            }*/
+            new ExportForm().Show();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -464,7 +474,7 @@ namespace VideoEditor.UI
             var FragmentPlacement = Project.SelectionManager.SelectedFragment;
             if (Project.SelectionManager.SelectedFragment != null)
             {
-                var Trim = new TrimOperation(Project, FragmentPlacement, TimeSpan.Zero, FragmentPlacement.Fragment.EndTime);
+                var Trim = new TrimOperation(Project, FragmentPlacement, TimeSpan.Zero, FragmentPlacement.Fragment.FileDuration);
                 Project.History.Execute(Trim);
                 RefreshFragmentParametres();
 
@@ -797,13 +807,59 @@ namespace VideoEditor.UI
                     break;
                 case LaneInteractionMode.Edit:
                     LanePanel.Cursor = Cursors.SizeAll;
-                    Project.SelectionManager.SelectTime(e.X,e.Y);
+                    Project.SelectionManager.SelectTime(e.X, e.Y);
 
+                    //Lane???
+                    var lane = Project.SelectionManager.SelectedLane;
+                    var time = Project.SelectionManager.SelectedTime;
+                    if (lane != null && time != null) {
+                        var selectLeft = lane[(TimeSpan)time - TimeSpan.FromSeconds(5 / Project.Configuration.LaneTimeScale)];
+                        var selectRight = lane[(TimeSpan)time + TimeSpan.FromSeconds(5 / Project.Configuration.LaneTimeScale)];
+                        if(selectLeft != null || selectRight != null)
+                        {
+                            double LeftEndDistance=10;
+                            double RightStartDistance=10;
+                            if (selectLeft != null)
+                            {
+                                LeftEndDistance = Math.Abs((selectLeft.EndPosition.TotalSeconds - ((TimeSpan)time).TotalSeconds) * Project.Configuration.LaneTimeScale);
+                                
+                            }
+
+                            if (selectRight != null)
+                            {
+                                RightStartDistance = Math.Abs((selectRight.Position.TotalSeconds - ((TimeSpan)time).TotalSeconds) * Project.Configuration.LaneTimeScale);
+                            }
+
+                            if (LeftEndDistance <= 5 || RightStartDistance <= 5)
+                            {
+                                LanePanel.Cursor = Cursors.SizeWE;
+                            }
+                            //Proximity
+
+                            
+                        }
+
+                    }
                     LanePanel.Update();
                     LanePanel.Refresh();
                     break;
-                default: Cursor = Cursors.Default;
+                default:
+                    Cursor = Cursors.Default;
                     break;
+            }
+        }
+
+        private async void button41_Click(object sender, EventArgs e)
+        {
+            axWindowsMediaPlayer1.Ctlcontrols.stop();
+            axWindowsMediaPlayer1.URL = ""; // release the file
+            await Task.Delay(100); // short pause to ensure file is unlocked
+
+            if (Project.SelectionManager.SelectedTime != null)
+            {
+                await Project.engine.RenderPreviewAsync("preview.mp4", ((TimeSpan)Project.SelectionManager.SelectedTime).TotalSeconds, 5.0);
+                axWindowsMediaPlayer1.URL = Path.GetFullPath("preview.mp4");
+                axWindowsMediaPlayer1.Ctlcontrols.play();
             }
         }
     }

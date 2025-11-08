@@ -1,3 +1,4 @@
+using Core.Config;
 using Video_Editor;
 using VideoEditor.Core;
 using VideoEditor.Infrastructure;
@@ -8,6 +9,14 @@ namespace VideoEditor.UI
         public Form1()
         {
             InitializeComponent();
+            listBox1.Items.Clear();
+            var recentList=ConfigManager.LoadRecent();
+            if (recentList != null) {
+                foreach (var recent in recentList.Recent)
+                {
+                    listBox1.Items.Add($"{recent.Name} - {recent.LastSaved.ToString()}");
+                }
+            }
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -51,7 +60,7 @@ namespace VideoEditor.UI
 
             }
         }
-        
+
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
         {
 
@@ -62,7 +71,7 @@ namespace VideoEditor.UI
             using (var dlg = new OpenFileDialog())
             {
                 dlg.Filter = "Video Editor Project files (*.vep)|*.vep";
-                if(dlg.ShowDialog() == DialogResult.OK)
+                if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     ProjectContext.Open(ProjectStorage.Load(dlg.FileName));
 
@@ -71,7 +80,31 @@ namespace VideoEditor.UI
 
                 }
             }
-            
+
+        }
+
+        private void listBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            int index = listBox1.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
+            {
+                var RecentProjects = ConfigManager.LoadRecent();
+                var RecentProject = RecentProjects.Recent[index];
+                string path = Path.Join(RecentProject.Path,$"{RecentProject.Name}.vep");
+                try
+                {
+                    ProjectContext.Open(ProjectStorage.Load(path));
+
+                    // Open the main editor
+                    OpenMain();
+                }
+                catch (FileNotFoundException)
+                {
+                    RecentProjects.Recent.Remove(RecentProject);
+                    ConfigManager.SaveRecent(RecentProjects);
+                    MessageBox.Show("Project not found");
+                }
+            }
         }
     }
 }

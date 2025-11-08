@@ -76,6 +76,7 @@
             button32 = new Button();
             imageList4 = new ImageList(components);
             button35 = new Button();
+            button41 = new Button();
             tableLayoutPanel30 = new TableLayoutPanel();
             flowLayoutPanel2 = new FlowLayoutPanel();
             button8 = new Button();
@@ -200,12 +201,6 @@
             importAudioToolStripMenuItem = new ToolStripMenuItem();
             importPhotoToolStripMenuItem = new ToolStripMenuItem();
             importVideoToolStripMenuItem = new ToolStripMenuItem();
-            aIToolsToolStripMenuItem = new ToolStripMenuItem();
-            aICaptionToolStripMenuItem = new ToolStripMenuItem();
-            aIVoiceoverToolStripMenuItem = new ToolStripMenuItem();
-            aIVoiceoverToolStripMenuItem1 = new ToolStripMenuItem();
-            pluginsToolStripMenuItem = new ToolStripMenuItem();
-            managePluginsToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             flowLayoutPanel3 = new FlowLayoutPanel();
             button13 = new Button();
@@ -614,6 +609,7 @@
             // 
             flowLayoutPanel1.Controls.Add(button5);
             flowLayoutPanel1.Controls.Add(tabControl5);
+            flowLayoutPanel1.Controls.Add(button41);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(3, 271);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -915,6 +911,16 @@
             button35.TabIndex = 12;
             button35.UseVisualStyleBackColor = true;
             button35.Click += button35_Click;
+            // 
+            // button41
+            // 
+            button41.Location = new Point(454, 3);
+            button41.Name = "button41";
+            button41.Size = new Size(94, 29);
+            button41.TabIndex = 7;
+            button41.Text = "Play";
+            button41.UseVisualStyleBackColor = true;
+            button41.Click += button41_Click;
             // 
             // tableLayoutPanel30
             // 
@@ -2021,7 +2027,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, editToolStripMenuItem, importToolStripMenuItem, aIToolsToolStripMenuItem, pluginsToolStripMenuItem, helpToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, editToolStripMenuItem, importToolStripMenuItem, helpToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(757, 28);
@@ -2196,58 +2202,20 @@
             // importAudioToolStripMenuItem
             // 
             importAudioToolStripMenuItem.Name = "importAudioToolStripMenuItem";
-            importAudioToolStripMenuItem.Size = new Size(181, 26);
+            importAudioToolStripMenuItem.Size = new Size(224, 26);
             importAudioToolStripMenuItem.Text = "Import Audio";
             // 
             // importPhotoToolStripMenuItem
             // 
             importPhotoToolStripMenuItem.Name = "importPhotoToolStripMenuItem";
-            importPhotoToolStripMenuItem.Size = new Size(181, 26);
+            importPhotoToolStripMenuItem.Size = new Size(224, 26);
             importPhotoToolStripMenuItem.Text = "Import Photo";
             // 
             // importVideoToolStripMenuItem
             // 
             importVideoToolStripMenuItem.Name = "importVideoToolStripMenuItem";
-            importVideoToolStripMenuItem.Size = new Size(181, 26);
+            importVideoToolStripMenuItem.Size = new Size(224, 26);
             importVideoToolStripMenuItem.Text = "Import Video";
-            // 
-            // aIToolsToolStripMenuItem
-            // 
-            aIToolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { aICaptionToolStripMenuItem, aIVoiceoverToolStripMenuItem, aIVoiceoverToolStripMenuItem1 });
-            aIToolsToolStripMenuItem.Name = "aIToolsToolStripMenuItem";
-            aIToolsToolStripMenuItem.Size = new Size(74, 24);
-            aIToolsToolStripMenuItem.Text = "AI tools";
-            // 
-            // aICaptionToolStripMenuItem
-            // 
-            aICaptionToolStripMenuItem.Name = "aICaptionToolStripMenuItem";
-            aICaptionToolStripMenuItem.Size = new Size(174, 26);
-            aICaptionToolStripMenuItem.Text = "AI caption";
-            // 
-            // aIVoiceoverToolStripMenuItem
-            // 
-            aIVoiceoverToolStripMenuItem.Name = "aIVoiceoverToolStripMenuItem";
-            aIVoiceoverToolStripMenuItem.Size = new Size(174, 26);
-            aIVoiceoverToolStripMenuItem.Text = "AI track";
-            // 
-            // aIVoiceoverToolStripMenuItem1
-            // 
-            aIVoiceoverToolStripMenuItem1.Name = "aIVoiceoverToolStripMenuItem1";
-            aIVoiceoverToolStripMenuItem1.Size = new Size(174, 26);
-            aIVoiceoverToolStripMenuItem1.Text = "AI voiceover";
-            // 
-            // pluginsToolStripMenuItem
-            // 
-            pluginsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { managePluginsToolStripMenuItem });
-            pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
-            pluginsToolStripMenuItem.Size = new Size(70, 24);
-            pluginsToolStripMenuItem.Text = "Plugins";
-            // 
-            // managePluginsToolStripMenuItem
-            // 
-            managePluginsToolStripMenuItem.Name = "managePluginsToolStripMenuItem";
-            managePluginsToolStripMenuItem.Size = new Size(207, 26);
-            managePluginsToolStripMenuItem.Text = "Manage plugins...";
             // 
             // helpToolStripMenuItem
             // 
@@ -3706,12 +3674,6 @@
         private ToolStripMenuItem importAudioToolStripMenuItem;
         private ToolStripMenuItem importPhotoToolStripMenuItem;
         private ToolStripMenuItem importVideoToolStripMenuItem;
-        private ToolStripMenuItem aIToolsToolStripMenuItem;
-        private ToolStripMenuItem aICaptionToolStripMenuItem;
-        private ToolStripMenuItem aIVoiceoverToolStripMenuItem;
-        private ToolStripMenuItem aIVoiceoverToolStripMenuItem1;
-        private ToolStripMenuItem pluginsToolStripMenuItem;
-        private ToolStripMenuItem managePluginsToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
         private FlowLayoutPanel flowLayoutPanel3;
         private Button button13;
@@ -3936,5 +3898,6 @@
         private HScrollBar hScrollBar1;
         private VScrollBar vScrollBar1;
         private Panel LanePanel;
+        private Button button41;
     }
 }

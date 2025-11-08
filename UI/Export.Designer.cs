@@ -1,6 +1,6 @@
 ﻿namespace Video_Editor
 {
-    partial class Export
+    partial class ExportForm
     {
         /// <summary>
         /// Required designer variable.
@@ -76,10 +76,13 @@
             button1.TabIndex = 2;
             button1.Text = "Browse...";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // comboBox1
             // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "426x240", "640x360", "854x480", "1280x720", "1920x1080", "2560x1440", "3840x2160" });
             comboBox1.Location = new Point(131, 200);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(217, 28);
@@ -121,7 +124,9 @@
             // 
             // comboBox2
             // 
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "64k", "96k", "128k", "192k", "256k", "320k" });
             comboBox2.Location = new Point(129, 301);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(151, 28);
@@ -138,7 +143,9 @@
             // 
             // comboBox3
             // 
+            comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox3.FormattingEnabled = true;
+            comboBox3.Items.AddRange(new object[] { "24", "25", "30", "50", "60" });
             comboBox3.Location = new Point(108, 238);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(89, 28);
@@ -155,7 +162,9 @@
             // 
             // comboBox4
             // 
+            comboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox4.FormattingEnabled = true;
+            comboBox4.Items.AddRange(new object[] { "aac", "mp3", "wav", "flac" });
             comboBox4.Location = new Point(348, 301);
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(100, 28);
@@ -163,7 +172,9 @@
             // 
             // comboBox5
             // 
+            comboBox5.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox5.FormattingEnabled = true;
+            comboBox5.Items.AddRange(new object[] { "mp4", "mkv", "avi", "mov" });
             comboBox5.Location = new Point(265, 238);
             comboBox5.Name = "comboBox5";
             comboBox5.Size = new Size(83, 28);
@@ -228,6 +239,7 @@
             button2.TabIndex = 20;
             button2.Text = "Cancel";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
@@ -237,8 +249,9 @@
             button3.TabIndex = 21;
             button3.Text = "Export";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
-            // Export
+            // ExportForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -265,7 +278,7 @@
             Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(label1);
-            Name = "Export";
+            Name = "ExportForm";
             Text = "Export";
             ResumeLayout(false);
             PerformLayout();

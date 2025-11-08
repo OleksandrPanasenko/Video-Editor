@@ -3,9 +3,11 @@
 //work with ffmpeg
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using VideoEditor.Core;
+using VideoEditor.Core.Operations;
 using Xabe.FFmpeg;
 
 namespace Videoeditor.Core { 
@@ -18,7 +20,7 @@ namespace Videoeditor.Core {
             
         }
         //Render video
-        public async Task RenderAsync(string outputPath)
+        public async Task RenderAsync(RenderParams args, string outputPath)
         {
             //Create temporary directory for render
             string tempDir = Path.Combine(Path.GetTempPath(), "Render_" + Guid.NewGuid());
@@ -95,5 +97,91 @@ namespace Videoeditor.Core {
             ffmpeg.ConvertMedia(projectFilePath, null, outputPath, null);*/
 
         }
+
+        public async Task RenderPreviewAsync(string outputPath, double timestamp, double durationSeconds)
+        {
+            string tempDir = Path.Combine(Path.GetTempPath(), "Preview_" + Guid.NewGuid());
+            Directory.CreateDirectory(tempDir);
+
+            var sb = new StringBuilder();
+            int index = 0;
+            int indexGap = 0;
+
+            double previousEnd = timestamp;
+
+            // We assume one lane for MVP
+            foreach (var placement in ProjectContext.CurrentProject.Lanes[0].Fragments)
+            {
+                var fragment = placement.Fragment;
+                double start = placement.Position.TotalSeconds;
+                double end = placement.EndPosition.TotalSeconds;
+
+                
+                // Include only if it overlaps the preview window
+                if (end < timestamp || start > timestamp + durationSeconds)
+                    continue;
+
+                double clipStart = Math.Max(0, timestamp - start);
+                double clipLength = Math.Min(fragment.Duration.TotalSeconds - clipStart, Math.Min(durationSeconds, timestamp-start+durationSeconds));
+                
+                string input = fragment.FilePath;
+                string tempOut = Path.Combine(tempDir, $"part{index++}.mp4");
+
+
+
+                // Build FFmpeg arguments
+                string args;
+                if (fragment.FragmentType == Fragment.Type.Image)
+                {
+                    args =
+                        $"-loop 1 -t {clipLength.ToString(System.Globalization.CultureInfo.InvariantCulture)} " +
+                        $"-i \"{input}\" -vf scale=640:360,fps=15,format=yuv420p -preset ultrafast -y \"{tempOut}\"";
+                }
+                else if (fragment.FragmentType == Fragment.Type.Audio)
+                {
+                    args =
+                        $"-f lavfi -i \"color=c=black:s=640x360:d={clipLength.ToString(System.Globalization.CultureInfo.InvariantCulture)}\" " +
+                        $"-ss {(fragment.StartTime.TotalSeconds+clipStart).ToString(System.Globalization.CultureInfo.InvariantCulture)} " + 
+                        
+                        $"-t {clipLength.ToString(System.Globalization.CultureInfo.InvariantCulture)} " +
+                        $"-i \"{input}\" -shortest -c:v libx264 -c:a aac -preset ultrafast -y \"{tempOut}\"";
+                }
+                else // video
+                {
+                    args =
+                        $"-ss {(fragment.StartTime.TotalSeconds+clipStart).ToString(System.Globalization.CultureInfo.InvariantCulture)} " +
+                        $"-t {clipLength.ToString(System.Globalization.CultureInfo.InvariantCulture)} " +
+                        $"-i \"{input}\" -vf scale=640:360,fps=15 -c:v libx264 -c:a aac -preset ultrafast -y \"{tempOut}\"";
+                }
+
+                //Make gap
+                if(previousEnd<placement.Position.TotalSeconds)
+                {
+                    var gapLen = placement.Position.TotalSeconds - previousEnd;
+                    string gapOut = Path.Combine(tempDir, $"gap{indexGap++}.mp4");
+                    string color = /*isTopLane ? "black@0.0" : */"black";
+                    await RunFFmpegAsync($"-f lavfi -t {gapLen.ToString(CultureInfo.InvariantCulture)} -i \"color=c={color}:s=640x360\" -pix_fmt {/*(isTopLane ? "yuva420p" :*/ ("yuv420p")} -preset ultrafast -y \"{gapOut}\"");
+                    sb.AppendLine($"file '{gapOut.Replace("\\", "/")}'");
+                }
+
+                previousEnd = placement.EndPosition.TotalSeconds;
+
+                await RunFFmpegAsync(args);
+                sb.AppendLine($"file '{tempOut.Replace("\\", "/")}'");
+            }
+
+            // Concatenate partials
+            string listFile = Path.Combine(tempDir, "list.txt");
+            await File.WriteAllTextAsync(listFile, sb.ToString());
+
+            await RunFFmpegAsync(
+                $"-f concat -safe 0 -i \"{listFile}\" -c:v libx264 -pix_fmt yuv420p -c:a aac -preset ultrafast -y \"{outputPath}\""
+            );
+
+            try { Directory.Delete(tempDir, true); } catch { /* ignore */ }
+        }
+
+
+
     }
 }

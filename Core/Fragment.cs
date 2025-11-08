@@ -33,6 +33,19 @@ namespace VideoEditor.Core
             EndTime = duration;
             FileDuration= duration;
         }
+        public Fragment DeepCopy()
+        {
+            Fragment newFragment= new Fragment(FilePath,StartTime,EndTime);
+            newFragment.Hidden = Hidden;
+            newFragment.Muted = Muted;
+            newFragment.Volume = Volume;
+            newFragment.Width = Width;
+            newFragment.Height = Height;
+            newFragment.Opacity = Opacity;
+            newFragment.FileDuration= FileDuration;
+
+            return newFragment;
+        }
         
         public enum Type {Video, Audio, Image, Text, Unknown};
         public static Type FileType(string path)

@@ -83,10 +83,11 @@
             // 
             listBox1.Anchor = AnchorStyles.Top;
             listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(264, 324);
+            listBox1.Location = new Point(153, 324);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(150, 104);
+            listBox1.Size = new Size(372, 104);
             listBox1.TabIndex = 2;
+            listBox1.MouseClick += listBox1_MouseClick;
             // 
             // label1
             // 

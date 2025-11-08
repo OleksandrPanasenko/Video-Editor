@@ -22,13 +22,16 @@ namespace VideoEditor.Core
         {
             if (this[position,position+ NewPlacement.Fragment.Duration] != null)
             {
-                FragmentPlacement existing = this[position, position + NewPlacement.Fragment.Duration][0];
-                if (position >= (existing.Position + existing.EndPosition) / 2)
+                if(NewPlacement.Fragment==null) throw new ArgumentNullException(nameof(NewPlacement));
+                List <FragmentPlacement> existing = this[position,position+NewPlacement.Fragment.Duration];
+                var First = existing[0];
+                var Last=existing.Last()!=NewPlacement?existing.Last():existing[existing.Count()-2];
+                if (position+NewPlacement.Fragment.Duration/2 >= (First.Position+Last.EndPosition) / 2)
                 {
                     //Try to append after
-                    if (this[existing.EndPosition,existing.EndPosition+NewPlacement.Fragment.Duration] == null)
+                    if (this[Last.EndPosition,Last.EndPosition+NewPlacement.Fragment.Duration] == null)
                     {
-                        position = existing.EndPosition;
+                        position = Last.EndPosition;
                     }
                     else
                     {
@@ -38,9 +41,9 @@ namespace VideoEditor.Core
                 else
                 {
                     //Try to append before
-                    if (existing.Position>=NewPlacement.Fragment.Duration && this[existing.Position - NewPlacement.Fragment.Duration, existing.Position] == null)
+                    if (this[First.Position - NewPlacement.Fragment.Duration, First.Position] == null)
                     {
-                        position = existing.Position - NewPlacement.Fragment.Duration;
+                        position = First.Position - NewPlacement.Fragment.Duration;
                     }
                     else
                     {

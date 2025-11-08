@@ -41,6 +41,10 @@ namespace Video_Editor
         {
             //TODO: wrap errors
             ProjectContext.Open(ProjectStorage.Create(textBox2.Text, textBox1.Text));
+            var RecentProjects = ConfigManager.LoadRecent();
+            RecentProjects.AddProject(ProjectContext.CurrentProject);
+            ConfigManager.SaveRecent(RecentProjects);
+
             ProjectCreated.Invoke();
             this.Close();
         }
