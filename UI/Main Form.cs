@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace VideoEditor.UI
         public enum LaneInteractionMode { Select, Edit, Navigate }
         public LaneInteractionMode CurrentMode { get; set; } = LaneInteractionMode.Select;
         public EditAction PendingEdit => Project.SelectionManager.PendingEdit;
+        public int SecondsSinceAutoSave { get; set; }
         public Main_Form()
         {
             InitializeComponent();
@@ -34,7 +36,45 @@ namespace VideoEditor.UI
             Project.Configuration.LanePanelWidth = LanePanel.Width;
             Project.Configuration.LanePanelHeight = LanePanel.Height;
             UpdateScrolls();
+            SecondsSinceAutoSave = 0;
+            var autosaveTimer = new System.Windows.Forms.Timer
+            {
+                Interval = 1000
+            };
+            autosaveTimer.Tick += AutoSaveTimer_Tick;
+            autosaveTimer.Start();
 
+            tableLayoutPanel24.AutoScroll = false;
+            tableLayoutPanel24.HorizontalScroll.Enabled = false;
+            tableLayoutPanel24.HorizontalScroll.Visible = false;
+            tableLayoutPanel24.AutoScroll = true;
+        }
+        private void AutoSaveTimer_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusLabel3.Text = $"Autosave: {TimeSpan.FromSeconds(SecondsSinceAutoSave).ToString()}";
+            SecondsSinceAutoSave++;
+            if (SecondsSinceAutoSave >= Config.AutoSaveIntervalMinutes * 60)
+            {
+                try
+                {
+                    ProjectStorage.Save(Project, Project.Path);
+
+                    var RecentProjects = ConfigManager.LoadRecent();
+                    RecentProjects.AddProject(Project);
+                    ConfigManager.SaveRecent(RecentProjects);
+                }
+                catch (ArgumentException ex)
+                {
+
+                    MessageBox.Show($"AutoSave failed: {ex.Message}\n\n{ex.StackTrace}");
+                    throw;
+
+                }
+                finally
+                {
+                    SecondsSinceAutoSave = 0;
+                }
+            }
         }
 
         private async void listBox1_DragDrop(object sender, DragEventArgs e)
@@ -294,7 +334,30 @@ namespace VideoEditor.UI
             textBox2.Text = fragment.StartTime.ToString();
             //Trim end
             textBox3.Text = fragment.EndTime.ToString();
-
+            //Sound
+            checkBox1.Checked = fragment.Muted;
+            if (fragment.Muted)
+            {
+                trackBar1.Enabled= false;
+            }
+            else
+            {
+                trackBar1.Enabled = true;
+                trackBar1.Value = (int)(fragment.Volume * 100);
+            }
+            //Visibility
+            checkBox2.Checked = fragment.Hidden;
+            trackBar1.Value = (int)(fragment.Volume * 100);
+            if (fragment.Hidden)
+            {
+                trackBar2.Enabled = false;
+            }
+            else
+            {
+                trackBar2.Enabled = true;
+                trackBar2.Maximum = 100;
+                trackBar2.Value = (int)(fragment.Opacity * 100);
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -812,17 +875,18 @@ namespace VideoEditor.UI
                     //Lane???
                     var lane = Project.SelectionManager.SelectedLane;
                     var time = Project.SelectionManager.SelectedTime;
-                    if (lane != null && time != null) {
+                    if (lane != null && time != null)
+                    {
                         var selectLeft = lane[(TimeSpan)time - TimeSpan.FromSeconds(5 / Project.Configuration.LaneTimeScale)];
                         var selectRight = lane[(TimeSpan)time + TimeSpan.FromSeconds(5 / Project.Configuration.LaneTimeScale)];
-                        if(selectLeft != null || selectRight != null)
+                        if (selectLeft != null || selectRight != null)
                         {
-                            double LeftEndDistance=10;
-                            double RightStartDistance=10;
+                            double LeftEndDistance = 10;
+                            double RightStartDistance = 10;
                             if (selectLeft != null)
                             {
                                 LeftEndDistance = Math.Abs((selectLeft.EndPosition.TotalSeconds - ((TimeSpan)time).TotalSeconds) * Project.Configuration.LaneTimeScale);
-                                
+
                             }
 
                             if (selectRight != null)
@@ -836,7 +900,7 @@ namespace VideoEditor.UI
                             }
                             //Proximity
 
-                            
+
                         }
 
                     }
@@ -860,6 +924,93 @@ namespace VideoEditor.UI
                 await Project.engine.RenderPreviewAsync("preview.mp4", ((TimeSpan)Project.SelectionManager.SelectedTime).TotalSeconds, 5.0);
                 axWindowsMediaPlayer1.URL = Path.GetFullPath("preview.mp4");
                 axWindowsMediaPlayer1.Ctlcontrols.play();
+            }
+            //MessageBox.Show(GetAudioFormat(Config.FfprobePath, Project.SelectionManager.SelectedFragment.Fragment.FilePath));
+        }
+
+
+        private void listBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void listBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            int index = listBox1.SelectedIndex;
+            if (index != -1 && (e.KeyCode == Keys.Delete || e.KeyCode == Keys.Back))
+            {
+                Project.MediaFiles.RemoveAt(index);
+                RefreshFiles();
+            }
+        }
+        string GetAudioFormat(string ffprobePath, string filePath)
+        {
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = ffprobePath,
+                Arguments = $"-v error -select_streams a:0 -show_entries stream=sample_rate,channels,channel_layout -of default=nw=1 \"{filePath}\"",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            using var proc = Process.Start(startInfo);
+            string output = proc.StandardOutput.ReadToEnd();
+            proc.WaitForExit();
+            return output; // example: "sample_rate=48000\nchannels=2\nchannel_layout=stereo\n"
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            //Mute
+            if ((Project.SelectionManager.SelectedFragment != null))
+            {
+                Project.SelectionManager.SelectedFragment.Fragment.Muted = checkBox1.Checked;
+                if (checkBox1.Checked)
+                {
+                    trackBar1.Enabled = false;
+                }
+                else
+                {
+                    trackBar1.Enabled = true;
+                    trackBar1.Value = (int)(Project.SelectionManager.SelectedFragment.Fragment.Volume * 100);
+                }
+            }
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            //Hide
+            if ((Project.SelectionManager.SelectedFragment != null))
+            {
+                Project.SelectionManager.SelectedFragment.Fragment.Hidden = checkBox2.Checked;
+                if (checkBox2.Checked)
+                {
+                    trackBar2.Enabled = false;
+                }
+                else
+                {
+                    trackBar2.Enabled = true;
+                    trackBar2.Value = (int)(Project.SelectionManager.SelectedFragment.Fragment.Opacity * 100);
+                }
+            }
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            //Sound
+            if ((Project.SelectionManager.SelectedFragment != null))
+            {
+                Project.SelectionManager.SelectedFragment.Fragment.Volume = ((float)trackBar1.Value)/100;
+            }
+        }
+
+        private void trackBar4_ValueChanged(object sender, EventArgs e)
+        {
+            //Opacity
+            if ((Project.SelectionManager.SelectedFragment != null))
+            {
+                Project.SelectionManager.SelectedFragment.Fragment.Opacity = ((float)trackBar2.Value) / 100;
             }
         }
     }

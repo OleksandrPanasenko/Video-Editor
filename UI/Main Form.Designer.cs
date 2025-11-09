@@ -97,10 +97,9 @@
             tabControl4 = new TabControl();
             tabPage13 = new TabPage();
             tableLayoutPanel24 = new TableLayoutPanel();
+            trackBar4 = new TrackBar();
             label6 = new Label();
             label7 = new Label();
-            label17 = new Label();
-            label15 = new Label();
             label18 = new Label();
             label16 = new Label();
             label8 = new Label();
@@ -108,7 +107,6 @@
             label14 = new Label();
             label13 = new Label();
             label12 = new Label();
-            label11 = new Label();
             label10 = new Label();
             label66 = new Label();
             label67 = new Label();
@@ -121,6 +119,9 @@
             textBox3 = new TextBox();
             button15 = new Button();
             trackBar1 = new TrackBar();
+            label17 = new Label();
+            checkBox1 = new CheckBox();
+            checkBox2 = new CheckBox();
             tabPage15 = new TabPage();
             tableLayoutPanel27 = new TableLayoutPanel();
             flowLayoutPanel7 = new FlowLayoutPanel();
@@ -333,6 +334,7 @@
             tabControl4.SuspendLayout();
             tabPage13.SuspendLayout();
             tableLayoutPanel24.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             tabPage15.SuspendLayout();
             tableLayoutPanel27.SuspendLayout();
@@ -389,6 +391,7 @@
             // 
             // tableLayoutPanel25
             // 
+            tableLayoutPanel25.AutoScroll = true;
             tableLayoutPanel25.ColumnCount = 2;
             tableLayoutPanel25.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel25.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
@@ -1154,13 +1157,14 @@
             // 
             // tableLayoutPanel24
             // 
-            tableLayoutPanel24.ColumnCount = 2;
-            tableLayoutPanel24.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel24.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel24.Controls.Add(label6, 1, 11);
-            tableLayoutPanel24.Controls.Add(label7, 0, 11);
-            tableLayoutPanel24.Controls.Add(label17, 1, 9);
-            tableLayoutPanel24.Controls.Add(label15, 1, 8);
+            tableLayoutPanel24.AutoScroll = true;
+            tableLayoutPanel24.ColumnCount = 3;
+            tableLayoutPanel24.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel24.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel24.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel24.Controls.Add(trackBar4, 1, 13);
+            tableLayoutPanel24.Controls.Add(label6, 0, 13);
+            tableLayoutPanel24.Controls.Add(label7, 0, 12);
             tableLayoutPanel24.Controls.Add(label18, 0, 10);
             tableLayoutPanel24.Controls.Add(label16, 0, 9);
             tableLayoutPanel24.Controls.Add(label8, 0, 3);
@@ -1168,7 +1172,6 @@
             tableLayoutPanel24.Controls.Add(label14, 0, 7);
             tableLayoutPanel24.Controls.Add(label13, 0, 6);
             tableLayoutPanel24.Controls.Add(label12, 0, 5);
-            tableLayoutPanel24.Controls.Add(label11, 0, 5);
             tableLayoutPanel24.Controls.Add(label10, 0, 4);
             tableLayoutPanel24.Controls.Add(label66, 0, 4);
             tableLayoutPanel24.Controls.Add(label67, 0, 2);
@@ -1181,10 +1184,13 @@
             tableLayoutPanel24.Controls.Add(textBox3, 1, 7);
             tableLayoutPanel24.Controls.Add(button15, 0, 8);
             tableLayoutPanel24.Controls.Add(trackBar1, 1, 10);
+            tableLayoutPanel24.Controls.Add(label17, 0, 11);
+            tableLayoutPanel24.Controls.Add(checkBox1, 1, 9);
+            tableLayoutPanel24.Controls.Add(checkBox2, 1, 12);
             tableLayoutPanel24.Dock = DockStyle.Fill;
             tableLayoutPanel24.Location = new Point(3, 3);
             tableLayoutPanel24.Name = "tableLayoutPanel24";
-            tableLayoutPanel24.RowCount = 13;
+            tableLayoutPanel24.RowCount = 14;
             tableLayoutPanel24.RowStyles.Add(new RowStyle());
             tableLayoutPanel24.RowStyles.Add(new RowStyle());
             tableLayoutPanel24.RowStyles.Add(new RowStyle());
@@ -1195,56 +1201,51 @@
             tableLayoutPanel24.RowStyles.Add(new RowStyle());
             tableLayoutPanel24.RowStyles.Add(new RowStyle());
             tableLayoutPanel24.RowStyles.Add(new RowStyle());
-            tableLayoutPanel24.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel24.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel24.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel24.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel24.RowStyles.Add(new RowStyle());
+            tableLayoutPanel24.RowStyles.Add(new RowStyle());
+            tableLayoutPanel24.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel24.Size = new Size(329, 211);
             tableLayoutPanel24.TabIndex = 4;
+            // 
+            // trackBar4
+            // 
+            trackBar4.Dock = DockStyle.Fill;
+            trackBar4.Location = new Point(157, 341);
+            trackBar4.Maximum = 100;
+            trackBar4.Name = "trackBar4";
+            trackBar4.Size = new Size(148, 34);
+            trackBar4.TabIndex = 32;
+            trackBar4.TickFrequency = 10;
+            trackBar4.ValueChanged += trackBar4_ValueChanged;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Dock = DockStyle.Top;
-            label6.Location = new Point(124, 258);
+            label6.Dock = DockStyle.Fill;
+            label6.Location = new Point(3, 338);
             label6.Name = "label6";
-            label6.Size = new Size(202, 20);
-            label6.TabIndex = 29;
+            label6.Size = new Size(148, 40);
+            label6.TabIndex = 31;
+            label6.Text = "Opacity:";
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Dock = DockStyle.Fill;
-            label7.Location = new Point(3, 258);
+            label7.Location = new Point(3, 308);
             label7.Name = "label7";
-            label7.Size = new Size(115, 20);
+            label7.Size = new Size(148, 30);
             label7.TabIndex = 28;
             label7.Text = "Video:";
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Dock = DockStyle.Top;
-            label17.Location = new Point(124, 218);
-            label17.Name = "label17";
-            label17.Size = new Size(202, 20);
-            label17.TabIndex = 27;
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Dock = DockStyle.Fill;
-            label15.Location = new Point(124, 182);
-            label15.Name = "label15";
-            label15.Size = new Size(202, 36);
-            label15.TabIndex = 26;
             // 
             // label18
             // 
             label18.AutoSize = true;
             label18.Dock = DockStyle.Fill;
-            label18.Location = new Point(3, 238);
+            label18.Location = new Point(3, 248);
             label18.Name = "label18";
-            label18.Size = new Size(115, 20);
+            label18.Size = new Size(148, 40);
             label18.TabIndex = 22;
             label18.Text = "Sound volume:";
             // 
@@ -1254,7 +1255,7 @@
             label16.Dock = DockStyle.Fill;
             label16.Location = new Point(3, 218);
             label16.Name = "label16";
-            label16.Size = new Size(115, 20);
+            label16.Size = new Size(148, 30);
             label16.TabIndex = 20;
             label16.Text = "Audio:";
             // 
@@ -1264,7 +1265,7 @@
             label8.Dock = DockStyle.Fill;
             label8.Location = new Point(3, 73);
             label8.Name = "label8";
-            label8.Size = new Size(115, 20);
+            label8.Size = new Size(148, 20);
             label8.TabIndex = 17;
             label8.Text = "End:";
             // 
@@ -1272,9 +1273,9 @@
             // 
             label9.AutoSize = true;
             label9.Dock = DockStyle.Fill;
-            label9.Location = new Point(124, 73);
+            label9.Location = new Point(157, 73);
             label9.Name = "label9";
-            label9.Size = new Size(202, 20);
+            label9.Size = new Size(148, 20);
             label9.TabIndex = 16;
             label9.Text = "End:";
             // 
@@ -1284,7 +1285,7 @@
             label14.Dock = DockStyle.Fill;
             label14.Location = new Point(3, 149);
             label14.Name = "label14";
-            label14.Size = new Size(115, 33);
+            label14.Size = new Size(148, 33);
             label14.TabIndex = 14;
             label14.Text = "End Offset:";
             // 
@@ -1294,7 +1295,7 @@
             label13.Dock = DockStyle.Fill;
             label13.Location = new Point(3, 116);
             label13.Name = "label13";
-            label13.Size = new Size(115, 33);
+            label13.Size = new Size(148, 33);
             label13.TabIndex = 12;
             label13.Text = "Start Offset";
             // 
@@ -1304,18 +1305,9 @@
             label12.Dock = DockStyle.Fill;
             label12.Location = new Point(3, 96);
             label12.Name = "label12";
-            label12.Size = new Size(115, 20);
+            label12.Size = new Size(148, 20);
             label12.TabIndex = 11;
             label12.Text = "Trimming";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Dock = DockStyle.Fill;
-            label11.Location = new Point(124, 96);
-            label11.Name = "label11";
-            label11.Size = new Size(202, 20);
-            label11.TabIndex = 10;
             // 
             // label10
             // 
@@ -1324,17 +1316,17 @@
             label10.Location = new Point(0, 93);
             label10.Margin = new Padding(0);
             label10.Name = "label10";
-            label10.Size = new Size(121, 3);
+            label10.Size = new Size(154, 3);
             label10.TabIndex = 9;
             // 
             // label66
             // 
             label66.BackColor = Color.Black;
             label66.Dock = DockStyle.Top;
-            label66.Location = new Point(121, 93);
+            label66.Location = new Point(154, 93);
             label66.Margin = new Padding(0);
             label66.Name = "label66";
-            label66.Size = new Size(208, 3);
+            label66.Size = new Size(154, 3);
             label66.TabIndex = 8;
             label66.Text = "label66";
             // 
@@ -1342,9 +1334,9 @@
             // 
             label67.AutoSize = true;
             label67.Dock = DockStyle.Fill;
-            label67.Location = new Point(3, 53);
+            label67.Location = new Point(157, 53);
             label67.Name = "label67";
-            label67.Size = new Size(115, 20);
+            label67.Size = new Size(148, 20);
             label67.TabIndex = 5;
             label67.Text = "Start:";
             // 
@@ -1352,9 +1344,9 @@
             // 
             label68.AutoSize = true;
             label68.Dock = DockStyle.Fill;
-            label68.Location = new Point(124, 53);
+            label68.Location = new Point(3, 53);
             label68.Name = "label68";
-            label68.Size = new Size(202, 20);
+            label68.Size = new Size(148, 20);
             label68.TabIndex = 4;
             label68.Text = "Start:";
             // 
@@ -1362,11 +1354,11 @@
             // 
             label69.AutoSize = true;
             label69.Dock = DockStyle.Fill;
-            label69.Location = new Point(124, 33);
+            label69.Location = new Point(157, 33);
             label69.Name = "label69";
-            label69.Size = new Size(202, 20);
+            label69.Size = new Size(148, 20);
             label69.TabIndex = 3;
-            label69.Text = "label69";
+            label69.Text = "Length:";
             // 
             // label70
             // 
@@ -1374,7 +1366,7 @@
             label70.Dock = DockStyle.Fill;
             label70.Location = new Point(3, 33);
             label70.Name = "label70";
-            label70.Size = new Size(115, 20);
+            label70.Size = new Size(148, 20);
             label70.TabIndex = 2;
             label70.Text = "Length:";
             // 
@@ -1384,25 +1376,25 @@
             label71.Dock = DockStyle.Fill;
             label71.Location = new Point(3, 0);
             label71.Name = "label71";
-            label71.Size = new Size(115, 33);
+            label71.Size = new Size(148, 33);
             label71.TabIndex = 0;
             label71.Text = "Name";
             // 
             // textBox1
             // 
             textBox1.Dock = DockStyle.Fill;
-            textBox1.Location = new Point(124, 3);
+            textBox1.Location = new Point(157, 3);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(202, 27);
+            textBox1.Size = new Size(148, 27);
             textBox1.TabIndex = 1;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
             // textBox2
             // 
             textBox2.Dock = DockStyle.Fill;
-            textBox2.Location = new Point(124, 119);
+            textBox2.Location = new Point(157, 119);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(202, 27);
+            textBox2.Size = new Size(148, 27);
             textBox2.TabIndex = 13;
             textBox2.TextChanged += textBox2_TextChanged;
             textBox2.KeyDown += textBox2_KeyDown;
@@ -1411,9 +1403,9 @@
             // textBox3
             // 
             textBox3.Dock = DockStyle.Fill;
-            textBox3.Location = new Point(124, 152);
+            textBox3.Location = new Point(157, 152);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(202, 27);
+            textBox3.Size = new Size(148, 27);
             textBox3.TabIndex = 15;
             textBox3.TextChanged += textBox3_TextChanged;
             textBox3.KeyDown += textBox3_KeyDown;
@@ -1422,10 +1414,11 @@
             // 
             // button15
             // 
+            button15.AutoSize = true;
             button15.Dock = DockStyle.Fill;
             button15.Location = new Point(3, 185);
             button15.Name = "button15";
-            button15.Size = new Size(115, 30);
+            button15.Size = new Size(148, 30);
             button15.TabIndex = 18;
             button15.Text = "Reset Trim";
             button15.UseVisualStyleBackColor = true;
@@ -1434,10 +1427,44 @@
             // trackBar1
             // 
             trackBar1.Dock = DockStyle.Fill;
-            trackBar1.Location = new Point(124, 241);
+            trackBar1.Location = new Point(157, 251);
+            trackBar1.Maximum = 200;
             trackBar1.Name = "trackBar1";
-            trackBar1.Size = new Size(202, 14);
+            trackBar1.Size = new Size(148, 34);
             trackBar1.TabIndex = 25;
+            trackBar1.TickFrequency = 10;
+            trackBar1.ValueChanged += trackBar1_ValueChanged;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Dock = DockStyle.Top;
+            label17.Location = new Point(3, 288);
+            label17.Name = "label17";
+            label17.Size = new Size(148, 20);
+            label17.TabIndex = 27;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(157, 221);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(65, 24);
+            checkBox1.TabIndex = 30;
+            checkBox1.Text = "Mute";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(157, 311);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(63, 24);
+            checkBox2.TabIndex = 33;
+            checkBox2.Text = "Hide";
+            checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckedChanged += checkBox2_CheckedChanged;
             // 
             // tabPage15
             // 
@@ -1453,6 +1480,7 @@
             // 
             // tableLayoutPanel27
             // 
+            tableLayoutPanel27.AutoScroll = true;
             tableLayoutPanel27.ColumnCount = 2;
             tableLayoutPanel27.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel27.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
@@ -1997,6 +2025,7 @@
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             listBox1.DragDrop += listBox1_DragDrop;
             listBox1.DragEnter += listBox1_DragEnter;
+            listBox1.KeyDown += listBox1_KeyDown;
             listBox1.MouseDown += listBox1_MouseDown;
             // 
             // tabPage9
@@ -2202,19 +2231,19 @@
             // importAudioToolStripMenuItem
             // 
             importAudioToolStripMenuItem.Name = "importAudioToolStripMenuItem";
-            importAudioToolStripMenuItem.Size = new Size(224, 26);
+            importAudioToolStripMenuItem.Size = new Size(181, 26);
             importAudioToolStripMenuItem.Text = "Import Audio";
             // 
             // importPhotoToolStripMenuItem
             // 
             importPhotoToolStripMenuItem.Name = "importPhotoToolStripMenuItem";
-            importPhotoToolStripMenuItem.Size = new Size(224, 26);
+            importPhotoToolStripMenuItem.Size = new Size(181, 26);
             importPhotoToolStripMenuItem.Text = "Import Photo";
             // 
             // importVideoToolStripMenuItem
             // 
             importVideoToolStripMenuItem.Name = "importVideoToolStripMenuItem";
-            importVideoToolStripMenuItem.Size = new Size(224, 26);
+            importVideoToolStripMenuItem.Size = new Size(181, 26);
             importVideoToolStripMenuItem.Text = "Import Video";
             // 
             // helpToolStripMenuItem
@@ -3552,6 +3581,7 @@
             tabPage13.ResumeLayout(false);
             tableLayoutPanel24.ResumeLayout(false);
             tableLayoutPanel24.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar4).EndInit();
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             tabPage15.ResumeLayout(false);
             tableLayoutPanel27.ResumeLayout(false);
@@ -3730,10 +3760,7 @@
         private Label label56;
         private Label label57;
         private TableLayoutPanel tableLayoutPanel24;
-        private Label label6;
         private Label label7;
-        private Label label17;
-        private Label label15;
         private Label label18;
         private Label label16;
         private Label label8;
@@ -3741,7 +3768,6 @@
         private Label label14;
         private Label label13;
         private Label label12;
-        private Label label11;
         private Label label10;
         private Label label66;
         private Label label67;
@@ -3899,5 +3925,10 @@
         private VScrollBar vScrollBar1;
         private Panel LanePanel;
         private Button button41;
+        private CheckBox checkBox1;
+        private Label label17;
+        private TrackBar trackBar4;
+        private Label label6;
+        private CheckBox checkBox2;
     }
 }

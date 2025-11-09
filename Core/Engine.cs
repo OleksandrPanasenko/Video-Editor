@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using VideoEditor.Core;
 using VideoEditor.Core.Operations;
@@ -104,79 +105,147 @@ namespace Videoeditor.Core {
             Directory.CreateDirectory(tempDir);
 
             var sb = new StringBuilder();
+            var lb = new StringBuilder();
             int index = 0;
+            int laneIndex = 0;
             int indexGap = 0;
 
             double previousEnd = timestamp;
 
             // We assume one lane for MVP
-            foreach (var placement in ProjectContext.CurrentProject.Lanes[0].Fragments)
+            foreach (var lane in ProjectContext.CurrentProject.Lanes)
             {
-                var fragment = placement.Fragment;
-                double start = placement.Position.TotalSeconds;
-                double end = placement.EndPosition.TotalSeconds;
+                foreach (var placement in lane.Fragments)
+                {
+                    var fragment = placement.Fragment;
+                    double start = placement.Position.TotalSeconds;
+                    double end = placement.EndPosition.TotalSeconds;
 
+
+                    // Include only if it overlaps the preview window
+                    if (end < timestamp || start > timestamp + durationSeconds)
+                        continue;
+
+                    double clipStart = Math.Max(0, timestamp - start);
+                    double clipLength = Math.Min(fragment.Duration.TotalSeconds - clipStart, Math.Min(durationSeconds, timestamp - start + durationSeconds));
+
+                    string input = fragment.FilePath;
+                    string tempOut = Path.Combine(tempDir, $"lane{laneIndex}part{index++}.mp4");
+
+                    string clipLengthStr = clipLength.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+                    // Build FFmpeg arguments
+                    string args;
+                    if (fragment.FragmentType == Fragment.Type.Image)
+                    {
+                        args =
+                            $"-loop 1 -t {clipLengthStr} -i \"{input}\" " +
+                            //$"-f lavfi -t {clipLengthStr} -i anullsrc=channel_layout=stereo:sample_rate=44100 " +
+                            $"-f lavfi -i \"anullsrc=channel_layout=stereo:sample_rate=44100:duration={clipLengthStr},aformat=sample_fmts=s16:sample_rates=44100:channel_layouts=stereo\" " +
+                            "-filter_complex \"[0:v]scale=640:360,format=yuv420p[v]\" " +
+                            "-map \"[v]\" -map 1:a -shortest -c:v libx264 -c:a aac -ar 44100 -ac 2 -b:a 128k -shortest -preset ultrafast -y \"" + tempOut + "\"";
+                    }
+                    else if (fragment.FragmentType == Fragment.Type.Audio)
+                    {
+                        args =
+                            $"-f lavfi -i \"color=c=black:s=640x360:d={clipLengthStr}\" " +
+                            $"-ss {(fragment.StartTime.TotalSeconds + clipStart).ToString(CultureInfo.InvariantCulture)} " +
+
+                            $"-t {clipLengthStr} " +
+                            $"-i \"{input}\" -shortest -c:v libx264 -c:a aac -ar 44100 -ac 2 -preset ultrafast -y \"{tempOut}\"";
+                    }
+                    else // video
+                    {
+                        if (Path.GetExtension(fragment.FilePath) == ".gif")
+                        {
+                            args =
+                            $"-ss {(fragment.StartTime.TotalSeconds + clipStart).ToString(CultureInfo.InvariantCulture)} " +
+                            $"-t {clipLengthStr} " +
+                            $"-i \"{input}\" " +
+                            $"-f lavfi -i \"anullsrc=channel_layout=stereo:sample_rate=44100:duration={clipLengthStr},aformat=sample_fmts=s16:sample_rates=44100:channel_layouts=stereo\" " +
+                            "-filter_complex \"[0:v]scale=640:360,fps=15,format=yuv420p[v]\" " +
+                            "-map \"[v]\" -map 1:a -shortest " +
+                            $"-c:v libx264 -c:a aac -ar 44100 -ac 2 -preset ultrafast -y \"{tempOut}\"";
+                        }
+                        else
+                        {
+                            args =
+                            $"-ss {(fragment.StartTime.TotalSeconds + clipStart).ToString(CultureInfo.InvariantCulture)} " +
+                            $"-t {clipLengthStr} " +
+                            $"-i \"{input}\" -vf scale=640:360,fps=15 -c:v libx264 -c:a aac -ar 44100 -ac 2 -preset ultrafast -y \"{tempOut}\"";
+                        }
+
+                    }
+
+                    //Make gap (empty video with silence)
+                    if (previousEnd < placement.Position.TotalSeconds)
+                    {
+                        var gapLen = placement.Position.TotalSeconds - previousEnd;
+                        string gapOut = Path.Combine(tempDir, $"gap{indexGap++}.mp4");
+                        string color = /*isTopLane ? "black@0.0" : */"black";
+                        await RunFFmpegAsync($"-f lavfi -t {gapLen.ToString(CultureInfo.InvariantCulture)} -i \"color=c={color}:s=640x360\" -pix_fmt {/*(isTopLane ? "yuva420p" :*/ ("yuv420p")} -preset ultrafast -y \"{gapOut}\"");
+                        sb.AppendLine($"file '{gapOut.Replace("\\", "/")}'");
+                    }
+
+                    previousEnd = placement.EndPosition.TotalSeconds;
+                    //Render fragment and add to list
+                    await RunFFmpegAsync(args);
+                    sb.AppendLine($"file '{tempOut.Replace("\\", "/")}'");
+
+                }
+                string tempOutLane = Path.Combine(tempDir, $"lane{laneIndex++}.mp4");
+                string listFile = Path.Combine(tempDir, "list.txt");
+                await File.WriteAllTextAsync(listFile, sb.ToString());
                 
-                // Include only if it overlaps the preview window
-                if (end < timestamp || start > timestamp + durationSeconds)
-                    continue;
+                await RunFFmpegAsync(
+                    $"-f concat -safe 0 -i \"{listFile}\" -c:v libx264 -pix_fmt yuv420p -c:a aac -preset ultrafast -y \"{tempOutLane}\""
+                );
+                lb.AppendLine($"file '{tempOutLane.Replace("\\", "/")}'");
 
-                double clipStart = Math.Max(0, timestamp - start);
-                double clipLength = Math.Min(fragment.Duration.TotalSeconds - clipStart, Math.Min(durationSeconds, timestamp-start+durationSeconds));
-                
-                string input = fragment.FilePath;
-                string tempOut = Path.Combine(tempDir, $"part{index++}.mp4");
+                //render lane and add to list
+                sb=new StringBuilder();
 
-
-
-                // Build FFmpeg arguments
-                string args;
-                if (fragment.FragmentType == Fragment.Type.Image)
-                {
-                    args =
-                        $"-loop 1 -t {clipLength.ToString(System.Globalization.CultureInfo.InvariantCulture)} " +
-                        $"-i \"{input}\" -vf scale=640:360,fps=15,format=yuv420p -preset ultrafast -y \"{tempOut}\"";
-                }
-                else if (fragment.FragmentType == Fragment.Type.Audio)
-                {
-                    args =
-                        $"-f lavfi -i \"color=c=black:s=640x360:d={clipLength.ToString(System.Globalization.CultureInfo.InvariantCulture)}\" " +
-                        $"-ss {(fragment.StartTime.TotalSeconds+clipStart).ToString(System.Globalization.CultureInfo.InvariantCulture)} " + 
-                        
-                        $"-t {clipLength.ToString(System.Globalization.CultureInfo.InvariantCulture)} " +
-                        $"-i \"{input}\" -shortest -c:v libx264 -c:a aac -preset ultrafast -y \"{tempOut}\"";
-                }
-                else // video
-                {
-                    args =
-                        $"-ss {(fragment.StartTime.TotalSeconds+clipStart).ToString(System.Globalization.CultureInfo.InvariantCulture)} " +
-                        $"-t {clipLength.ToString(System.Globalization.CultureInfo.InvariantCulture)} " +
-                        $"-i \"{input}\" -vf scale=640:360,fps=15 -c:v libx264 -c:a aac -preset ultrafast -y \"{tempOut}\"";
-                }
-
-                //Make gap
-                if(previousEnd<placement.Position.TotalSeconds)
-                {
-                    var gapLen = placement.Position.TotalSeconds - previousEnd;
-                    string gapOut = Path.Combine(tempDir, $"gap{indexGap++}.mp4");
-                    string color = /*isTopLane ? "black@0.0" : */"black";
-                    await RunFFmpegAsync($"-f lavfi -t {gapLen.ToString(CultureInfo.InvariantCulture)} -i \"color=c={color}:s=640x360\" -pix_fmt {/*(isTopLane ? "yuva420p" :*/ ("yuv420p")} -preset ultrafast -y \"{gapOut}\"");
-                    sb.AppendLine($"file '{gapOut.Replace("\\", "/")}'");
-                }
-
-                previousEnd = placement.EndPosition.TotalSeconds;
-
-                await RunFFmpegAsync(args);
-                sb.AppendLine($"file '{tempOut.Replace("\\", "/")}'");
+                index = 0;
             }
-
             // Concatenate partials
-            string listFile = Path.Combine(tempDir, "list.txt");
-            await File.WriteAllTextAsync(listFile, sb.ToString());
+            string listLaneFile = Path.Combine(tempDir, "listLane.txt");
+            await File.WriteAllTextAsync(listLaneFile, lb.ToString());
+            //add all lines in files together
+            string[] lanePaths = Directory.GetFiles(tempDir, "lane*.mp4");
 
-            await RunFFmpegAsync(
-                $"-f concat -safe 0 -i \"{listFile}\" -c:v libx264 -pix_fmt yuv420p -c:a aac -preset ultrafast -y \"{outputPath}\""
-            );
+
+            var inputs = string.Join(" ", lanePaths.Select(p => $"-i \"{p}\""));
+            int n = lanePaths.Length;
+
+            // build overlay chain
+            var filter = new StringBuilder();
+
+            // video overlay chain
+            if (n > 1)
+            {
+                for (int i = 0; i < n - 1; i++)
+                {
+                    if (i == 0)
+                        filter.Append($"[0:v][1:v]overlay=shortest=1[tmp1];");
+                    else
+                        filter.Append($"[tmp{i}][{i + 1}:v]overlay=shortest=1[tmp{i + 1}];");
+                }
+                filter.Append($"[tmp{n - 1}]copy[v];");
+            }
+            else
+            {
+                filter.Append("[0:v]copy[v];");
+            }
+            // audio mix
+            filter.Append($"[0:a]");
+            for (int i = 1; i < n; i++)
+                filter.Append($"[{i}:a]");
+            filter.Append($"amix=inputs={n}:normalize=0[a]");
+            // add all together
+            string finalArgs =
+                $"{inputs} -filter_complex \"{filter}\" -map \"[v]\" -map \"[a]\" -c:v libx264 -c:a aac -ar 44100 -ac 2 -preset ultrafast -y \"{outputPath}\"";
+
+            await RunFFmpegAsync(finalArgs);
 
             try { Directory.Delete(tempDir, true); } catch { /* ignore */ }
         }

@@ -36,11 +36,19 @@ namespace Core.Config
             {
                 if (project != null)
                 {
-                    foreach (var recent in Recent)
+                    int i = 0;
+                    while (i < Recent.Count)
                     {
-                        if (project.Path == recent.Path)
+                        var recent= Recent[i];
                         {
-                            Recent.Remove(recent);
+                            if (project.Path == recent.Path)
+                            {
+                                Recent.Remove(recent);
+                            }
+                            else
+                            {
+                                i++;
+                            }
                         }
                     }
                 }

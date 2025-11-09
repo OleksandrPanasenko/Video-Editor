@@ -5,8 +5,8 @@ namespace VideoEditor.Core
 {
     public static class Config
     {
-        public static string FfmpegPath { get; set; } = "ffmpeg"; // Default to ffmpeg in PATH
-        public static string FfprobePath { get; set; } = "ffprobe"; // Default to ffprobe in PATH
+        public static string FfmpegPath { get; set; } = @"C:\ffmpeg\ffmpeg.exe"; // Default to ffmpeg in PATH
+        public static string FfprobePath { get; set; } = @"C:\ffmpeg\ffprobe.exe"; // Default to ffprobe in PATH
         public static string TempDirectory { get; set; } = Path.GetTempPath();
         public static int MaxUndoSteps { get; set; } = 20;
         public static string DefaultProjectExtension { get; set; } = ".vep";

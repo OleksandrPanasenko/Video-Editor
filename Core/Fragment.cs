@@ -1,3 +1,6 @@
+using VideoEditor.Core.Effects;
+using VideoEditor.Core.Transitions;
+
 namespace VideoEditor.Core
 {
     public class Fragment
@@ -20,6 +23,8 @@ namespace VideoEditor.Core
         public bool Hidden { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
+        public List<Effect> Effects { get; set; } = new();
+        public Transition? OutTransition { get; set; }
         public Fragment(string filePath, TimeSpan startTime, TimeSpan endTime)
         {
             FilePath = filePath;
@@ -62,7 +67,7 @@ namespace VideoEditor.Core
                 return Type.Text;
             return Type.Unknown;
         }
-        public Type FragmentType { get { return FileType(FilePath); } }
+        public virtual Type FragmentType { get { return FileType(FilePath); } }
         //Empty constructor for deserialisation
         public Fragment() { }
     }
