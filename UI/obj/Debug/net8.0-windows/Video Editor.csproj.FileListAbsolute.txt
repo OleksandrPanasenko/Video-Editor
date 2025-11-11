@@ -90,3 +90,4 @@ D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\runtimes\browser\lib\net8.0\Sys
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.RenderProgress.resources
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.Settings.resources
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.ExportForm.resources
+D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.Select_Effect_Type.resources

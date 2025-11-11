@@ -1,4 +1,5 @@
 ﻿using Core.Operations;
+using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,7 @@ namespace VideoEditor.UI
         public LaneInteractionMode CurrentMode { get; set; } = LaneInteractionMode.Select;
         public EditAction PendingEdit => Project.SelectionManager.PendingEdit;
         public int SecondsSinceAutoSave { get; set; }
+        public bool AllowRightSwitch = false;
         public Main_Form()
         {
             InitializeComponent();
@@ -48,6 +50,16 @@ namespace VideoEditor.UI
             tableLayoutPanel24.HorizontalScroll.Enabled = false;
             tableLayoutPanel24.HorizontalScroll.Visible = false;
             tableLayoutPanel24.AutoScroll = true;
+
+            tableLayoutPanel25.AutoScroll = false;
+            tableLayoutPanel25.HorizontalScroll.Enabled = false;
+            tableLayoutPanel25.HorizontalScroll.Visible = false;
+            tableLayoutPanel25.AutoScroll = true;
+
+            tableLayoutPanel27.AutoScroll = false;
+            tableLayoutPanel27.HorizontalScroll.Enabled = false;
+            tableLayoutPanel27.HorizontalScroll.Visible = false;
+            tableLayoutPanel27.AutoScroll = true;
         }
         private void AutoSaveTimer_Tick(object sender, EventArgs e)
         {
@@ -318,6 +330,42 @@ namespace VideoEditor.UI
         }
         private void RefreshFragmentParametres()
         {
+            if(Project.SelectionManager.SelectedFragment==null) return;
+            //Select apropriate tab
+            AllowRightSwitch = true;
+            switch (Project.SelectionManager.SelectedFragment.Fragment.FragmentType)
+            {
+                case (Fragment.Type.Video):
+                    tabControl4.SelectedIndex = 0;
+                    RefreshVideoParametres();
+                    break;
+
+                case (Fragment.Type.Audio):
+                    tabControl4.SelectedIndex = 1;
+                    RefreshAudioParametres();
+                    break;
+                case (Fragment.Type.Image):
+                    tabControl4.SelectedIndex = 0;
+                    RefreshVideoParametres();
+                    break;
+                case (Fragment.Type.Text):
+                    tabControl4.SelectedIndex = 2;
+                    RefreshTextParametres();
+                    break;
+            }
+            AllowRightSwitch = false;
+            ConstructEffectsPanel();
+        }
+        //Disable manual switching between property tabs
+        private void tabControl4_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (!AllowRightSwitch)
+            {
+                e.Cancel = true;
+            }
+        }
+        private void RefreshVideoParametres()
+        {
             var fragmentPlacement = Project.SelectionManager.SelectedFragment;
             if (fragmentPlacement == null) return;
 
@@ -338,26 +386,65 @@ namespace VideoEditor.UI
             checkBox1.Checked = fragment.Muted;
             if (fragment.Muted)
             {
-                trackBar1.Enabled= false;
+                trackBar1.Enabled = false;
             }
             else
             {
                 trackBar1.Enabled = true;
                 trackBar1.Value = (int)(fragment.Volume * 100);
+                label105.Text = $"{trackBar1.Value}%";
             }
             //Visibility
             checkBox2.Checked = fragment.Hidden;
             trackBar1.Value = (int)(fragment.Volume * 100);
             if (fragment.Hidden)
             {
-                trackBar2.Enabled = false;
+                trackBar4.Enabled = false;
             }
             else
             {
-                trackBar2.Enabled = true;
-                trackBar2.Maximum = 100;
-                trackBar2.Value = (int)(fragment.Opacity * 100);
+                trackBar4.Enabled = true;
+                trackBar4.Maximum = 100;
+                trackBar4.Value = (int)(fragment.Opacity * 100);
+                label105.Text = $"{trackBar4.Value}%";
             }
+            checkBox3.Checked = fragment.Subtitles;
+        }
+
+        private void RefreshAudioParametres()
+        {
+            var fragmentPlacement = Project.SelectionManager.SelectedFragment;
+            if (fragmentPlacement == null) return;
+
+            var fragment = fragmentPlacement.Fragment;
+            //Name
+            textBox7.Text = fragment.Name;
+            //Duration
+            label88.Text = fragment.Duration.ToString();
+            //Start on line
+            label15.Text = fragmentPlacement.Position.ToString();
+            //End on line
+            label104.Text = fragmentPlacement.EndPosition.ToString();
+            //Trim start
+            textBox8.Text = fragment.StartTime.ToString();
+            //Trim end
+            textBox9.Text = fragment.EndTime.ToString();
+            //Sound
+            checkBox1.Checked = fragment.Muted;
+            if (fragment.Muted)
+            {
+                trackBar1.Enabled = false;
+            }
+            else
+            {
+                trackBar1.Enabled = true;
+                trackBar1.Value = (int)(fragment.Volume * 100);
+            }
+
+        }
+        private void RefreshTextParametres()
+        {
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -924,6 +1011,7 @@ namespace VideoEditor.UI
                 await Project.engine.RenderPreviewAsync("preview.mp4", ((TimeSpan)Project.SelectionManager.SelectedTime).TotalSeconds, 5.0);
                 axWindowsMediaPlayer1.URL = Path.GetFullPath("preview.mp4");
                 axWindowsMediaPlayer1.Ctlcontrols.play();
+                MessageBox.Show(axWindowsMediaPlayer1.URL);
             }
             //MessageBox.Show(GetAudioFormat(Config.FfprobePath, Project.SelectionManager.SelectedFragment.Fragment.FilePath));
         }
@@ -986,13 +1074,22 @@ namespace VideoEditor.UI
                 Project.SelectionManager.SelectedFragment.Fragment.Hidden = checkBox2.Checked;
                 if (checkBox2.Checked)
                 {
-                    trackBar2.Enabled = false;
+                    trackBar4.Enabled = false;
                 }
                 else
                 {
-                    trackBar2.Enabled = true;
-                    trackBar2.Value = (int)(Project.SelectionManager.SelectedFragment.Fragment.Opacity * 100);
+                    trackBar4.Enabled = true;
+                    trackBar4.Value = (int)(Project.SelectionManager.SelectedFragment.Fragment.Opacity * 100);
                 }
+            }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            var placement = Project.SelectionManager.SelectedFragment;
+            if (placement != null)
+            {
+                placement.Fragment.Subtitles = checkBox3.Checked;
             }
         }
 
@@ -1001,8 +1098,10 @@ namespace VideoEditor.UI
             //Sound
             if ((Project.SelectionManager.SelectedFragment != null))
             {
-                Project.SelectionManager.SelectedFragment.Fragment.Volume = ((float)trackBar1.Value)/100;
+                Project.SelectionManager.SelectedFragment.Fragment.Volume = ((float)trackBar1.Value) / 100;
+                label105.Text = $"{trackBar1.Value}%";
             }
+
         }
 
         private void trackBar4_ValueChanged(object sender, EventArgs e)
@@ -1010,8 +1109,144 @@ namespace VideoEditor.UI
             //Opacity
             if ((Project.SelectionManager.SelectedFragment != null))
             {
-                Project.SelectionManager.SelectedFragment.Fragment.Opacity = ((float)trackBar2.Value) / 100;
+                Project.SelectionManager.SelectedFragment.Fragment.Opacity = ((float)trackBar4.Value) / 100;
+                label106.Text = $"{trackBar4.Value}%";
             }
         }
+        //===========Text==============
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            //Font size
+        }
+
+        private void comboBox1_ValueMemberChanged(object sender, EventArgs e)
+        {
+            //Font
+        }
+        //-----------Style-------------
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+        //--------Alignment------------
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+        //------Colors---------------
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+        //---------Duration-----------
+        private void textBox10_Leave(object sender, EventArgs e)
+        {
+            //Start
+        }
+
+
+
+        private void textBox11_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox10_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void textBox11_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+        //--------Position
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ConstructEffectsPanel()
+        {
+            var EffectsPanel = tabPage10;
+            var lane = Project.SelectionManager.SelectedLane;
+            var placement = Project.SelectionManager.SelectedFragment;
+            if (placement == null) return;
+            var fragment = placement.Fragment;
+
+            EffectsPanel.Controls.Clear();
+            if (fragment.Effects.Count > 0)
+            {
+                //Draw name
+
+                //Draw intensity
+
+                //Draw delete
+            }
+            //Add effect button
+            var newEffectButton = new Button();
+            newEffectButton.Text = "Add new effect";
+            var newEffectList = new ComboBox();
+            newEffectList.DropDownStyle = ComboBoxStyle.DropDownList;
+            newEffectList.Items.AddRange([]);//what effects?
+            EffectsPanel.Controls.Add(newEffectButton);
+            EffectsPanel.Controls.Add(newEffectList);
+            //Selection box with effects
+            if (fragment.OutTransition == null)
+            {
+                //Add out transition button
+                //if (lane[placement.EndPosition] == null) throw new NotImplementedException(); //disable;
+                //list to select
+
+
+            }
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

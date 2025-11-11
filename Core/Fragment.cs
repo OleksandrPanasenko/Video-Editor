@@ -8,6 +8,7 @@ namespace VideoEditor.Core
         public string FilePath { get; set; }
         public TimeSpan FileDuration { get; set; }
         public string FileName { get; set; }
+        public bool Subtitles {  get; set; }=false;
         public string Name
         {
             get => string.IsNullOrEmpty(FileName) ? System.IO.Path.GetFileName(FilePath) : FileName; 

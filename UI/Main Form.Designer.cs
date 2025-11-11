@@ -48,6 +48,10 @@
             textBox9 = new TextBox();
             button17 = new Button();
             trackBar3 = new TrackBar();
+            label99 = new Label();
+            label15 = new Label();
+            label103 = new Label();
+            label104 = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
             button5 = new Button();
@@ -122,18 +126,17 @@
             label17 = new Label();
             checkBox1 = new CheckBox();
             checkBox2 = new CheckBox();
+            label105 = new Label();
+            checkBox3 = new CheckBox();
+            label106 = new Label();
+            label11 = new Label();
             tabPage15 = new TabPage();
             tableLayoutPanel27 = new TableLayoutPanel();
             flowLayoutPanel7 = new FlowLayoutPanel();
             label100 = new Label();
-            textBox12 = new TextBox();
+            numericUpDown2 = new NumericUpDown();
             label101 = new Label();
-            textBox13 = new TextBox();
-            label99 = new Label();
-            flowLayoutPanel6 = new FlowLayoutPanel();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
-            comboBox2 = new ComboBox();
+            numericUpDown3 = new NumericUpDown();
             label98 = new Label();
             label97 = new Label();
             label96 = new Label();
@@ -169,6 +172,7 @@
             tabPage8 = new TabPage();
             listBox1 = new ListBox();
             tabPage9 = new TabPage();
+            tabPage10 = new TabPage();
             tableLayoutPanel6 = new TableLayoutPanel();
             menuStrip1 = new MenuStrip();
             toolStripMenuItem1 = new ToolStripMenuItem();
@@ -339,7 +343,8 @@
             tabPage15.SuspendLayout();
             tableLayoutPanel27.SuspendLayout();
             flowLayoutPanel7.SuspendLayout();
-            flowLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
             flowLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             flowLayoutPanel4.SuspendLayout();
@@ -392,30 +397,36 @@
             // tableLayoutPanel25
             // 
             tableLayoutPanel25.AutoScroll = true;
-            tableLayoutPanel25.ColumnCount = 2;
+            tableLayoutPanel25.ColumnCount = 3;
             tableLayoutPanel25.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel25.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel25.Controls.Add(label72, 0, 11);
-            tableLayoutPanel25.Controls.Add(label76, 0, 10);
-            tableLayoutPanel25.Controls.Add(label77, 0, 9);
-            tableLayoutPanel25.Controls.Add(label80, 0, 7);
-            tableLayoutPanel25.Controls.Add(label81, 0, 6);
-            tableLayoutPanel25.Controls.Add(label82, 0, 5);
-            tableLayoutPanel25.Controls.Add(label84, 0, 4);
-            tableLayoutPanel25.Controls.Add(label85, 0, 4);
+            tableLayoutPanel25.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel25.Controls.Add(label72, 1, 13);
+            tableLayoutPanel25.Controls.Add(label76, 0, 12);
+            tableLayoutPanel25.Controls.Add(label77, 0, 11);
+            tableLayoutPanel25.Controls.Add(label80, 0, 9);
+            tableLayoutPanel25.Controls.Add(label81, 0, 8);
+            tableLayoutPanel25.Controls.Add(label82, 0, 7);
+            tableLayoutPanel25.Controls.Add(label84, 0, 6);
+            tableLayoutPanel25.Controls.Add(label85, 0, 6);
             tableLayoutPanel25.Controls.Add(label88, 1, 1);
             tableLayoutPanel25.Controls.Add(label89, 0, 1);
             tableLayoutPanel25.Controls.Add(label90, 0, 0);
             tableLayoutPanel25.Controls.Add(textBox7, 1, 0);
-            tableLayoutPanel25.Controls.Add(textBox8, 1, 6);
-            tableLayoutPanel25.Controls.Add(textBox9, 1, 7);
-            tableLayoutPanel25.Controls.Add(button17, 0, 8);
-            tableLayoutPanel25.Controls.Add(trackBar3, 1, 10);
+            tableLayoutPanel25.Controls.Add(textBox8, 1, 8);
+            tableLayoutPanel25.Controls.Add(textBox9, 1, 9);
+            tableLayoutPanel25.Controls.Add(button17, 0, 10);
+            tableLayoutPanel25.Controls.Add(trackBar3, 1, 12);
+            tableLayoutPanel25.Controls.Add(label99, 0, 2);
+            tableLayoutPanel25.Controls.Add(label15, 1, 2);
+            tableLayoutPanel25.Controls.Add(label103, 0, 3);
+            tableLayoutPanel25.Controls.Add(label104, 1, 3);
             tableLayoutPanel25.Dock = DockStyle.Fill;
             tableLayoutPanel25.Font = new Font("Segoe UI", 9F);
             tableLayoutPanel25.Location = new Point(3, 3);
             tableLayoutPanel25.Name = "tableLayoutPanel25";
-            tableLayoutPanel25.RowCount = 12;
+            tableLayoutPanel25.RowCount = 14;
+            tableLayoutPanel25.RowStyles.Add(new RowStyle());
             tableLayoutPanel25.RowStyles.Add(new RowStyle());
             tableLayoutPanel25.RowStyles.Add(new RowStyle());
             tableLayoutPanel25.RowStyles.Add(new RowStyle());
@@ -427,7 +438,7 @@
             tableLayoutPanel25.RowStyles.Add(new RowStyle());
             tableLayoutPanel25.RowStyles.Add(new RowStyle());
             tableLayoutPanel25.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel25.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel25.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel25.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel25.Size = new Size(329, 211);
             tableLayoutPanel25.TabIndex = 5;
@@ -436,9 +447,9 @@
             // 
             label72.AutoSize = true;
             label72.Dock = DockStyle.Fill;
-            label72.Location = new Point(3, 218);
+            label72.Location = new Point(124, 278);
             label72.Name = "label72";
-            label72.Size = new Size(115, 20);
+            label72.Size = new Size(182, 20);
             label72.TabIndex = 26;
             label72.Text = "Sound volume:";
             // 
@@ -446,9 +457,9 @@
             // 
             label76.AutoSize = true;
             label76.Dock = DockStyle.Fill;
-            label76.Location = new Point(3, 198);
+            label76.Location = new Point(3, 238);
             label76.Name = "label76";
-            label76.Size = new Size(115, 20);
+            label76.Size = new Size(115, 40);
             label76.TabIndex = 22;
             label76.Text = "Sound volume:";
             // 
@@ -456,7 +467,7 @@
             // 
             label77.AutoSize = true;
             label77.Dock = DockStyle.Fill;
-            label77.Location = new Point(3, 178);
+            label77.Location = new Point(3, 218);
             label77.Name = "label77";
             label77.Size = new Size(115, 20);
             label77.TabIndex = 20;
@@ -466,7 +477,7 @@
             // 
             label80.AutoSize = true;
             label80.Dock = DockStyle.Fill;
-            label80.Location = new Point(3, 109);
+            label80.Location = new Point(3, 149);
             label80.Name = "label80";
             label80.Size = new Size(115, 33);
             label80.TabIndex = 14;
@@ -476,7 +487,7 @@
             // 
             label81.AutoSize = true;
             label81.Dock = DockStyle.Fill;
-            label81.Location = new Point(3, 76);
+            label81.Location = new Point(3, 116);
             label81.Name = "label81";
             label81.Size = new Size(115, 33);
             label81.TabIndex = 12;
@@ -486,7 +497,7 @@
             // 
             label82.AutoSize = true;
             label82.Dock = DockStyle.Fill;
-            label82.Location = new Point(3, 56);
+            label82.Location = new Point(3, 96);
             label82.Name = "label82";
             label82.Size = new Size(115, 20);
             label82.TabIndex = 11;
@@ -496,7 +507,7 @@
             // 
             label84.BackColor = Color.Black;
             label84.Dock = DockStyle.Top;
-            label84.Location = new Point(0, 53);
+            label84.Location = new Point(0, 93);
             label84.Margin = new Padding(0);
             label84.Name = "label84";
             label84.Size = new Size(121, 3);
@@ -506,10 +517,10 @@
             // 
             label85.BackColor = Color.Black;
             label85.Dock = DockStyle.Top;
-            label85.Location = new Point(121, 53);
+            label85.Location = new Point(121, 93);
             label85.Margin = new Padding(0);
             label85.Name = "label85";
-            label85.Size = new Size(208, 3);
+            label85.Size = new Size(188, 3);
             label85.TabIndex = 8;
             label85.Text = "label85";
             // 
@@ -519,7 +530,7 @@
             label88.Dock = DockStyle.Fill;
             label88.Location = new Point(124, 33);
             label88.Name = "label88";
-            label88.Size = new Size(202, 20);
+            label88.Size = new Size(182, 20);
             label88.TabIndex = 3;
             label88.Text = "label88";
             // 
@@ -548,29 +559,29 @@
             textBox7.Dock = DockStyle.Fill;
             textBox7.Location = new Point(124, 3);
             textBox7.Name = "textBox7";
-            textBox7.Size = new Size(202, 27);
+            textBox7.Size = new Size(182, 27);
             textBox7.TabIndex = 1;
             // 
             // textBox8
             // 
             textBox8.Dock = DockStyle.Fill;
-            textBox8.Location = new Point(124, 79);
+            textBox8.Location = new Point(124, 119);
             textBox8.Name = "textBox8";
-            textBox8.Size = new Size(202, 27);
+            textBox8.Size = new Size(182, 27);
             textBox8.TabIndex = 13;
             // 
             // textBox9
             // 
             textBox9.Dock = DockStyle.Fill;
-            textBox9.Location = new Point(124, 112);
+            textBox9.Location = new Point(124, 152);
             textBox9.Name = "textBox9";
-            textBox9.Size = new Size(202, 27);
+            textBox9.Size = new Size(182, 27);
             textBox9.TabIndex = 15;
             // 
             // button17
             // 
             button17.Dock = DockStyle.Fill;
-            button17.Location = new Point(3, 145);
+            button17.Location = new Point(3, 185);
             button17.Name = "button17";
             button17.Size = new Size(115, 30);
             button17.TabIndex = 18;
@@ -580,10 +591,46 @@
             // trackBar3
             // 
             trackBar3.Dock = DockStyle.Fill;
-            trackBar3.Location = new Point(124, 201);
+            trackBar3.Location = new Point(124, 241);
             trackBar3.Name = "trackBar3";
-            trackBar3.Size = new Size(202, 14);
+            trackBar3.Size = new Size(182, 34);
             trackBar3.TabIndex = 25;
+            // 
+            // label99
+            // 
+            label99.AutoSize = true;
+            label99.Location = new Point(3, 53);
+            label99.Name = "label99";
+            label99.Size = new Size(40, 20);
+            label99.TabIndex = 28;
+            label99.Text = "Start";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(124, 53);
+            label15.Name = "label15";
+            label15.Size = new Size(58, 20);
+            label15.TabIndex = 27;
+            label15.Text = "label15";
+            // 
+            // label103
+            // 
+            label103.AutoSize = true;
+            label103.Location = new Point(3, 73);
+            label103.Name = "label103";
+            label103.Size = new Size(34, 20);
+            label103.TabIndex = 29;
+            label103.Text = "End";
+            // 
+            // label104
+            // 
+            label104.AutoSize = true;
+            label104.Location = new Point(124, 73);
+            label104.Name = "label104";
+            label104.Size = new Size(66, 20);
+            label104.TabIndex = 0;
+            label104.Text = "label104";
             // 
             // tableLayoutPanel1
             // 
@@ -1142,7 +1189,8 @@
             tabControl4.SelectedIndex = 0;
             tabControl4.Size = new Size(378, 225);
             tabControl4.SizeMode = TabSizeMode.Fixed;
-            tabControl4.TabIndex = 3;
+            tabControl4.TabIndex = 0;
+            tabControl4.Selecting += tabControl4_Selecting;
             // 
             // tabPage13
             // 
@@ -1159,8 +1207,8 @@
             // 
             tableLayoutPanel24.AutoScroll = true;
             tableLayoutPanel24.ColumnCount = 3;
-            tableLayoutPanel24.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel24.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel24.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel24.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel24.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel24.Controls.Add(trackBar4, 1, 13);
             tableLayoutPanel24.Controls.Add(label6, 0, 13);
@@ -1187,10 +1235,14 @@
             tableLayoutPanel24.Controls.Add(label17, 0, 11);
             tableLayoutPanel24.Controls.Add(checkBox1, 1, 9);
             tableLayoutPanel24.Controls.Add(checkBox2, 1, 12);
+            tableLayoutPanel24.Controls.Add(label105, 1, 11);
+            tableLayoutPanel24.Controls.Add(checkBox3, 1, 15);
+            tableLayoutPanel24.Controls.Add(label106, 1, 14);
+            tableLayoutPanel24.Controls.Add(label11, 0, 15);
             tableLayoutPanel24.Dock = DockStyle.Fill;
             tableLayoutPanel24.Location = new Point(3, 3);
             tableLayoutPanel24.Name = "tableLayoutPanel24";
-            tableLayoutPanel24.RowCount = 14;
+            tableLayoutPanel24.RowCount = 16;
             tableLayoutPanel24.RowStyles.Add(new RowStyle());
             tableLayoutPanel24.RowStyles.Add(new RowStyle());
             tableLayoutPanel24.RowStyles.Add(new RowStyle());
@@ -1205,6 +1257,8 @@
             tableLayoutPanel24.RowStyles.Add(new RowStyle());
             tableLayoutPanel24.RowStyles.Add(new RowStyle());
             tableLayoutPanel24.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel24.RowStyles.Add(new RowStyle());
+            tableLayoutPanel24.RowStyles.Add(new RowStyle());
             tableLayoutPanel24.Size = new Size(329, 211);
             tableLayoutPanel24.TabIndex = 4;
             // 
@@ -1214,7 +1268,7 @@
             trackBar4.Location = new Point(157, 341);
             trackBar4.Maximum = 100;
             trackBar4.Name = "trackBar4";
-            trackBar4.Size = new Size(148, 34);
+            trackBar4.Size = new Size(149, 34);
             trackBar4.TabIndex = 32;
             trackBar4.TickFrequency = 10;
             trackBar4.ValueChanged += trackBar4_ValueChanged;
@@ -1275,7 +1329,7 @@
             label9.Dock = DockStyle.Fill;
             label9.Location = new Point(157, 73);
             label9.Name = "label9";
-            label9.Size = new Size(148, 20);
+            label9.Size = new Size(149, 20);
             label9.TabIndex = 16;
             label9.Text = "End:";
             // 
@@ -1326,7 +1380,7 @@
             label66.Location = new Point(154, 93);
             label66.Margin = new Padding(0);
             label66.Name = "label66";
-            label66.Size = new Size(154, 3);
+            label66.Size = new Size(155, 3);
             label66.TabIndex = 8;
             label66.Text = "label66";
             // 
@@ -1334,7 +1388,7 @@
             // 
             label67.AutoSize = true;
             label67.Dock = DockStyle.Fill;
-            label67.Location = new Point(157, 53);
+            label67.Location = new Point(3, 53);
             label67.Name = "label67";
             label67.Size = new Size(148, 20);
             label67.TabIndex = 5;
@@ -1344,9 +1398,9 @@
             // 
             label68.AutoSize = true;
             label68.Dock = DockStyle.Fill;
-            label68.Location = new Point(3, 53);
+            label68.Location = new Point(157, 53);
             label68.Name = "label68";
-            label68.Size = new Size(148, 20);
+            label68.Size = new Size(149, 20);
             label68.TabIndex = 4;
             label68.Text = "Start:";
             // 
@@ -1356,7 +1410,7 @@
             label69.Dock = DockStyle.Fill;
             label69.Location = new Point(157, 33);
             label69.Name = "label69";
-            label69.Size = new Size(148, 20);
+            label69.Size = new Size(149, 20);
             label69.TabIndex = 3;
             label69.Text = "Length:";
             // 
@@ -1385,7 +1439,7 @@
             textBox1.Dock = DockStyle.Fill;
             textBox1.Location = new Point(157, 3);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(148, 27);
+            textBox1.Size = new Size(149, 27);
             textBox1.TabIndex = 1;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
@@ -1394,7 +1448,7 @@
             textBox2.Dock = DockStyle.Fill;
             textBox2.Location = new Point(157, 119);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(148, 27);
+            textBox2.Size = new Size(149, 27);
             textBox2.TabIndex = 13;
             textBox2.TextChanged += textBox2_TextChanged;
             textBox2.KeyDown += textBox2_KeyDown;
@@ -1405,7 +1459,7 @@
             textBox3.Dock = DockStyle.Fill;
             textBox3.Location = new Point(157, 152);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(148, 27);
+            textBox3.Size = new Size(149, 27);
             textBox3.TabIndex = 15;
             textBox3.TextChanged += textBox3_TextChanged;
             textBox3.KeyDown += textBox3_KeyDown;
@@ -1414,7 +1468,6 @@
             // 
             // button15
             // 
-            button15.AutoSize = true;
             button15.Dock = DockStyle.Fill;
             button15.Location = new Point(3, 185);
             button15.Name = "button15";
@@ -1430,9 +1483,10 @@
             trackBar1.Location = new Point(157, 251);
             trackBar1.Maximum = 200;
             trackBar1.Name = "trackBar1";
-            trackBar1.Size = new Size(148, 34);
+            trackBar1.Size = new Size(149, 34);
             trackBar1.TabIndex = 25;
             trackBar1.TickFrequency = 10;
+            trackBar1.Scroll += trackBar1_Scroll;
             trackBar1.ValueChanged += trackBar1_ValueChanged;
             // 
             // label17
@@ -1466,6 +1520,44 @@
             checkBox2.UseVisualStyleBackColor = true;
             checkBox2.CheckedChanged += checkBox2_CheckedChanged;
             // 
+            // label105
+            // 
+            label105.AutoSize = true;
+            label105.Location = new Point(157, 288);
+            label105.Name = "label105";
+            label105.Size = new Size(66, 20);
+            label105.TabIndex = 36;
+            label105.Text = "label105";
+            // 
+            // checkBox3
+            // 
+            checkBox3.AutoSize = true;
+            checkBox3.Location = new Point(157, 401);
+            checkBox3.Name = "checkBox3";
+            checkBox3.Size = new Size(91, 24);
+            checkBox3.TabIndex = 35;
+            checkBox3.Text = "Generate";
+            checkBox3.UseVisualStyleBackColor = true;
+            checkBox3.CheckedChanged += checkBox3_CheckedChanged;
+            // 
+            // label106
+            // 
+            label106.AutoSize = true;
+            label106.Location = new Point(157, 378);
+            label106.Name = "label106";
+            label106.Size = new Size(66, 20);
+            label106.TabIndex = 37;
+            label106.Text = "label106";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(3, 398);
+            label11.Name = "label11";
+            label11.Size = new Size(66, 20);
+            label11.TabIndex = 34;
+            label11.Text = "Subtitles";
+            // 
             // tabPage15
             // 
             tabPage15.AutoScroll = true;
@@ -1485,8 +1577,6 @@
             tableLayoutPanel27.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel27.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel27.Controls.Add(flowLayoutPanel7, 2, 12);
-            tableLayoutPanel27.Controls.Add(label99, 0, 11);
-            tableLayoutPanel27.Controls.Add(flowLayoutPanel6, 2, 11);
             tableLayoutPanel27.Controls.Add(label98, 0, 12);
             tableLayoutPanel27.Controls.Add(label97, 0, 10);
             tableLayoutPanel27.Controls.Add(label96, 0, 10);
@@ -1525,21 +1615,22 @@
             tableLayoutPanel27.RowStyles.Add(new RowStyle());
             tableLayoutPanel27.RowStyles.Add(new RowStyle());
             tableLayoutPanel27.RowStyles.Add(new RowStyle());
-            tableLayoutPanel27.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel27.RowStyles.Add(new RowStyle());
             tableLayoutPanel27.Size = new Size(329, 211);
             tableLayoutPanel27.TabIndex = 0;
             tableLayoutPanel27.Paint += tableLayoutPanel27_Paint;
             // 
             // flowLayoutPanel7
             // 
+            flowLayoutPanel7.AutoSize = true;
             flowLayoutPanel7.Controls.Add(label100);
-            flowLayoutPanel7.Controls.Add(textBox12);
+            flowLayoutPanel7.Controls.Add(numericUpDown2);
             flowLayoutPanel7.Controls.Add(label101);
-            flowLayoutPanel7.Controls.Add(textBox13);
+            flowLayoutPanel7.Controls.Add(numericUpDown3);
             flowLayoutPanel7.Dock = DockStyle.Fill;
-            flowLayoutPanel7.Location = new Point(92, 342);
+            flowLayoutPanel7.Location = new Point(92, 306);
             flowLayoutPanel7.Name = "flowLayoutPanel7";
-            flowLayoutPanel7.Size = new Size(234, 14);
+            flowLayoutPanel7.Size = new Size(234, 33);
             flowLayoutPanel7.TabIndex = 26;
             // 
             // label100
@@ -1549,102 +1640,44 @@
             label100.Location = new Point(3, 3);
             label100.Margin = new Padding(3, 3, 3, 0);
             label100.Name = "label100";
-            label100.Size = new Size(21, 20);
+            label100.Size = new Size(21, 30);
             label100.TabIndex = 24;
             label100.Text = "X:";
             // 
-            // textBox12
+            // numericUpDown2
             // 
-            textBox12.Dock = DockStyle.Left;
-            textBox12.Location = new Point(27, 0);
-            textBox12.Margin = new Padding(0);
-            textBox12.Name = "textBox12";
-            textBox12.Size = new Size(50, 27);
-            textBox12.TabIndex = 25;
+            numericUpDown2.Location = new Point(30, 3);
+            numericUpDown2.Name = "numericUpDown2";
+            numericUpDown2.Size = new Size(70, 27);
+            numericUpDown2.TabIndex = 27;
+            numericUpDown2.ValueChanged += numericUpDown2_ValueChanged;
             // 
             // label101
             // 
             label101.AutoSize = true;
             label101.Dock = DockStyle.Left;
-            label101.Location = new Point(80, 3);
+            label101.Location = new Point(106, 3);
             label101.Margin = new Padding(3, 3, 3, 0);
             label101.Name = "label101";
-            label101.Size = new Size(20, 20);
+            label101.Size = new Size(20, 30);
             label101.TabIndex = 26;
             label101.Text = "Y:";
             // 
-            // textBox13
+            // numericUpDown3
             // 
-            textBox13.Dock = DockStyle.Left;
-            textBox13.Location = new Point(103, 0);
-            textBox13.Margin = new Padding(0);
-            textBox13.Name = "textBox13";
-            textBox13.Size = new Size(50, 27);
-            textBox13.TabIndex = 27;
-            // 
-            // label99
-            // 
-            label99.AutoSize = true;
-            label99.Dock = DockStyle.Fill;
-            label99.Location = new Point(3, 303);
-            label99.Name = "label99";
-            label99.Size = new Size(83, 36);
-            label99.TabIndex = 25;
-            label99.Text = "Belongs:";
-            // 
-            // flowLayoutPanel6
-            // 
-            flowLayoutPanel6.Controls.Add(radioButton1);
-            flowLayoutPanel6.Controls.Add(radioButton2);
-            flowLayoutPanel6.Controls.Add(comboBox2);
-            flowLayoutPanel6.Dock = DockStyle.Fill;
-            flowLayoutPanel6.Location = new Point(92, 306);
-            flowLayoutPanel6.Name = "flowLayoutPanel6";
-            flowLayoutPanel6.Size = new Size(234, 30);
-            flowLayoutPanel6.TabIndex = 24;
-            flowLayoutPanel6.Paint += flowLayoutPanel6_Paint;
-            // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Checked = true;
-            radioButton1.Dock = DockStyle.Left;
-            radioButton1.Location = new Point(3, 3);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(76, 24);
-            radioButton1.TabIndex = 0;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Project";
-            radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(82, 7);
-            radioButton2.Margin = new Padding(0, 7, 0, 5);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(17, 16);
-            radioButton2.TabIndex = 1;
-            radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // comboBox2
-            // 
-            comboBox2.Dock = DockStyle.Left;
-            comboBox2.Enabled = false;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(101, 2);
-            comboBox2.Margin = new Padding(2);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(95, 28);
-            comboBox2.TabIndex = 4;
+            numericUpDown3.Location = new Point(132, 3);
+            numericUpDown3.Name = "numericUpDown3";
+            numericUpDown3.Size = new Size(70, 27);
+            numericUpDown3.TabIndex = 28;
+            numericUpDown3.ValueChanged += numericUpDown3_ValueChanged;
             // 
             // label98
             // 
             label98.AutoSize = true;
             label98.Dock = DockStyle.Fill;
-            label98.Location = new Point(3, 339);
+            label98.Location = new Point(3, 303);
             label98.Name = "label98";
-            label98.Size = new Size(83, 20);
+            label98.Size = new Size(83, 39);
             label98.TabIndex = 23;
             label98.Text = "Position:";
             // 
@@ -1707,6 +1740,8 @@
             textBox10.Name = "textBox10";
             textBox10.Size = new Size(115, 27);
             textBox10.TabIndex = 18;
+            textBox10.KeyPress += textBox10_KeyPress;
+            textBox10.Leave += textBox10_Leave;
             // 
             // textBox11
             // 
@@ -1715,6 +1750,8 @@
             textBox11.Name = "textBox11";
             textBox11.Size = new Size(115, 27);
             textBox11.TabIndex = 20;
+            textBox11.KeyPress += textBox11_KeyPress;
+            textBox11.Leave += textBox11_Leave;
             // 
             // label87
             // 
@@ -1722,9 +1759,9 @@
             label87.BackColor = Color.Black;
             label87.Dock = DockStyle.Top;
             label87.Font = new Font("Segoe UI", 1F);
-            label87.Location = new Point(92, 211);
+            label87.Location = new Point(3, 211);
             label87.Name = "label87";
-            label87.Size = new Size(234, 3);
+            label87.Size = new Size(83, 3);
             label87.TabIndex = 13;
             // 
             // label86
@@ -1733,9 +1770,9 @@
             label86.BackColor = Color.Black;
             label86.Dock = DockStyle.Top;
             label86.Font = new Font("Segoe UI", 1F);
-            label86.Location = new Point(3, 211);
+            label86.Location = new Point(92, 211);
             label86.Name = "label86";
-            label86.Size = new Size(83, 3);
+            label86.Size = new Size(234, 3);
             label86.TabIndex = 12;
             // 
             // button27
@@ -1750,6 +1787,7 @@
             button27.Size = new Size(30, 30);
             button27.TabIndex = 11;
             button27.UseVisualStyleBackColor = false;
+            button27.Click += button27_Click;
             // 
             // label83
             // 
@@ -1772,6 +1810,7 @@
             button26.Size = new Size(30, 30);
             button26.TabIndex = 9;
             button26.UseVisualStyleBackColor = false;
+            button26.Click += button26_Click;
             // 
             // label79
             // 
@@ -1806,6 +1845,7 @@
             button19.Size = new Size(30, 30);
             button19.TabIndex = 1;
             button19.UseVisualStyleBackColor = false;
+            button19.Click += button19_Click;
             // 
             // button23
             // 
@@ -1819,6 +1859,7 @@
             button23.Size = new Size(30, 30);
             button23.TabIndex = 2;
             button23.UseVisualStyleBackColor = false;
+            button23.Click += button23_Click;
             // 
             // button24
             // 
@@ -1832,6 +1873,7 @@
             button24.Size = new Size(30, 30);
             button24.TabIndex = 3;
             button24.UseVisualStyleBackColor = false;
+            button24.Click += button24_Click;
             // 
             // button25
             // 
@@ -1845,6 +1887,7 @@
             button25.Size = new Size(30, 30);
             button25.TabIndex = 4;
             button25.UseVisualStyleBackColor = false;
+            button25.Click += button25_Click;
             // 
             // label78
             // 
@@ -1897,15 +1940,19 @@
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(54, 27);
             numericUpDown1.TabIndex = 1;
+            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
             // 
             // comboBox1
             // 
             comboBox1.Dock = DockStyle.Left;
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "Arial", "Times New Roman", "Impact", "Pacifico", "Roboto" });
             comboBox1.Location = new Point(92, 36);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(95, 28);
             comboBox1.TabIndex = 3;
+            comboBox1.ValueMemberChanged += comboBox1_ValueMemberChanged;
             // 
             // flowLayoutPanel4
             // 
@@ -1931,6 +1978,7 @@
             button18.Size = new Size(30, 30);
             button18.TabIndex = 0;
             button18.UseVisualStyleBackColor = false;
+            button18.Click += button18_Click;
             // 
             // button20
             // 
@@ -1944,6 +1992,7 @@
             button20.Size = new Size(30, 30);
             button20.TabIndex = 1;
             button20.UseVisualStyleBackColor = false;
+            button20.Click += button20_Click;
             // 
             // button21
             // 
@@ -1957,6 +2006,7 @@
             button21.Size = new Size(30, 30);
             button21.TabIndex = 2;
             button21.UseVisualStyleBackColor = false;
+            button21.Click += button21_Click;
             // 
             // button22
             // 
@@ -1970,6 +2020,7 @@
             button22.Size = new Size(30, 30);
             button22.TabIndex = 3;
             button22.UseVisualStyleBackColor = false;
+            button22.Click += button22_Click;
             // 
             // axWindowsMediaPlayer1
             // 
@@ -1987,6 +2038,7 @@
             tabControl3.AllowDrop = true;
             tabControl3.Controls.Add(tabPage8);
             tabControl3.Controls.Add(tabPage9);
+            tabControl3.Controls.Add(tabPage10);
             tabControl3.Dock = DockStyle.Fill;
             tabControl3.ImageList = imageList1;
             tabControl3.ItemSize = new Size(35, 35);
@@ -2037,6 +2089,16 @@
             tabPage9.Size = new Size(192, 217);
             tabPage9.TabIndex = 1;
             tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // tabPage10
+            // 
+            tabPage10.Location = new Point(4, 4);
+            tabPage10.Name = "tabPage10";
+            tabPage10.Padding = new Padding(3);
+            tabPage10.Size = new Size(192, 217);
+            tabPage10.TabIndex = 2;
+            tabPage10.Text = "tabPage10";
+            tabPage10.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel6
             // 
@@ -3588,8 +3650,8 @@
             tableLayoutPanel27.PerformLayout();
             flowLayoutPanel7.ResumeLayout(false);
             flowLayoutPanel7.PerformLayout();
-            flowLayoutPanel6.ResumeLayout(false);
-            flowLayoutPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown3).EndInit();
             flowLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             flowLayoutPanel4.ResumeLayout(false);
@@ -3820,7 +3882,6 @@
         private TextBox textBox9;
         private Button button17;
         private TrackBar trackBar3;
-        private Label label72;
         private TableLayoutPanel tableLayoutPanel27;
         private Label label74;
         private Label label73;
@@ -3858,17 +3919,10 @@
         private Label label95;
         private TextBox textBox10;
         private TextBox textBox11;
-        private FlowLayoutPanel flowLayoutPanel6;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
-        private ComboBox comboBox2;
         private Label label98;
         private FlowLayoutPanel flowLayoutPanel7;
         private Label label100;
-        private Label label99;
-        private TextBox textBox12;
         private Label label101;
-        private TextBox textBox13;
         private SaveFileDialog saveFileDialog1;
         private ImageList imageList4;
         private TabPage tabPage8;
@@ -3930,5 +3984,17 @@
         private TrackBar trackBar4;
         private Label label6;
         private CheckBox checkBox2;
+        private TabPage tabPage10;
+        private Label label11;
+        private CheckBox checkBox3;
+        private NumericUpDown numericUpDown2;
+        private NumericUpDown numericUpDown3;
+        private Label label72;
+        private Label label15;
+        private Label label99;
+        private Label label103;
+        private Label label104;
+        private Label label105;
+        private Label label106;
     }
 }
