@@ -74,6 +74,7 @@
             checkBox1.Size = new Size(18, 17);
             checkBox1.TabIndex = 1;
             checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // numericUpDown1
             // 
@@ -81,6 +82,7 @@
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(61, 27);
             numericUpDown1.TabIndex = 3;
+            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
             // 
             // label2
             // 
@@ -145,6 +147,7 @@
             button2.TabIndex = 10;
             button2.Text = "Apply";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // label8
             // 
@@ -199,6 +202,7 @@
             button3.TabIndex = 16;
             button3.Text = "Cancel";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button26
             // 
@@ -212,6 +216,7 @@
             button26.Size = new Size(20, 20);
             button26.TabIndex = 17;
             button26.UseVisualStyleBackColor = false;
+            button26.Click += button26_Click;
             // 
             // button1
             // 
@@ -225,6 +230,7 @@
             button1.Size = new Size(20, 20);
             button1.TabIndex = 18;
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // button4
             // 
@@ -238,6 +244,7 @@
             button4.Size = new Size(20, 20);
             button4.TabIndex = 19;
             button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
             // 
             // button5
             // 
@@ -251,6 +258,7 @@
             button5.Size = new Size(20, 20);
             button5.TabIndex = 20;
             button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
             // 
             // button6
             // 
@@ -264,6 +272,7 @@
             button6.Size = new Size(20, 20);
             button6.TabIndex = 21;
             button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
             // 
             // button7
             // 
@@ -277,6 +286,7 @@
             button7.Size = new Size(20, 20);
             button7.TabIndex = 22;
             button7.UseVisualStyleBackColor = false;
+            button7.Click += button7_Click;
             // 
             // button8
             // 
@@ -290,6 +300,7 @@
             button8.Size = new Size(20, 20);
             button8.TabIndex = 23;
             button8.UseVisualStyleBackColor = false;
+            button8.Click += button8_Click;
             // 
             // button9
             // 
@@ -303,6 +314,7 @@
             button9.Size = new Size(20, 20);
             button9.TabIndex = 24;
             button9.UseVisualStyleBackColor = false;
+            button9.Click += button9_Click;
             // 
             // button10
             // 
@@ -312,6 +324,7 @@
             button10.TabIndex = 25;
             button10.Text = "Defaults";
             button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
             // 
             // Settings
             // 

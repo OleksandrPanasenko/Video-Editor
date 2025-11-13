@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using static Core.Config.Recent;
+using VideoEditor.Core;
 
 namespace VideoEditor.Infrastructure
 {
@@ -37,14 +37,36 @@ namespace VideoEditor.Infrastructure
 
         public static AppSettings LoadSettings()
         {
-            if (!File.Exists(SettingsPath)) return new AppSettings();
+            //Resolve code not loading issue
+            if (!File.Exists(SettingsPath)) return null;
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new ColorJsonConverter() }
+            };
             var json = File.ReadAllText(SettingsPath);
-            return JsonSerializer.Deserialize<AppSettings>(json);
+
+            try {
+                return JsonSerializer.Deserialize<AppSettings>(json, options);
+            }catch(JsonException ex)
+            {
+                return null;
+            }
+            catch(InvalidOperationException ex)
+            {
+                return null;
+            }
         }
 
         public static void SaveSettings(AppSettings settings)
         {
-            var json = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });
+            //Custom save to fix color not loading
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new ColorJsonConverter() },
+                WriteIndented = true // Makes the JSON file easier to read
+            };
+
+            var json = JsonSerializer.Serialize(settings, options);
             File.WriteAllText(SettingsPath, json);
         }
 

@@ -11,6 +11,7 @@ namespace VideoEditor.Core
         public static int MaxUndoSteps { get; set; } = 20;
         public static string DefaultProjectExtension { get; set; } = ".vep";
         public static string DefaultExportFormat { get; set; } = "mp4";
+        public static bool AutoSave { get; set; } = true;
         public static int AutoSaveIntervalMinutes { get; set; } = 5;
         //public static bool EnableHardwareAcceleration { get; set; } = false;
         //public static string HardwareAccelerationMethod { get; set; } = "auto"; // e.g., "cuda", "dxva2", "qsv", etc.

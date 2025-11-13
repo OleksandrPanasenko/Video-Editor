@@ -24,7 +24,7 @@ namespace VideoEditor.Core
         public bool Hidden { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
-        public List<Effect> Effects { get; set; } = new();
+        public List<IEffect> Effects { get; set; } = new();
         public Transition? OutTransition { get; set; }
         public Fragment(string filePath, TimeSpan startTime, TimeSpan endTime)
         {

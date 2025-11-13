@@ -29,6 +29,7 @@ namespace VideoEditor.UI
         public EditAction PendingEdit => Project.SelectionManager.PendingEdit;
         public int SecondsSinceAutoSave { get; set; }
         public bool AllowRightSwitch = false;
+        public bool IsRenderPreviewin = false;
         public Main_Form()
         {
             InitializeComponent();
@@ -39,6 +40,21 @@ namespace VideoEditor.UI
             Project.Configuration.LanePanelHeight = LanePanel.Height;
             UpdateScrolls();
             SecondsSinceAutoSave = 0;
+
+            AppSettings.SaveDefaults();
+
+            var settings = ConfigManager.LoadSettings();
+            if (settings == null)
+            {
+                settings = AppSettings.FromSettings();
+                MessageBox.Show("Settings not found");
+                ConfigManager.SaveSettings(settings);
+            }
+            else
+            {
+                settings.ApplySettings();
+            }
+
             var autosaveTimer = new System.Windows.Forms.Timer
             {
                 Interval = 1000
@@ -63,28 +79,31 @@ namespace VideoEditor.UI
         }
         private void AutoSaveTimer_Tick(object sender, EventArgs e)
         {
-            toolStripStatusLabel3.Text = $"Autosave: {TimeSpan.FromSeconds(SecondsSinceAutoSave).ToString()}";
-            SecondsSinceAutoSave++;
-            if (SecondsSinceAutoSave >= Config.AutoSaveIntervalMinutes * 60)
+            if (Config.AutoSave)
             {
-                try
+                toolStripStatusLabel3.Text = $"Autosave: {TimeSpan.FromSeconds(SecondsSinceAutoSave).ToString()}";
+                SecondsSinceAutoSave++;
+                if (SecondsSinceAutoSave >= Config.AutoSaveIntervalMinutes * 60)
                 {
-                    ProjectStorage.Save(Project, Project.Path);
+                    try
+                    {
+                        ProjectStorage.Save(Project, Project.Path);
 
-                    var RecentProjects = ConfigManager.LoadRecent();
-                    RecentProjects.AddProject(Project);
-                    ConfigManager.SaveRecent(RecentProjects);
-                }
-                catch (ArgumentException ex)
-                {
+                        var RecentProjects = ConfigManager.LoadRecent();
+                        RecentProjects.AddProject(Project);
+                        ConfigManager.SaveRecent(RecentProjects);
+                    }
+                    catch (ArgumentException ex)
+                    {
 
-                    MessageBox.Show($"AutoSave failed: {ex.Message}\n\n{ex.StackTrace}");
-                    throw;
+                        MessageBox.Show($"AutoSave failed: {ex.Message}\n\n{ex.StackTrace}");
+                        throw;
 
-                }
-                finally
-                {
-                    SecondsSinceAutoSave = 0;
+                    }
+                    finally
+                    {
+                        SecondsSinceAutoSave = 0;
+                    }
                 }
             }
         }
@@ -330,7 +349,7 @@ namespace VideoEditor.UI
         }
         private void RefreshFragmentParametres()
         {
-            if(Project.SelectionManager.SelectedFragment==null) return;
+            if (Project.SelectionManager.SelectedFragment == null) return;
             //Select apropriate tab
             AllowRightSwitch = true;
             switch (Project.SelectionManager.SelectedFragment.Fragment.FragmentType)
@@ -444,7 +463,21 @@ namespace VideoEditor.UI
         }
         private void RefreshTextParametres()
         {
+            var fragmentPlacement = Project.SelectionManager.SelectedFragment;
+            if (fragmentPlacement == null) return;
 
+            TextFragment fragment = (TextFragment)fragmentPlacement.Fragment;
+
+            numericUpDown1.Value = fragment.FontSize;
+            comboBox1.Text = fragment.FontName;
+
+            button26.BackColor = fragment.TextColor;
+
+            textBox10.Text = fragmentPlacement.Position.ToString();
+            textBox11.Text = fragmentPlacement.EndPosition.ToString();
+
+            numericUpDown1.Value = (decimal)fragmentPlacement.X;
+            numericUpDown2.Value= (decimal)fragmentPlacement.Y; 
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -1002,18 +1035,47 @@ namespace VideoEditor.UI
 
         private async void button41_Click(object sender, EventArgs e)
         {
+            if (IsRenderPreviewin == false)
+            {
+                IsRenderPreviewin = true;
+            }
+            else
+            {
+                MessageBox.Show("Preview already going");
+                return;
+            }
+
             axWindowsMediaPlayer1.Ctlcontrols.stop();
             axWindowsMediaPlayer1.URL = ""; // release the file
             await Task.Delay(100); // short pause to ensure file is unlocked
 
+
             if (Project.SelectionManager.SelectedTime != null)
             {
-                await Project.engine.RenderPreviewAsync("preview.mp4", ((TimeSpan)Project.SelectionManager.SelectedTime).TotalSeconds, 5.0);
-                axWindowsMediaPlayer1.URL = Path.GetFullPath("preview.mp4");
-                axWindowsMediaPlayer1.Ctlcontrols.play();
-                MessageBox.Show(axWindowsMediaPlayer1.URL);
+                int preview_index = 0;
+                while (IsRenderPreviewin)
+                {
+                    TimeSpan previewTimePosition = (TimeSpan)Project.SelectionManager.SelectedTime;
+                    await Project.engine.RenderPreviewAsync($"preview{preview_index}.mp4", (previewTimePosition).TotalSeconds, 1.0);
+                    axWindowsMediaPlayer1.URL = Path.GetFullPath($"preview{preview_index}.mp4");
+                    axWindowsMediaPlayer1.Ctlcontrols.play();
+                    MessageBox.Show(axWindowsMediaPlayer1.URL);
+                    Project.SelectionManager.SelectedTime += TimeSpan.FromSeconds(1);
+                    
+                    LanePanel.Update();
+                    LanePanel.Refresh();
+                }
+            }
+            else
+            {
+                IsRenderPreviewin = false;
             }
             //MessageBox.Show(GetAudioFormat(Config.FfprobePath, Project.SelectionManager.SelectedFragment.Fragment.FilePath));
+
+        }
+        private void button42_Click(object sender, EventArgs e)
+        {
+            IsRenderPreviewin = false;
         }
 
 
@@ -1095,7 +1157,7 @@ namespace VideoEditor.UI
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            //Sound
+            //Video Sound
             if ((Project.SelectionManager.SelectedFragment != null))
             {
                 Project.SelectionManager.SelectedFragment.Fragment.Volume = ((float)trackBar1.Value) / 100;
@@ -1116,12 +1178,22 @@ namespace VideoEditor.UI
         //===========Text==============
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
+            var placement = Project.SelectionManager.SelectedFragment;
             //Font size
+            if (placement != null && placement.Fragment is TextFragment fragment)
+            {
+                fragment.FontSize = (int)numericUpDown1.Value;
+            }
         }
 
         private void comboBox1_ValueMemberChanged(object sender, EventArgs e)
         {
             //Font
+            var placement = Project.SelectionManager.SelectedFragment;
+            if (placement != null && placement.Fragment is TextFragment fragment)
+            {
+                fragment.FontName = comboBox1.SelectedText;
+            }
         }
         //-----------Style-------------
         private void button18_Click(object sender, EventArgs e)
@@ -1167,6 +1239,18 @@ namespace VideoEditor.UI
         private void button26_Click(object sender, EventArgs e)
         {
 
+            var placement = Project.SelectionManager.SelectedFragment;
+            if (placement != null && placement.Fragment is TextFragment fragment)
+            {
+                colorDialog1.ShowDialog();
+                colorDialog1.AllowFullOpen = true;
+                colorDialog1.Color = fragment.TextColor;
+                if (colorDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    fragment.TextColor = colorDialog1.Color;
+                }
+
+            }
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1198,16 +1282,25 @@ namespace VideoEditor.UI
         //--------Position
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
-
+            var placement = Project.SelectionManager.SelectedFragment;
+            if (placement != null && placement.Fragment is TextFragment fragment)
+            {
+                placement.X = (double)numericUpDown2.Value;
+            }
         }
 
         private void numericUpDown3_ValueChanged(object sender, EventArgs e)
         {
-
+            var placement = Project.SelectionManager.SelectedFragment;
+            if (placement != null && placement.Fragment is TextFragment fragment)
+            {
+                placement.Y = (double)numericUpDown3.Value;
+            }
         }
 
         private void ConstructEffectsPanel()
         {
+            
             var EffectsPanel = tabPage10;
             var lane = Project.SelectionManager.SelectedLane;
             var placement = Project.SelectionManager.SelectedFragment;
@@ -1215,13 +1308,42 @@ namespace VideoEditor.UI
             var fragment = placement.Fragment;
 
             EffectsPanel.Controls.Clear();
+            var Grid = new TableLayoutPanel();
+            Grid.RowCount = 0;
+            Grid.ColumnCount = 2;
+            EffectsPanel.Controls.Add(Grid);
             if (fragment.Effects.Count > 0)
             {
-                //Draw name
+                foreach (var effect in fragment.Effects) {
+                    //Draw name
+                    Label nameLabel = new Label();
+                    Button deleteButton = new Button();
+                    TextBox startTime = new TextBox();
+                    Label startTimeLabel = new Label();
+                    TextBox endTime = new TextBox();
+                    Label endTimeLabel = new Label();
+                    Label intensityWord = new Label();
+                    Label intensityNumber = new Label();
+                    TrackBar IntensityTrack = new TrackBar();
 
-                //Draw intensity
+                    Grid.RowCount++;
+                    Grid.Controls.Add(nameLabel, 0, Grid.RowCount - 1);
+                    Grid.Controls.Add(deleteButton, 1, Grid.RowCount - 1);
+                    Grid.RowCount++;
+                    Grid.Controls.Add(startTimeLabel, 0, Grid.RowCount - 1);
+                    Grid.Controls.Add(startTime, 1, Grid.RowCount - 1);
+                    Grid.RowCount++;
+                    Grid.Controls.Add(endTimeLabel, 0, Grid.RowCount - 1);
+                    Grid.Controls.Add(endTime, 1, Grid.RowCount - 1);
+                    Grid.RowCount++;
+                    Grid.Controls.Add(intensityWord, 0, Grid.RowCount - 1);
+                    Grid.Controls.Add(IntensityTrack, 1, Grid.RowCount - 1);
+                    Grid.RowCount++;
+                    Grid.Controls.Add(intensityNumber, 1, Grid.RowCount - 1);
+                    //Draw intensity
 
-                //Draw delete
+                    //Draw delete
+                }
             }
             //Add effect button
             var newEffectButton = new Button();
@@ -1229,8 +1351,10 @@ namespace VideoEditor.UI
             var newEffectList = new ComboBox();
             newEffectList.DropDownStyle = ComboBoxStyle.DropDownList;
             newEffectList.Items.AddRange([]);//what effects?
-            EffectsPanel.Controls.Add(newEffectButton);
-            EffectsPanel.Controls.Add(newEffectList);
+
+            Grid.RowCount++;
+            Grid.Controls.Add(newEffectButton,0,Grid.RowCount-1);
+            Grid.Controls.Add(newEffectList,1,Grid.RowCount-1);
             //Selection box with effects
             if (fragment.OutTransition == null)
             {
@@ -1240,6 +1364,11 @@ namespace VideoEditor.UI
 
 
             }
+            else
+            {
+
+            }
+            
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -1247,6 +1376,179 @@ namespace VideoEditor.UI
 
         }
 
-        
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Settings().Show();
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void neToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void recentProjectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void undoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void importAudioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void importPhotoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void importVideoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox7_Leave(object sender, EventArgs e)
+        {
+            //Audio name chanaged
+            var fragmentPlacement = Project.SelectionManager.SelectedFragment;
+            if (fragmentPlacement == null) return;
+
+            fragmentPlacement.Fragment.Name = textBox7.Text;
+            LanePanel.Update();
+            LanePanel.Refresh();
+        }
+
+        private void textBox8_Leave(object sender, EventArgs e)
+        {
+            //start offset
+            var fragmentPlacement = Project.SelectionManager.SelectedFragment;
+            if (fragmentPlacement == null) return;
+
+            if (TimeSpan.TryParse(textBox8.Text, out var ts))
+            {
+                if (ts >= fragmentPlacement.Fragment.EndTime)
+                {
+                    RefreshFragmentParametres();
+                    MessageBox.Show("Start time should be less than end");
+                }
+                else
+                {
+                    var Trim = new TrimOperation(Project, fragmentPlacement, ts, fragmentPlacement.Fragment.EndTime);
+                    Project.History.Execute(Trim);
+                    RefreshFragmentParametres();
+
+                    LanePanel.Update();
+                    LanePanel.Refresh();
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid time (e.g., 00:01:23.456)");
+            }
+        }
+
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+            //end offset
+            var fragmentPlacement = Project.SelectionManager.SelectedFragment;
+            if (fragmentPlacement == null) return;
+
+            if (TimeSpan.TryParse(textBox9.Text, out var te))
+            {
+                if (te <= fragmentPlacement.Fragment.StartTime)
+                {
+                    MessageBox.Show("End time should be greater than start");
+                }
+                else
+                {
+                    var Trim = new TrimOperation(Project, fragmentPlacement, fragmentPlacement.Fragment.StartTime, te);
+                    Project.History.Execute(Trim);
+                    RefreshFragmentParametres();
+
+                    LanePanel.Update();
+                    LanePanel.Refresh();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid time (e.g., 00:01:23.456)");
+            }
+        }
+
+        private void tabPage14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //Reset trim
+            button15_Click(sender, e);
+        }
+
+        private void trackBar3_ValueChanged(object sender, EventArgs e)
+        {
+            //Audio Sound
+            if ((Project.SelectionManager.SelectedFragment != null))
+            {
+                Project.SelectionManager.SelectedFragment.Fragment.Volume = ((float)trackBar3.Value) / 100;
+                label72.Text = $"{trackBar3.Value}%";
+            }
+        }
     }
 }

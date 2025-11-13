@@ -65,10 +65,6 @@
             button30 = new Button();
             tabPage16 = new TabPage();
             flowLayoutPanel9 = new FlowLayoutPanel();
-            button3 = new Button();
-            button31 = new Button();
-            button34 = new Button();
-            button33 = new Button();
             tabPage17 = new TabPage();
             flowLayoutPanel10 = new FlowLayoutPanel();
             label1 = new Label();
@@ -81,6 +77,7 @@
             imageList4 = new ImageList(components);
             button35 = new Button();
             button41 = new Button();
+            button42 = new Button();
             tableLayoutPanel30 = new TableLayoutPanel();
             flowLayoutPanel2 = new FlowLayoutPanel();
             button8 = new Button();
@@ -147,26 +144,12 @@
             textBox11 = new TextBox();
             label87 = new Label();
             label86 = new Label();
-            button27 = new Button();
-            label83 = new Label();
             button26 = new Button();
             label79 = new Label();
-            flowLayoutPanel5 = new FlowLayoutPanel();
-            button19 = new Button();
-            button23 = new Button();
-            button24 = new Button();
-            button25 = new Button();
-            label78 = new Label();
-            label75 = new Label();
             label74 = new Label();
             label73 = new Label();
             numericUpDown1 = new NumericUpDown();
             comboBox1 = new ComboBox();
-            flowLayoutPanel4 = new FlowLayoutPanel();
-            button18 = new Button();
-            button20 = new Button();
-            button21 = new Button();
-            button22 = new Button();
             axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             tabControl3 = new TabControl();
             tabPage8 = new TabPage();
@@ -181,7 +164,6 @@
             neToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             saveToolStripMenuItem = new ToolStripMenuItem();
-            saveAsToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             exportToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator6 = new ToolStripSeparator();
@@ -201,7 +183,6 @@
             deleteToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             preferencesToolStripMenuItem = new ToolStripMenuItem();
-            undoToolStripMenuItem = new ToolStripMenuItem();
             importToolStripMenuItem = new ToolStripMenuItem();
             importAudioToolStripMenuItem = new ToolStripMenuItem();
             importPhotoToolStripMenuItem = new ToolStripMenuItem();
@@ -317,6 +298,9 @@
             vScrollBar3 = new VScrollBar();
             saveFileDialog1 = new SaveFileDialog();
             tableLayoutPanel5 = new TableLayoutPanel();
+            listBox2 = new ListBox();
+            maskedTextBox1 = new MaskedTextBox();
+            label75 = new Label();
             tabPage14 = new TabPage();
             tabPage14.SuspendLayout();
             tableLayoutPanel25.SuspendLayout();
@@ -327,7 +311,6 @@
             tabPage12.SuspendLayout();
             flowLayoutPanel8.SuspendLayout();
             tabPage16.SuspendLayout();
-            flowLayoutPanel9.SuspendLayout();
             tabPage17.SuspendLayout();
             flowLayoutPanel10.SuspendLayout();
             tableLayoutPanel30.SuspendLayout();
@@ -345,12 +328,11 @@
             flowLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
-            flowLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)axWindowsMediaPlayer1).BeginInit();
             tabControl3.SuspendLayout();
             tabPage8.SuspendLayout();
+            tabPage9.SuspendLayout();
             tableLayoutPanel6.SuspendLayout();
             menuStrip1.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
@@ -393,6 +375,7 @@
             tabPage14.Size = new Size(335, 217);
             tabPage14.TabIndex = 2;
             tabPage14.UseVisualStyleBackColor = true;
+            tabPage14.Click += tabPage14_Click;
             // 
             // tableLayoutPanel25
             // 
@@ -561,6 +544,7 @@
             textBox7.Name = "textBox7";
             textBox7.Size = new Size(182, 27);
             textBox7.TabIndex = 1;
+            textBox7.Leave += textBox7_Leave;
             // 
             // textBox8
             // 
@@ -569,6 +553,7 @@
             textBox8.Name = "textBox8";
             textBox8.Size = new Size(182, 27);
             textBox8.TabIndex = 13;
+            textBox8.Leave += textBox8_Leave;
             // 
             // textBox9
             // 
@@ -577,6 +562,7 @@
             textBox9.Name = "textBox9";
             textBox9.Size = new Size(182, 27);
             textBox9.TabIndex = 15;
+            textBox9.TextChanged += textBox9_TextChanged;
             // 
             // button17
             // 
@@ -587,14 +573,18 @@
             button17.TabIndex = 18;
             button17.Text = "Reset Trim";
             button17.UseVisualStyleBackColor = true;
+            button17.Click += button17_Click;
             // 
             // trackBar3
             // 
             trackBar3.Dock = DockStyle.Fill;
             trackBar3.Location = new Point(124, 241);
+            trackBar3.Maximum = 200;
             trackBar3.Name = "trackBar3";
             trackBar3.Size = new Size(182, 34);
             trackBar3.TabIndex = 25;
+            trackBar3.TickFrequency = 10;
+            trackBar3.ValueChanged += trackBar3_ValueChanged;
             // 
             // label99
             // 
@@ -660,6 +650,7 @@
             flowLayoutPanel1.Controls.Add(button5);
             flowLayoutPanel1.Controls.Add(tabControl5);
             flowLayoutPanel1.Controls.Add(button41);
+            flowLayoutPanel1.Controls.Add(button42);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(3, 271);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -778,61 +769,17 @@
             tabPage16.Padding = new Padding(3);
             tabPage16.Size = new Size(325, 34);
             tabPage16.TabIndex = 1;
-            tabPage16.Text = "Edit";
+            tabPage16.Text = "Move";
             tabPage16.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel9
             // 
-            flowLayoutPanel9.Controls.Add(button3);
-            flowLayoutPanel9.Controls.Add(button31);
-            flowLayoutPanel9.Controls.Add(button34);
-            flowLayoutPanel9.Controls.Add(button33);
             flowLayoutPanel9.Dock = DockStyle.Left;
             flowLayoutPanel9.Location = new Point(3, 3);
             flowLayoutPanel9.Margin = new Padding(0);
             flowLayoutPanel9.Name = "flowLayoutPanel9";
             flowLayoutPanel9.Size = new Size(319, 28);
             flowLayoutPanel9.TabIndex = 3;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(3, 0);
-            button3.Margin = new Padding(3, 0, 3, 0);
-            button3.Name = "button3";
-            button3.Size = new Size(56, 28);
-            button3.TabIndex = 7;
-            button3.Text = "Move";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button31
-            // 
-            button31.Location = new Point(65, 0);
-            button31.Margin = new Padding(3, 0, 3, 0);
-            button31.Name = "button31";
-            button31.Size = new Size(48, 28);
-            button31.TabIndex = 8;
-            button31.Text = "Trim";
-            button31.UseVisualStyleBackColor = true;
-            // 
-            // button34
-            // 
-            button34.Location = new Point(119, 0);
-            button34.Margin = new Padding(3, 0, 3, 0);
-            button34.Name = "button34";
-            button34.Size = new Size(58, 28);
-            button34.TabIndex = 11;
-            button34.Text = "Split";
-            button34.UseVisualStyleBackColor = true;
-            // 
-            // button33
-            // 
-            button33.Location = new Point(183, 0);
-            button33.Margin = new Padding(3, 0, 3, 0);
-            button33.Name = "button33";
-            button33.Size = new Size(73, 28);
-            button33.TabIndex = 10;
-            button33.Text = "Double";
-            button33.UseVisualStyleBackColor = true;
             // 
             // tabPage17
             // 
@@ -897,6 +844,7 @@
             imageList1.Images.SetKeyName(6, "Video.ico");
             imageList1.Images.SetKeyName(7, "Glass minus.png");
             imageList1.Images.SetKeyName(8, "Glass plus.png");
+            imageList1.Images.SetKeyName(9, "Effect.ico");
             // 
             // button2
             // 
@@ -971,6 +919,16 @@
             button41.Text = "Play";
             button41.UseVisualStyleBackColor = true;
             button41.Click += button41_Click;
+            // 
+            // button42
+            // 
+            button42.Location = new Point(554, 3);
+            button42.Name = "button42";
+            button42.Size = new Size(94, 29);
+            button42.TabIndex = 8;
+            button42.Text = "Stop";
+            button42.UseVisualStyleBackColor = true;
+            button42.Click += button42_Click;
             // 
             // tableLayoutPanel30
             // 
@@ -1587,18 +1545,14 @@
             tableLayoutPanel27.Controls.Add(textBox11, 1, 9);
             tableLayoutPanel27.Controls.Add(label87, 0, 6);
             tableLayoutPanel27.Controls.Add(label86, 0, 6);
-            tableLayoutPanel27.Controls.Add(button27, 2, 5);
-            tableLayoutPanel27.Controls.Add(label83, 0, 5);
-            tableLayoutPanel27.Controls.Add(button26, 1, 4);
-            tableLayoutPanel27.Controls.Add(label79, 0, 4);
-            tableLayoutPanel27.Controls.Add(flowLayoutPanel5, 2, 3);
-            tableLayoutPanel27.Controls.Add(label78, 0, 3);
-            tableLayoutPanel27.Controls.Add(label75, 0, 2);
-            tableLayoutPanel27.Controls.Add(label74, 0, 1);
-            tableLayoutPanel27.Controls.Add(label73, 0, 0);
-            tableLayoutPanel27.Controls.Add(numericUpDown1, 1, 0);
-            tableLayoutPanel27.Controls.Add(comboBox1, 1, 1);
-            tableLayoutPanel27.Controls.Add(flowLayoutPanel4, 1, 2);
+            tableLayoutPanel27.Controls.Add(button26, 1, 3);
+            tableLayoutPanel27.Controls.Add(label79, 0, 3);
+            tableLayoutPanel27.Controls.Add(label74, 0, 2);
+            tableLayoutPanel27.Controls.Add(numericUpDown1, 1, 1);
+            tableLayoutPanel27.Controls.Add(comboBox1, 1, 2);
+            tableLayoutPanel27.Controls.Add(maskedTextBox1, 1, 0);
+            tableLayoutPanel27.Controls.Add(label73, 0, 1);
+            tableLayoutPanel27.Controls.Add(label75, 0, 0);
             tableLayoutPanel27.Dock = DockStyle.Fill;
             tableLayoutPanel27.Location = new Point(3, 3);
             tableLayoutPanel27.Name = "tableLayoutPanel27";
@@ -1628,9 +1582,9 @@
             flowLayoutPanel7.Controls.Add(label101);
             flowLayoutPanel7.Controls.Add(numericUpDown3);
             flowLayoutPanel7.Dock = DockStyle.Fill;
-            flowLayoutPanel7.Location = new Point(92, 306);
+            flowLayoutPanel7.Location = new Point(92, 231);
             flowLayoutPanel7.Name = "flowLayoutPanel7";
-            flowLayoutPanel7.Size = new Size(234, 33);
+            flowLayoutPanel7.Size = new Size(234, 108);
             flowLayoutPanel7.TabIndex = 26;
             // 
             // label100
@@ -1675,9 +1629,9 @@
             // 
             label98.AutoSize = true;
             label98.Dock = DockStyle.Fill;
-            label98.Location = new Point(3, 303);
+            label98.Location = new Point(3, 228);
             label98.Name = "label98";
-            label98.Size = new Size(83, 39);
+            label98.Size = new Size(83, 114);
             label98.TabIndex = 23;
             label98.Text = "Position:";
             // 
@@ -1687,7 +1641,7 @@
             label97.BackColor = Color.Black;
             label97.Dock = DockStyle.Top;
             label97.Font = new Font("Segoe UI", 1F);
-            label97.Location = new Point(3, 300);
+            label97.Location = new Point(3, 225);
             label97.Name = "label97";
             label97.Size = new Size(83, 3);
             label97.TabIndex = 22;
@@ -1698,7 +1652,7 @@
             label96.BackColor = Color.Black;
             label96.Dock = DockStyle.Top;
             label96.Font = new Font("Segoe UI", 1F);
-            label96.Location = new Point(92, 300);
+            label96.Location = new Point(92, 225);
             label96.Name = "label96";
             label96.Size = new Size(234, 3);
             label96.TabIndex = 21;
@@ -1707,7 +1661,7 @@
             // 
             label93.AutoSize = true;
             label93.Dock = DockStyle.Fill;
-            label93.Location = new Point(3, 267);
+            label93.Location = new Point(3, 192);
             label93.Name = "label93";
             label93.Size = new Size(83, 33);
             label93.TabIndex = 19;
@@ -1717,7 +1671,7 @@
             // 
             label94.AutoSize = true;
             label94.Dock = DockStyle.Fill;
-            label94.Location = new Point(3, 234);
+            label94.Location = new Point(3, 159);
             label94.Name = "label94";
             label94.Size = new Size(83, 33);
             label94.TabIndex = 17;
@@ -1727,7 +1681,7 @@
             // 
             label95.AutoSize = true;
             label95.Dock = DockStyle.Fill;
-            label95.Location = new Point(3, 214);
+            label95.Location = new Point(3, 139);
             label95.Name = "label95";
             label95.Size = new Size(83, 20);
             label95.TabIndex = 16;
@@ -1736,7 +1690,7 @@
             // textBox10
             // 
             textBox10.Dock = DockStyle.Left;
-            textBox10.Location = new Point(92, 237);
+            textBox10.Location = new Point(92, 162);
             textBox10.Name = "textBox10";
             textBox10.Size = new Size(115, 27);
             textBox10.TabIndex = 18;
@@ -1746,7 +1700,7 @@
             // textBox11
             // 
             textBox11.Dock = DockStyle.Left;
-            textBox11.Location = new Point(92, 270);
+            textBox11.Location = new Point(92, 195);
             textBox11.Name = "textBox11";
             textBox11.Size = new Size(115, 27);
             textBox11.TabIndex = 20;
@@ -1759,9 +1713,9 @@
             label87.BackColor = Color.Black;
             label87.Dock = DockStyle.Top;
             label87.Font = new Font("Segoe UI", 1F);
-            label87.Location = new Point(3, 211);
+            label87.Location = new Point(92, 136);
             label87.Name = "label87";
-            label87.Size = new Size(83, 3);
+            label87.Size = new Size(234, 3);
             label87.TabIndex = 13;
             // 
             // label86
@@ -1770,33 +1724,10 @@
             label86.BackColor = Color.Black;
             label86.Dock = DockStyle.Top;
             label86.Font = new Font("Segoe UI", 1F);
-            label86.Location = new Point(92, 211);
+            label86.Location = new Point(3, 136);
             label86.Name = "label86";
-            label86.Size = new Size(234, 3);
+            label86.Size = new Size(83, 3);
             label86.TabIndex = 12;
-            // 
-            // button27
-            // 
-            button27.BackColor = Color.Black;
-            button27.FlatAppearance.BorderColor = Color.White;
-            button27.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            button27.ForeColor = Color.White;
-            button27.ImageKey = "dropper.ico";
-            button27.Location = new Point(92, 178);
-            button27.Name = "button27";
-            button27.Size = new Size(30, 30);
-            button27.TabIndex = 11;
-            button27.UseVisualStyleBackColor = false;
-            button27.Click += button27_Click;
-            // 
-            // label83
-            // 
-            label83.AutoSize = true;
-            label83.Location = new Point(3, 175);
-            label83.Name = "label83";
-            label83.Size = new Size(71, 20);
-            label83.TabIndex = 10;
-            label83.Text = "Highlight";
             // 
             // button26
             // 
@@ -1805,7 +1736,7 @@
             button26.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
             button26.ForeColor = Color.White;
             button26.ImageKey = "dropper.ico";
-            button26.Location = new Point(92, 142);
+            button26.Location = new Point(92, 103);
             button26.Name = "button26";
             button26.Size = new Size(30, 30);
             button26.TabIndex = 9;
@@ -1815,107 +1746,17 @@
             // label79
             // 
             label79.AutoSize = true;
-            label79.Location = new Point(3, 139);
+            label79.Location = new Point(3, 100);
             label79.Name = "label79";
             label79.Size = new Size(45, 20);
             label79.TabIndex = 8;
             label79.Text = "Color";
             // 
-            // flowLayoutPanel5
-            // 
-            flowLayoutPanel5.Controls.Add(button19);
-            flowLayoutPanel5.Controls.Add(button23);
-            flowLayoutPanel5.Controls.Add(button24);
-            flowLayoutPanel5.Controls.Add(button25);
-            flowLayoutPanel5.Dock = DockStyle.Fill;
-            flowLayoutPanel5.Location = new Point(92, 106);
-            flowLayoutPanel5.Name = "flowLayoutPanel5";
-            flowLayoutPanel5.Size = new Size(234, 30);
-            flowLayoutPanel5.TabIndex = 7;
-            // 
-            // button19
-            // 
-            button19.BackColor = Color.White;
-            button19.FlatAppearance.BorderColor = Color.White;
-            button19.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            button19.ForeColor = Color.White;
-            button19.ImageKey = "Text_align_left.ico";
-            button19.Location = new Point(3, 3);
-            button19.Name = "button19";
-            button19.Size = new Size(30, 30);
-            button19.TabIndex = 1;
-            button19.UseVisualStyleBackColor = false;
-            button19.Click += button19_Click;
-            // 
-            // button23
-            // 
-            button23.BackColor = Color.White;
-            button23.FlatAppearance.BorderColor = Color.White;
-            button23.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            button23.ForeColor = Color.White;
-            button23.ImageKey = "Text_align_centre.ico";
-            button23.Location = new Point(39, 3);
-            button23.Name = "button23";
-            button23.Size = new Size(30, 30);
-            button23.TabIndex = 2;
-            button23.UseVisualStyleBackColor = false;
-            button23.Click += button23_Click;
-            // 
-            // button24
-            // 
-            button24.BackColor = Color.White;
-            button24.FlatAppearance.BorderColor = Color.White;
-            button24.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            button24.ForeColor = Color.White;
-            button24.ImageKey = "Text_align_right.ico";
-            button24.Location = new Point(75, 3);
-            button24.Name = "button24";
-            button24.Size = new Size(30, 30);
-            button24.TabIndex = 3;
-            button24.UseVisualStyleBackColor = false;
-            button24.Click += button24_Click;
-            // 
-            // button25
-            // 
-            button25.BackColor = Color.White;
-            button25.FlatAppearance.BorderColor = Color.White;
-            button25.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            button25.ForeColor = Color.White;
-            button25.ImageKey = "Text_align_width.ico";
-            button25.Location = new Point(111, 3);
-            button25.Name = "button25";
-            button25.Size = new Size(30, 30);
-            button25.TabIndex = 4;
-            button25.UseVisualStyleBackColor = false;
-            button25.Click += button25_Click;
-            // 
-            // label78
-            // 
-            label78.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label78.AutoSize = true;
-            label78.Location = new Point(3, 103);
-            label78.Name = "label78";
-            label78.Size = new Size(83, 36);
-            label78.TabIndex = 6;
-            label78.Text = "Alignment";
-            label78.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // label75
-            // 
-            label75.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label75.AutoSize = true;
-            label75.Location = new Point(3, 67);
-            label75.Name = "label75";
-            label75.Size = new Size(83, 36);
-            label75.TabIndex = 4;
-            label75.Text = "Style";
-            label75.TextAlign = ContentAlignment.MiddleLeft;
-            // 
             // label74
             // 
             label74.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label74.AutoSize = true;
-            label74.Location = new Point(3, 33);
+            label74.Location = new Point(3, 66);
             label74.Name = "label74";
             label74.Size = new Size(83, 34);
             label74.TabIndex = 2;
@@ -1926,7 +1767,7 @@
             // 
             label73.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label73.AutoSize = true;
-            label73.Location = new Point(3, 0);
+            label73.Location = new Point(3, 33);
             label73.Name = "label73";
             label73.Size = new Size(83, 33);
             label73.TabIndex = 0;
@@ -1936,7 +1777,7 @@
             // numericUpDown1
             // 
             numericUpDown1.Dock = DockStyle.Left;
-            numericUpDown1.Location = new Point(92, 3);
+            numericUpDown1.Location = new Point(92, 36);
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(54, 27);
             numericUpDown1.TabIndex = 1;
@@ -1948,79 +1789,11 @@
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "Arial", "Times New Roman", "Impact", "Pacifico", "Roboto" });
-            comboBox1.Location = new Point(92, 36);
+            comboBox1.Location = new Point(92, 69);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(95, 28);
             comboBox1.TabIndex = 3;
             comboBox1.ValueMemberChanged += comboBox1_ValueMemberChanged;
-            // 
-            // flowLayoutPanel4
-            // 
-            flowLayoutPanel4.Controls.Add(button18);
-            flowLayoutPanel4.Controls.Add(button20);
-            flowLayoutPanel4.Controls.Add(button21);
-            flowLayoutPanel4.Controls.Add(button22);
-            flowLayoutPanel4.Dock = DockStyle.Fill;
-            flowLayoutPanel4.Location = new Point(92, 70);
-            flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(234, 30);
-            flowLayoutPanel4.TabIndex = 5;
-            // 
-            // button18
-            // 
-            button18.BackColor = Color.White;
-            button18.FlatAppearance.BorderColor = Color.White;
-            button18.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            button18.ForeColor = Color.White;
-            button18.ImageKey = "Text_bold.ico";
-            button18.Location = new Point(3, 3);
-            button18.Name = "button18";
-            button18.Size = new Size(30, 30);
-            button18.TabIndex = 0;
-            button18.UseVisualStyleBackColor = false;
-            button18.Click += button18_Click;
-            // 
-            // button20
-            // 
-            button20.BackColor = Color.White;
-            button20.FlatAppearance.BorderColor = Color.White;
-            button20.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            button20.ForeColor = Color.White;
-            button20.ImageKey = "Text_italic.ico";
-            button20.Location = new Point(39, 3);
-            button20.Name = "button20";
-            button20.Size = new Size(30, 30);
-            button20.TabIndex = 1;
-            button20.UseVisualStyleBackColor = false;
-            button20.Click += button20_Click;
-            // 
-            // button21
-            // 
-            button21.BackColor = Color.White;
-            button21.FlatAppearance.BorderColor = Color.White;
-            button21.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            button21.ForeColor = Color.White;
-            button21.ImageKey = "Text_underlined.ico";
-            button21.Location = new Point(75, 3);
-            button21.Name = "button21";
-            button21.Size = new Size(30, 30);
-            button21.TabIndex = 2;
-            button21.UseVisualStyleBackColor = false;
-            button21.Click += button21_Click;
-            // 
-            // button22
-            // 
-            button22.BackColor = Color.White;
-            button22.FlatAppearance.BorderColor = Color.White;
-            button22.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            button22.ForeColor = Color.White;
-            button22.ImageKey = "Text_crosseed.ico";
-            button22.Location = new Point(111, 3);
-            button22.Name = "button22";
-            button22.Size = new Size(30, 30);
-            button22.TabIndex = 3;
-            button22.UseVisualStyleBackColor = false;
-            button22.Click += button22_Click;
             // 
             // axWindowsMediaPlayer1
             // 
@@ -2040,6 +1813,7 @@
             tabControl3.Controls.Add(tabPage9);
             tabControl3.Controls.Add(tabPage10);
             tabControl3.Dock = DockStyle.Fill;
+            tabControl3.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tabControl3.ImageList = imageList1;
             tabControl3.ItemSize = new Size(35, 35);
             tabControl3.Location = new Point(3, 3);
@@ -2068,7 +1842,9 @@
             // 
             listBox1.AllowDrop = true;
             listBox1.Dock = DockStyle.Fill;
+            listBox1.Font = new Font("Segoe UI", 10F);
             listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 23;
             listBox1.Items.AddRange(new object[] { "File1.mp3" });
             listBox1.Location = new Point(3, 3);
             listBox1.Name = "listBox1";
@@ -2082,6 +1858,7 @@
             // 
             // tabPage9
             // 
+            tabPage9.Controls.Add(listBox2);
             tabPage9.ImageKey = "Text lines.ico";
             tabPage9.Location = new Point(4, 4);
             tabPage9.Name = "tabPage9";
@@ -2092,12 +1869,14 @@
             // 
             // tabPage10
             // 
+            tabPage10.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tabPage10.ForeColor = Color.Black;
+            tabPage10.ImageKey = "Effect.ico";
             tabPage10.Location = new Point(4, 4);
             tabPage10.Name = "tabPage10";
             tabPage10.Padding = new Padding(3);
             tabPage10.Size = new Size(192, 217);
             tabPage10.TabIndex = 2;
-            tabPage10.Text = "tabPage10";
             tabPage10.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel6
@@ -2127,7 +1906,7 @@
             // 
             // toolStripMenuItem1
             // 
-            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2, toolStripMenuItem3, neToolStripMenuItem, toolStripSeparator4, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator5, exportToolStripMenuItem, toolStripSeparator6, recentProjectsToolStripMenuItem, toolStripSeparator7, exitToolStripMenuItem });
+            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2, toolStripMenuItem3, neToolStripMenuItem, toolStripSeparator4, saveToolStripMenuItem, toolStripSeparator5, exportToolStripMenuItem, toolStripSeparator6, recentProjectsToolStripMenuItem, toolStripSeparator7, exitToolStripMenuItem });
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(46, 24);
             toolStripMenuItem1.Text = "File";
@@ -2137,18 +1916,21 @@
             toolStripMenuItem2.Name = "toolStripMenuItem2";
             toolStripMenuItem2.Size = new Size(194, 26);
             toolStripMenuItem2.Text = "New...";
+            toolStripMenuItem2.Click += toolStripMenuItem2_Click;
             // 
             // toolStripMenuItem3
             // 
             toolStripMenuItem3.Name = "toolStripMenuItem3";
             toolStripMenuItem3.Size = new Size(194, 26);
             toolStripMenuItem3.Text = "Open...";
+            toolStripMenuItem3.Click += toolStripMenuItem3_Click;
             // 
             // neToolStripMenuItem
             // 
             neToolStripMenuItem.Name = "neToolStripMenuItem";
             neToolStripMenuItem.Size = new Size(194, 26);
             neToolStripMenuItem.Text = "Copy...";
+            neToolStripMenuItem.Click += neToolStripMenuItem_Click;
             // 
             // toolStripSeparator4
             // 
@@ -2160,12 +1942,7 @@
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new Size(194, 26);
             saveToolStripMenuItem.Text = "Save...";
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new Size(194, 26);
-            saveAsToolStripMenuItem.Text = "Save as...";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // toolStripSeparator5
             // 
@@ -2177,6 +1954,7 @@
             exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             exportToolStripMenuItem.Size = new Size(194, 26);
             exportToolStripMenuItem.Text = "Export...";
+            exportToolStripMenuItem.Click += exportToolStripMenuItem_Click;
             // 
             // toolStripSeparator6
             // 
@@ -2189,6 +1967,7 @@
             recentProjectsToolStripMenuItem.Name = "recentProjectsToolStripMenuItem";
             recentProjectsToolStripMenuItem.Size = new Size(194, 26);
             recentProjectsToolStripMenuItem.Text = "Recent projects";
+            recentProjectsToolStripMenuItem.Click += recentProjectsToolStripMenuItem_Click;
             // 
             // project1ToolStripMenuItem
             // 
@@ -2212,10 +1991,11 @@
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             exitToolStripMenuItem.Size = new Size(194, 26);
             exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem1, redoToolStripMenuItem, toolStripSeparator1, cutToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, toolStripSeparator3, deleteToolStripMenuItem, toolStripSeparator2, preferencesToolStripMenuItem, undoToolStripMenuItem });
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem1, redoToolStripMenuItem, toolStripSeparator1, cutToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, toolStripSeparator3, deleteToolStripMenuItem, toolStripSeparator2, preferencesToolStripMenuItem });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new Size(49, 24);
             editToolStripMenuItem.Text = "Edit";
@@ -2225,12 +2005,14 @@
             undoToolStripMenuItem1.Name = "undoToolStripMenuItem1";
             undoToolStripMenuItem1.Size = new Size(177, 26);
             undoToolStripMenuItem1.Text = "Undo";
+            undoToolStripMenuItem1.Click += undoToolStripMenuItem1_Click;
             // 
             // redoToolStripMenuItem
             // 
             redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             redoToolStripMenuItem.Size = new Size(177, 26);
             redoToolStripMenuItem.Text = "Redo";
+            redoToolStripMenuItem.Click += redoToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
@@ -2242,18 +2024,21 @@
             cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             cutToolStripMenuItem.Size = new Size(177, 26);
             cutToolStripMenuItem.Text = "Cut";
+            cutToolStripMenuItem.Click += cutToolStripMenuItem_Click;
             // 
             // copyToolStripMenuItem
             // 
             copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             copyToolStripMenuItem.Size = new Size(177, 26);
             copyToolStripMenuItem.Text = "Copy";
+            copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
             // 
             // pasteToolStripMenuItem
             // 
             pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             pasteToolStripMenuItem.Size = new Size(177, 26);
             pasteToolStripMenuItem.Text = "Paste";
+            pasteToolStripMenuItem.Click += pasteToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
@@ -2265,6 +2050,7 @@
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             deleteToolStripMenuItem.Size = new Size(177, 26);
             deleteToolStripMenuItem.Text = "Delete";
+            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
@@ -2276,12 +2062,7 @@
             preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             preferencesToolStripMenuItem.Size = new Size(177, 26);
             preferencesToolStripMenuItem.Text = "Preferences...";
-            // 
-            // undoToolStripMenuItem
-            // 
-            undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            undoToolStripMenuItem.Size = new Size(177, 26);
-            undoToolStripMenuItem.Text = "Undo";
+            preferencesToolStripMenuItem.Click += preferencesToolStripMenuItem_Click;
             // 
             // importToolStripMenuItem
             // 
@@ -2295,18 +2076,21 @@
             importAudioToolStripMenuItem.Name = "importAudioToolStripMenuItem";
             importAudioToolStripMenuItem.Size = new Size(181, 26);
             importAudioToolStripMenuItem.Text = "Import Audio";
+            importAudioToolStripMenuItem.Click += importAudioToolStripMenuItem_Click;
             // 
             // importPhotoToolStripMenuItem
             // 
             importPhotoToolStripMenuItem.Name = "importPhotoToolStripMenuItem";
             importPhotoToolStripMenuItem.Size = new Size(181, 26);
             importPhotoToolStripMenuItem.Text = "Import Photo";
+            importPhotoToolStripMenuItem.Click += importPhotoToolStripMenuItem_Click;
             // 
             // importVideoToolStripMenuItem
             // 
             importVideoToolStripMenuItem.Name = "importVideoToolStripMenuItem";
             importVideoToolStripMenuItem.Size = new Size(181, 26);
             importVideoToolStripMenuItem.Text = "Import Video";
+            importVideoToolStripMenuItem.Click += importVideoToolStripMenuItem_Click;
             // 
             // helpToolStripMenuItem
             // 
@@ -3605,6 +3389,32 @@
             tableLayoutPanel5.Size = new Size(200, 100);
             tableLayoutPanel5.TabIndex = 0;
             // 
+            // listBox2
+            // 
+            listBox2.FormattingEnabled = true;
+            listBox2.ItemHeight = 37;
+            listBox2.Items.AddRange(new object[] { "Text", "Text", "Text" });
+            listBox2.Location = new Point(0, 1);
+            listBox2.Name = "listBox2";
+            listBox2.Size = new Size(192, 115);
+            listBox2.TabIndex = 0;
+            // 
+            // maskedTextBox1
+            // 
+            maskedTextBox1.Location = new Point(92, 3);
+            maskedTextBox1.Name = "maskedTextBox1";
+            maskedTextBox1.Size = new Size(115, 27);
+            maskedTextBox1.TabIndex = 27;
+            // 
+            // label75
+            // 
+            label75.AutoSize = true;
+            label75.Location = new Point(3, 0);
+            label75.Name = "label75";
+            label75.Size = new Size(36, 20);
+            label75.TabIndex = 28;
+            label75.Text = "Text";
+            // 
             // Main_Form
             // 
             AllowDrop = true;
@@ -3630,7 +3440,6 @@
             tabPage12.ResumeLayout(false);
             flowLayoutPanel8.ResumeLayout(false);
             tabPage16.ResumeLayout(false);
-            flowLayoutPanel9.ResumeLayout(false);
             tabPage17.ResumeLayout(false);
             flowLayoutPanel10.ResumeLayout(false);
             tableLayoutPanel30.ResumeLayout(false);
@@ -3652,12 +3461,11 @@
             flowLayoutPanel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown3).EndInit();
-            flowLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            flowLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)axWindowsMediaPlayer1).EndInit();
             tabControl3.ResumeLayout(false);
             tabPage8.ResumeLayout(false);
+            tabPage9.ResumeLayout(false);
             tableLayoutPanel6.ResumeLayout(false);
             tableLayoutPanel6.PerformLayout();
             menuStrip1.ResumeLayout(false);
@@ -3741,7 +3549,6 @@
         private ToolStripMenuItem neToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator4;
         private ToolStripMenuItem saveToolStripMenuItem;
-        private ToolStripMenuItem saveAsToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem exportToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator6;
@@ -3761,7 +3568,6 @@
         private ToolStripMenuItem deleteToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem preferencesToolStripMenuItem;
-        private ToolStripMenuItem undoToolStripMenuItem;
         private ToolStripMenuItem importToolStripMenuItem;
         private ToolStripMenuItem importAudioToolStripMenuItem;
         private ToolStripMenuItem importPhotoToolStripMenuItem;
@@ -3887,19 +3693,7 @@
         private Label label73;
         private NumericUpDown numericUpDown1;
         private ComboBox comboBox1;
-        private Label label75;
-        private FlowLayoutPanel flowLayoutPanel4;
-        private Button button18;
-        private FlowLayoutPanel flowLayoutPanel5;
-        private Label label78;
         private Label label79;
-        private Button button19;
-        private Button button23;
-        private Button button24;
-        private Button button25;
-        private Button button20;
-        private Button button21;
-        private Button button22;
         private ColorDialog colorDialog1;
         private TableLayoutPanel tableLayoutPanel28;
         private HScrollBar hScrollBar2;
@@ -3908,8 +3702,6 @@
         private HScrollBar hScrollBar3;
         private VScrollBar vScrollBar3;
         private Button button26;
-        private Button button27;
-        private Label label83;
         private Label label87;
         private Label label86;
         private Label label97;
@@ -3943,10 +3735,6 @@
         private Button button30;
         private TabPage tabPage16;
         private FlowLayoutPanel flowLayoutPanel9;
-        private Button button3;
-        private Button button31;
-        private Button button34;
-        private Button button33;
         private TabPage tabPage17;
         private FlowLayoutPanel flowLayoutPanel10;
         private Label label1;
@@ -3996,5 +3784,9 @@
         private Label label104;
         private Label label105;
         private Label label106;
+        private Button button42;
+        private ListBox listBox2;
+        private MaskedTextBox maskedTextBox1;
+        private Label label75;
     }
 }

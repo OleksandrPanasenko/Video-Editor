@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using VideoEditor.Core.Effects;
 namespace VideoEditor.Core
 {
     internal class RenderLanePanel
@@ -11,7 +12,7 @@ namespace VideoEditor.Core
         public Project Project { get; set; }
         internal ProjectConfig Params;
         private Graphics g;
-        private static List<double> NiceIntervals=[0.01,0.02,0.05,0.1,0.2,0.5,1,2,5,10,15,20,30,60,120,300,600,900,1800,3600];
+        private static List<double> NiceIntervals = [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 15, 20, 30, 60, 120, 300, 600, 900, 1800, 3600];
         public RenderLanePanel(Project project, Graphics g)
         {
             Project = project;
@@ -21,11 +22,11 @@ namespace VideoEditor.Core
         public void Render()
         {
             int yUpperBound = (int)Params.LanePanelScrollY;
-            int yLowerBound = yUpperBound + Params.LanePanelHeight-Params.TimeRulerHeight+Params.LaneSpacing;
-            for(int i=0, y=0; i<Project.Lanes.Count; i++, y+=Params.LaneHeight+Params.LaneSpacing)
+            int yLowerBound = yUpperBound + Params.LanePanelHeight - Params.TimeRulerHeight + Params.LaneSpacing;
+            for (int i = 0, y = 0; i < Project.Lanes.Count; i++, y += Params.LaneHeight + Params.LaneSpacing)
             {
-                if(y+Params.LaneHeight<yUpperBound) continue;
-                if(y>yLowerBound) break;
+                if (y + Params.LaneHeight < yUpperBound) continue;
+                if (y > yLowerBound) break;
                 RenderLane(Project.Lanes[i], i);
             }
             RenderLaneLabels();
@@ -43,13 +44,13 @@ namespace VideoEditor.Core
                 g.FillRectangle(brush, rect);
                 g.DrawRectangle(pen, rect);
             }
-            
+
             //render lane border
-            foreach(var fragment in lane.Fragments)
+            foreach (var fragment in lane.Fragments)
             {
-                if (fragment.EndPosition<TimeSpan.FromSeconds(Params.LanePanelScrollX/Params.LaneTimeScale)) continue;
+                if (fragment.EndPosition < TimeSpan.FromSeconds(Params.LanePanelScrollX / Params.LaneTimeScale)) continue;
                 if (fragment.Position > TimeSpan.FromSeconds((Params.LanePanelScrollX + Params.LanePanelWidth - Params.LaneLabelWidth) / Params.LaneTimeScale)) break;
-                RenderFragment(laneIndex,fragment);
+                RenderFragment(laneIndex, fragment);
             }
             //render fragments
         }
@@ -68,11 +69,13 @@ namespace VideoEditor.Core
             using (var pen = new Pen(Config.LaneBorderColor))
             using (var textBrush = new SolidBrush(Color.Black))
             {
+                var rectX = (int)(fragment.Position.TotalSeconds * Params.LaneTimeScale - Params.LanePanelScrollX + Params.LaneLabelWidth);
+                var rectY = (int)(laneIndex * (Params.LaneHeight + Params.LaneSpacing) - Params.LanePanelScrollY + Params.TimeRulerHeight);
+                var rectWidth = (int)(fragment.Fragment.Duration.TotalSeconds * Params.LaneTimeScale);
+                var rectHeight = Params.LaneHeight;
+
                 Rectangle rect = new Rectangle(
-                (int)(fragment.Position.TotalSeconds * Params.LaneTimeScale - Params.LanePanelScrollX + Params.LaneLabelWidth),
-                (int)(laneIndex * (Params.LaneHeight + Params.LaneSpacing) - Params.LanePanelScrollY + Params.TimeRulerHeight),
-                (int)(fragment.Fragment.Duration.TotalSeconds * Params.LaneTimeScale),
-                Params.LaneHeight);
+                rectX, rectY, rectWidth, rectHeight);
                 g.FillRectangle(brush, rect);
                 g.DrawRectangle(pen, rect);
 
@@ -83,7 +86,7 @@ namespace VideoEditor.Core
                         g.DrawRectangle(selectFrame, rect);
                     }
                 }
-                
+
 
                 //render fragment name
                 StringFormat format = new StringFormat
@@ -93,10 +96,29 @@ namespace VideoEditor.Core
                     Trimming = StringTrimming.EllipsisCharacter
                 };
                 g.DrawString(fragment.Fragment.Name, Config.FragmentNameFont, textBrush, rect, format);
+                var numEffects = fragment.Fragment.Effects.Count;
+                for (int i = 0; i < numEffects; i++)
+                {
+                    IEffect effect = fragment.Fragment.Effects[i];
+                    var effectHeight = rectHeight / numEffects;
+
+                    var effectY = rectY + i * effectHeight;
+                    var effectX = Math.Max(TimeToX(fragment.Position), TimeToX(fragment.Position - fragment.Fragment.StartTime + effect.StartTime));
+                    var effextXEnd= Math.Min(TimeToX(fragment.EndPosition), TimeToX(fragment.Position - fragment.Fragment.StartTime + effect.EndTime));
+                    //Fix color
+                    using (var selectFrame = new Pen(Config.SelectionHighlightColor, 2))
+                    {
+                        g.DrawRectangle(selectFrame, rect);
+                    }
+                }
             }
-            //render fragment border
-            
         }
+        //render fragment border
+        //render effect lines
+
+
+    
+
         internal void RenderTimeMarker(TimeSpan? time)
         {
             if (time == null) return;

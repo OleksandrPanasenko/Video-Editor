@@ -1,4 +1,4 @@
-using Core.Config;
+
 using Video_Editor;
 using VideoEditor.Core;
 using VideoEditor.Infrastructure;
