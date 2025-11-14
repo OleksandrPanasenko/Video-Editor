@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VideoEditor.Core.Transitions
 {
-    public class Transition
+    public interface ITransition
     {
     }
 }

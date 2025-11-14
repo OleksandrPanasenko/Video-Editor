@@ -10,7 +10,7 @@ namespace VideoEditor.Core.Effects
     public class BrightnessEffect : IEffect
     {
         public string Name { get => "Brightness";}
-        public double Intensity { get; set; }
+        public double Intensity { get; set; } = 0.5;
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
 

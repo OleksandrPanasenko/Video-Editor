@@ -25,7 +25,7 @@ namespace VideoEditor.Core
         public double Width { get; set; }
         public double Height { get; set; }
         public List<IEffect> Effects { get; set; } = new();
-        public Transition? OutTransition { get; set; }
+        public ITransition? OutTransition { get; set; }
         public Fragment(string filePath, TimeSpan startTime, TimeSpan endTime)
         {
             FilePath = filePath;
@@ -39,7 +39,7 @@ namespace VideoEditor.Core
             EndTime = duration;
             FileDuration= duration;
         }
-        public Fragment DeepCopy()
+        public virtual Fragment DeepCopy()
         {
             Fragment newFragment= new Fragment(FilePath,StartTime,EndTime);
             newFragment.Hidden = Hidden;

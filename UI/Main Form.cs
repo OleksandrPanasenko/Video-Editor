@@ -292,27 +292,48 @@ namespace VideoEditor.UI
 
         private async void LanePanel_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data != null & e.Data.GetData(typeof(int)) != null)
+            if (tabControl3.SelectedIndex == 0)
             {
-                int index = (int)e.Data.GetData(typeof(int));
-                if (index >= 0 & index < Project.MediaFiles.Count())
+                if (e.Data != null & e.Data.GetData(typeof(int)) != null)
+                {
+                    int index = (int)e.Data.GetData(typeof(int));
+                    if (index >= 0 & index < Project.MediaFiles.Count())
+                    {
+                        Point relativePoint = LanePanelXY(e.X, e.Y);
+                        Project.SelectionManager.SelectObject(relativePoint);
+                        if (Project.SelectionManager.SelectedLane != null)
+                        {
+                            var operation = await AddNewFragmentFromFileOperation.CreateAsync(Project, Project.MediaFiles[index], Project.SelectionManager.SelectedLane);
+
+                            Project.History.Execute(operation);
+
+
+                            //LanePanel.Invalidate();
+                            LanePanel.Update();
+                            LanePanel.Refresh();
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Lane not selected, point[{relativePoint.X},{relativePoint.Y}]");
+                        }
+                    }
+                }
+            }
+            else if (tabControl3.SelectedIndex == 1)
+            {
+                //TODO - create operation for text addition
+                if (e.Data!=null && e.Data.GetData(typeof(int)) != null)
                 {
                     Point relativePoint = LanePanelXY(e.X, e.Y);
                     Project.SelectionManager.SelectObject(relativePoint);
                     if (Project.SelectionManager.SelectedLane != null)
                     {
-                        var operation = await AddNewFragmentFromFileOperation.CreateAsync(Project, Project.MediaFiles[index], Project.SelectionManager.SelectedLane);
+                        var index = (int)e.Data.GetData(typeof(int));
+                        var addFragment = new AddTextFragmentOperation(UiList.NewText(UiList.Selectables[index].Text), (TimeSpan)Project.SelectionManager.SelectedTime, Project.SelectionManager.SelectedLane);
+                        Project.History.Execute(addFragment);
 
-                        Project.History.Execute(operation);
-
-
-                        //LanePanel.Invalidate();
                         LanePanel.Update();
                         LanePanel.Refresh();
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Lane not selected, point[{relativePoint.X},{relativePoint.Y}]");
                     }
                 }
             }
@@ -477,7 +498,7 @@ namespace VideoEditor.UI
             textBox11.Text = fragmentPlacement.EndPosition.ToString();
 
             numericUpDown1.Value = (decimal)fragmentPlacement.X;
-            numericUpDown2.Value= (decimal)fragmentPlacement.Y; 
+            numericUpDown2.Value = (decimal)fragmentPlacement.Y;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -682,28 +703,63 @@ namespace VideoEditor.UI
             //Trim start
             var fragmentPlacement = Project.SelectionManager.SelectedFragment;
             if (fragmentPlacement == null) return;
-
-            if (TimeSpan.TryParse(textBox2.Text, out var ts))
+            TimeSpan? ts = SetStart(textBox2, textBox3, TimeSpan.Zero);
+            if (ts != null)
             {
-                if (ts >= fragmentPlacement.Fragment.EndTime)
+                var Trim = new TrimOperation(Project, fragmentPlacement, (TimeSpan)ts, fragmentPlacement.Fragment.EndTime);
+                Project.History.Execute(Trim);
+                RefreshFragmentParametres();
+
+                LanePanel.Update();
+                LanePanel.Refresh();
+            }
+
+        }
+        private TimeSpan? SetStart(TextBox start, TextBox end, TimeSpan min)
+        {
+            if (TimeSpan.TryParse(start.Text, out var ts) && TimeSpan.TryParse(end.Text, out var te))
+            {
+                if (ts < te)
                 {
-                    RefreshFragmentParametres();
-                    MessageBox.Show("Start time should be less than end");
+                    if (ts > min) return ts;
+                    else return min;
                 }
                 else
                 {
-                    var Trim = new TrimOperation(Project, fragmentPlacement, ts, fragmentPlacement.Fragment.EndTime);
-                    Project.History.Execute(Trim);
                     RefreshFragmentParametres();
-
-                    LanePanel.Update();
-                    LanePanel.Refresh();
+                    MessageBox.Show("Start time should be less than end time");
+                    return null;
                 }
 
             }
             else
             {
                 MessageBox.Show("Please enter a valid time (e.g., 00:01:23.456)");
+                return null;
+            }
+        }
+        private TimeSpan? SetEnd(TextBox start, TextBox end, TimeSpan max)
+        {
+            {
+                if (TimeSpan.TryParse(start.Text, out var ts) && TimeSpan.TryParse(end.Text, out var te))
+                {
+                    if (ts < te)
+                    {
+                        if (ts < max) return ts;
+                        else return max;
+                    }
+                    else
+                    {
+                        RefreshFragmentParametres();
+                        MessageBox.Show("End time should be greater than start time");
+                        return null;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid time (e.g., 00:01:23.456)");
+                    return null;
+                }
             }
         }
 
@@ -712,26 +768,16 @@ namespace VideoEditor.UI
             //Trim end
             var fragmentPlacement = Project.SelectionManager.SelectedFragment;
             if (fragmentPlacement == null) return;
+            var te = SetEnd(textBox2, textBox3, fragmentPlacement.Fragment.EndTime);
 
-            if (TimeSpan.TryParse(textBox3.Text, out var te))
+            if (te != null)
             {
-                if (te <= fragmentPlacement.Fragment.StartTime)
-                {
-                    MessageBox.Show("End time should be greater than start");
-                }
-                else
-                {
-                    var Trim = new TrimOperation(Project, fragmentPlacement, fragmentPlacement.Fragment.StartTime, te);
-                    Project.History.Execute(Trim);
-                    RefreshFragmentParametres();
+                var Trim = new TrimOperation(Project, fragmentPlacement, fragmentPlacement.Fragment.StartTime, (TimeSpan)te);
+                Project.History.Execute(Trim);
+                RefreshFragmentParametres();
 
-                    LanePanel.Update();
-                    LanePanel.Refresh();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please enter a valid time (e.g., 00:01:23.456)");
+                LanePanel.Update();
+                LanePanel.Refresh();
             }
         }
 
@@ -1061,7 +1107,7 @@ namespace VideoEditor.UI
                     axWindowsMediaPlayer1.Ctlcontrols.play();
                     MessageBox.Show(axWindowsMediaPlayer1.URL);
                     Project.SelectionManager.SelectedTime += TimeSpan.FromSeconds(1);
-                    
+
                     LanePanel.Update();
                     LanePanel.Refresh();
                 }
@@ -1260,14 +1306,26 @@ namespace VideoEditor.UI
         //---------Duration-----------
         private void textBox10_Leave(object sender, EventArgs e)
         {
-            //Start
+            //Start text
+            var fragmentPlacement = Project.SelectionManager.SelectedFragment;
+            if (fragmentPlacement == null) return;
+            TimeSpan? ts = SetStart(textBox10, textBox11, TimeSpan.Zero);
+            if (ts != null)
+            {
+                var Trim = new TrimOperation(Project, fragmentPlacement, (TimeSpan)ts, fragmentPlacement.Fragment.EndTime);
+                Project.History.Execute(Trim);
+                RefreshFragmentParametres();
+
+                LanePanel.Update();
+                LanePanel.Refresh();
+            }
         }
 
 
 
         private void textBox11_Leave(object sender, EventArgs e)
         {
-
+            //End text
         }
 
         private void textBox10_KeyPress(object sender, KeyPressEventArgs e)
@@ -1300,7 +1358,7 @@ namespace VideoEditor.UI
 
         private void ConstructEffectsPanel()
         {
-            
+
             var EffectsPanel = tabPage10;
             var lane = Project.SelectionManager.SelectedLane;
             var placement = Project.SelectionManager.SelectedFragment;
@@ -1311,20 +1369,78 @@ namespace VideoEditor.UI
             var Grid = new TableLayoutPanel();
             Grid.RowCount = 0;
             Grid.ColumnCount = 2;
+            Grid.AutoScroll = true;
+            Grid.AutoSize = true;
+            Grid.Dock = DockStyle.Fill;
+
             EffectsPanel.Controls.Add(Grid);
             if (fragment.Effects.Count > 0)
             {
-                foreach (var effect in fragment.Effects) {
+                foreach (var effect in fragment.Effects)
+                {
                     //Draw name
                     Label nameLabel = new Label();
+                    nameLabel.Text = effect.Name;
                     Button deleteButton = new Button();
+                    deleteButton.AutoSize = true;
+                    deleteButton.Text = "Delete";
+                    deleteButton.Click += (sender, e) =>
+                    {
+                        fragment.Effects.Remove(effect);
+                        ConstructEffectsPanel();
+                    };
+
                     TextBox startTime = new TextBox();
+                    startTime.Text = (effect.StartTime - fragment.StartTime).ToString();
+                    //startTime.Leave.
                     Label startTimeLabel = new Label();
+                    startTimeLabel.Text = "Start Time:";
                     TextBox endTime = new TextBox();
+
+                    startTime.Leave += (sender, e) =>
+                    {
+
+                        TimeSpan? ts = SetStart(startTime, endTime, TimeSpan.Zero - fragment.StartTime);
+                        if (ts != null)
+                        {
+                            effect.StartTime = ts.Value + fragment.StartTime;
+                            RefreshFragmentParametres();
+
+                            LanePanel.Update();
+                            LanePanel.Refresh();
+                        }
+                    };
+
+
+                    endTime.Text = (effect.EndTime - fragment.StartTime).ToString();
+                    endTime.Leave += (sender, e) =>
+                    {
+
+                        TimeSpan? ts = SetEnd(startTime, endTime, fragment.FileDuration - fragment.StartTime);
+                        if (ts != null)
+                        {
+                            effect.StartTime = ts.Value + fragment.StartTime;
+                            RefreshFragmentParametres();
+
+                            LanePanel.Update();
+                            LanePanel.Refresh();
+                        }
+                    };
                     Label endTimeLabel = new Label();
+                    endTimeLabel.Text = "End Time";
                     Label intensityWord = new Label();
+                    intensityWord.Text = "Intensity:";
                     Label intensityNumber = new Label();
+                    intensityNumber.Text = effect.LabelIntensity;
                     TrackBar IntensityTrack = new TrackBar();
+                    IntensityTrack.Minimum = 0;
+                    IntensityTrack.Maximum = 100;
+                    IntensityTrack.Value = (int)(effect.Intensity * 100);
+                    IntensityTrack.ValueChanged += (sender, e) =>
+                    {
+                        effect.Intensity = ((double)IntensityTrack.Value) / 100;
+                        intensityNumber.Text = effect.LabelIntensity;
+                    };
 
                     Grid.RowCount++;
                     Grid.Controls.Add(nameLabel, 0, Grid.RowCount - 1);
@@ -1347,14 +1463,25 @@ namespace VideoEditor.UI
             }
             //Add effect button
             var newEffectButton = new Button();
-            newEffectButton.Text = "Add new effect";
+            newEffectButton.Text = "Add";
+            newEffectButton.AutoSize = true;
             var newEffectList = new ComboBox();
+
             newEffectList.DropDownStyle = ComboBoxStyle.DropDownList;
-            newEffectList.Items.AddRange([]);//what effects?
+            newEffectList.Items.AddRange(UiList.EffectsNames.ToArray());//what effects?
+            newEffectList.SelectedIndex = 0;
+            newEffectButton.Click += (sender, e) =>
+            {
+                var newEffect = (UiList.NewEffect(newEffectList.Text));
+                newEffect.StartTime = fragment.StartTime;
+                newEffect.EndTime = fragment.EndTime;
+                fragment.Effects.Add(newEffect);
+                ConstructEffectsPanel();
+            };
 
             Grid.RowCount++;
-            Grid.Controls.Add(newEffectButton,0,Grid.RowCount-1);
-            Grid.Controls.Add(newEffectList,1,Grid.RowCount-1);
+            Grid.Controls.Add(newEffectButton, 0, Grid.RowCount - 1);
+            Grid.Controls.Add(newEffectList, 1, Grid.RowCount - 1);
             //Selection box with effects
             if (fragment.OutTransition == null)
             {
@@ -1368,7 +1495,7 @@ namespace VideoEditor.UI
             {
 
             }
-            
+
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -1477,28 +1604,15 @@ namespace VideoEditor.UI
             //start offset
             var fragmentPlacement = Project.SelectionManager.SelectedFragment;
             if (fragmentPlacement == null) return;
-
-            if (TimeSpan.TryParse(textBox8.Text, out var ts))
+            TimeSpan? ts = SetStart(textBox8, textBox9, TimeSpan.Zero);
+            if (ts != null)
             {
-                if (ts >= fragmentPlacement.Fragment.EndTime)
-                {
-                    RefreshFragmentParametres();
-                    MessageBox.Show("Start time should be less than end");
-                }
-                else
-                {
-                    var Trim = new TrimOperation(Project, fragmentPlacement, ts, fragmentPlacement.Fragment.EndTime);
-                    Project.History.Execute(Trim);
-                    RefreshFragmentParametres();
+                var Trim = new TrimOperation(Project, fragmentPlacement, (TimeSpan)ts, fragmentPlacement.Fragment.EndTime);
+                Project.History.Execute(Trim);
+                RefreshFragmentParametres();
 
-                    LanePanel.Update();
-                    LanePanel.Refresh();
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("Please enter a valid time (e.g., 00:01:23.456)");
+                LanePanel.Update();
+                LanePanel.Refresh();
             }
         }
 
@@ -1548,6 +1662,16 @@ namespace VideoEditor.UI
             {
                 Project.SelectionManager.SelectedFragment.Fragment.Volume = ((float)trackBar3.Value) / 100;
                 label72.Text = $"{trackBar3.Value}%";
+            }
+        }
+
+        private void listBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            //Drag text fragment
+            int index = listBox1.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
+            {
+                listBox2.DoDragDrop(index, DragDropEffects.Copy);
             }
         }
     }

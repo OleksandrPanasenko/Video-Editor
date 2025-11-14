@@ -147,14 +147,17 @@
             button26 = new Button();
             label79 = new Label();
             label74 = new Label();
-            label73 = new Label();
             numericUpDown1 = new NumericUpDown();
             comboBox1 = new ComboBox();
+            maskedTextBox1 = new MaskedTextBox();
+            label73 = new Label();
+            label75 = new Label();
             axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             tabControl3 = new TabControl();
             tabPage8 = new TabPage();
             listBox1 = new ListBox();
             tabPage9 = new TabPage();
+            listBox2 = new ListBox();
             tabPage10 = new TabPage();
             tableLayoutPanel6 = new TableLayoutPanel();
             menuStrip1 = new MenuStrip();
@@ -298,9 +301,6 @@
             vScrollBar3 = new VScrollBar();
             saveFileDialog1 = new SaveFileDialog();
             tableLayoutPanel5 = new TableLayoutPanel();
-            listBox2 = new ListBox();
-            maskedTextBox1 = new MaskedTextBox();
-            label75 = new Label();
             tabPage14 = new TabPage();
             tabPage14.SuspendLayout();
             tableLayoutPanel25.SuspendLayout();
@@ -1584,7 +1584,7 @@
             flowLayoutPanel7.Dock = DockStyle.Fill;
             flowLayoutPanel7.Location = new Point(92, 231);
             flowLayoutPanel7.Name = "flowLayoutPanel7";
-            flowLayoutPanel7.Size = new Size(234, 108);
+            flowLayoutPanel7.Size = new Size(234, 33);
             flowLayoutPanel7.TabIndex = 26;
             // 
             // label100
@@ -1631,7 +1631,7 @@
             label98.Dock = DockStyle.Fill;
             label98.Location = new Point(3, 228);
             label98.Name = "label98";
-            label98.Size = new Size(83, 114);
+            label98.Size = new Size(83, 39);
             label98.TabIndex = 23;
             label98.Text = "Position:";
             // 
@@ -1763,17 +1763,6 @@
             label74.Text = "Font family";
             label74.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // label73
-            // 
-            label73.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label73.AutoSize = true;
-            label73.Location = new Point(3, 33);
-            label73.Name = "label73";
-            label73.Size = new Size(83, 33);
-            label73.TabIndex = 0;
-            label73.Text = "Font size";
-            label73.TextAlign = ContentAlignment.MiddleLeft;
-            // 
             // numericUpDown1
             // 
             numericUpDown1.Dock = DockStyle.Left;
@@ -1794,6 +1783,33 @@
             comboBox1.Size = new Size(95, 28);
             comboBox1.TabIndex = 3;
             comboBox1.ValueMemberChanged += comboBox1_ValueMemberChanged;
+            // 
+            // maskedTextBox1
+            // 
+            maskedTextBox1.Location = new Point(92, 3);
+            maskedTextBox1.Name = "maskedTextBox1";
+            maskedTextBox1.Size = new Size(115, 27);
+            maskedTextBox1.TabIndex = 27;
+            // 
+            // label73
+            // 
+            label73.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label73.AutoSize = true;
+            label73.Location = new Point(3, 33);
+            label73.Name = "label73";
+            label73.Size = new Size(83, 33);
+            label73.TabIndex = 0;
+            label73.Text = "Font size";
+            label73.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label75
+            // 
+            label75.AutoSize = true;
+            label75.Location = new Point(3, 0);
+            label75.Name = "label75";
+            label75.Size = new Size(36, 20);
+            label75.TabIndex = 28;
+            label75.Text = "Text";
             // 
             // axWindowsMediaPlayer1
             // 
@@ -1867,9 +1883,21 @@
             tabPage9.TabIndex = 1;
             tabPage9.UseVisualStyleBackColor = true;
             // 
+            // listBox2
+            // 
+            listBox2.FormattingEnabled = true;
+            listBox2.ItemHeight = 37;
+            listBox2.Items.AddRange(new object[] { "Text", "Text", "Text" });
+            listBox2.Location = new Point(0, 1);
+            listBox2.Name = "listBox2";
+            listBox2.Size = new Size(192, 226);
+            listBox2.TabIndex = 0;
+            listBox2.MouseDown += listBox2_MouseDown;
+            // 
             // tabPage10
             // 
-            tabPage10.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tabPage10.AutoScroll = true;
+            tabPage10.Font = new Font("Segoe UI", 9F);
             tabPage10.ForeColor = Color.Black;
             tabPage10.ImageKey = "Effect.ico";
             tabPage10.Location = new Point(4, 4);
@@ -3388,32 +3416,6 @@
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel5.Size = new Size(200, 100);
             tableLayoutPanel5.TabIndex = 0;
-            // 
-            // listBox2
-            // 
-            listBox2.FormattingEnabled = true;
-            listBox2.ItemHeight = 37;
-            listBox2.Items.AddRange(new object[] { "Text", "Text", "Text" });
-            listBox2.Location = new Point(0, 1);
-            listBox2.Name = "listBox2";
-            listBox2.Size = new Size(192, 115);
-            listBox2.TabIndex = 0;
-            // 
-            // maskedTextBox1
-            // 
-            maskedTextBox1.Location = new Point(92, 3);
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(115, 27);
-            maskedTextBox1.TabIndex = 27;
-            // 
-            // label75
-            // 
-            label75.AutoSize = true;
-            label75.Location = new Point(3, 0);
-            label75.Name = "label75";
-            label75.Size = new Size(36, 20);
-            label75.TabIndex = 28;
-            label75.Text = "Text";
             // 
             // Main_Form
             // 

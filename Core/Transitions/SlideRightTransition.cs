@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VideoEditor.Core.Transitions
 {
-    internal class SlideRightTransition
+    public class SlideRightTransition:ITransition
     {
     }
 }

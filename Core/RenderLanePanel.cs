@@ -100,15 +100,16 @@ namespace VideoEditor.Core
                 for (int i = 0; i < numEffects; i++)
                 {
                     IEffect effect = fragment.Fragment.Effects[i];
-                    var effectHeight = rectHeight / numEffects;
+                    var effectHeight = Math.Min(rectHeight / numEffects,rectHeight/10);
 
                     var effectY = rectY + i * effectHeight;
                     var effectX = Math.Max(TimeToX(fragment.Position), TimeToX(fragment.Position - fragment.Fragment.StartTime + effect.StartTime));
-                    var effextXEnd= Math.Min(TimeToX(fragment.EndPosition), TimeToX(fragment.Position - fragment.Fragment.StartTime + effect.EndTime));
+                    var effectXEnd= Math.Min(TimeToX(fragment.EndPosition), TimeToX(fragment.Position - fragment.Fragment.StartTime + effect.EndTime));
                     //Fix color
-                    using (var selectFrame = new Pen(Config.SelectionHighlightColor, 2))
+                    var rectangleEffect = new Rectangle((int)effectX, (int)effectY, (int)(effectXEnd - effectX), (int)effectHeight);
+                    using (var selectFrame = new SolidBrush(Config.SelectionHighlightColor))
                     {
-                        g.DrawRectangle(selectFrame, rect);
+                        g.FillRectangle(selectFrame, rectangleEffect);
                     }
                 }
             }

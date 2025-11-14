@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VideoEditor.Core.Transitions
 {
-    internal class FadeBlackTransition
+    public class FadeBlackTransition : ITransition
     {
     }
 }
