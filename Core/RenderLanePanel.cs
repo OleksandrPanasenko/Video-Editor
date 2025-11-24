@@ -53,6 +53,7 @@ namespace VideoEditor.Core
                 RenderFragment(laneIndex, fragment);
             }
             //render fragments
+            RenderTransitions(laneIndex);
         }
         internal void RenderFragment(int laneIndex, FragmentPlacement fragment)
         {
@@ -116,7 +117,50 @@ namespace VideoEditor.Core
         }
         //render fragment border
         //render effect lines
-
+        internal void RenderTransitions(int laneIndex)
+        {
+            var lane = Project.Lanes[laneIndex];
+            if (lane.Transitions.Count > 0)
+            {
+                foreach (var transition in lane.Transitions)
+                {
+                    Point TopLeft = new Point((int)TimeToX(transition.From.EndPosition),
+                                           (int)(laneIndex * (Params.LaneHeight + Params.LaneSpacing) - Params.LanePanelScrollY + Params.TimeRulerHeight));
+                    Point TopRight = new Point((int)TimeToX(transition.To.Position),
+                                             TopLeft.Y);
+                    Point BottomLeft = new Point(TopLeft.X,
+                                               TopLeft.Y + Params.LaneHeight);
+                    Point BottomRight = new Point(TopRight.X,
+                                                BottomLeft.Y);
+                    Point[] pointsFirst = { TopLeft, TopRight, BottomLeft };
+                    Point[] pointsSecond = { TopRight, BottomRight, BottomLeft };
+                    Color transitionColor = transition.From.Fragment.FragmentType switch
+                    {
+                        Fragment.Type.Video => Config.VideoBlockColor,
+                        Fragment.Type.Audio => Config.AudioBlockColor,
+                        Fragment.Type.Text => Config.TextBlockColor,
+                        Fragment.Type.Image => Config.ImageBlockColor,
+                        _ => Config.VideoBlockColor
+                    };
+                    using (var brush = new SolidBrush(transitionColor))
+                    {
+                        g.FillPolygon(brush, pointsFirst);
+                    }
+                    transitionColor = transition.To.Fragment.FragmentType switch
+                    {
+                        Fragment.Type.Video => Config.VideoBlockColor,
+                        Fragment.Type.Audio => Config.AudioBlockColor,
+                        Fragment.Type.Text => Config.TextBlockColor,
+                        Fragment.Type.Image => Config.ImageBlockColor,
+                        _ => Config.VideoBlockColor
+                    };
+                    using (var brush = new SolidBrush(transitionColor))
+                    {
+                        g.FillPolygon(brush, pointsSecond);
+                    }
+                }
+            }
+        }
 
     
 

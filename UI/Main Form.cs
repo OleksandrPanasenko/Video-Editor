@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using Video_Editor;
 using VideoEditor.Core;
 using VideoEditor.Core.Operations;
+using VideoEditor.Core.Transitions;
 using VideoEditor.Infrastructure;
 using EditAction = VideoEditor.Core.SelectionManager.EditAction;
 
@@ -30,6 +31,15 @@ namespace VideoEditor.UI
         public int SecondsSinceAutoSave { get; set; }
         public bool AllowRightSwitch = false;
         public bool IsRenderPreviewin = false;
+        public void Execute(IOperation operation)
+        {
+            try {
+                Project.History.Execute(operation);
+            }catch(Exception ex)
+            {
+                MessageBox.Show($"Operation failed: {ex.Message}\n\n{ex.StackTrace}");
+            }
+        }
         public Main_Form()
         {
             InitializeComponent();
@@ -114,7 +124,7 @@ namespace VideoEditor.UI
             if (fileList != null & fileList.Length > 0)
             {
                 IOperation addFiles = new AddMultipleFilesOperation(Project, fileList);
-                Project.History.Execute(addFiles);
+                Execute(addFiles);
                 RefreshFiles();
                 //MessageBox.Show("You dropped some files");
                 //Test fragment addition
@@ -305,7 +315,7 @@ namespace VideoEditor.UI
                         {
                             var operation = await AddNewFragmentFromFileOperation.CreateAsync(Project, Project.MediaFiles[index], Project.SelectionManager.SelectedLane);
 
-                            Project.History.Execute(operation);
+                            Execute(operation);
 
 
                             //LanePanel.Invalidate();
@@ -322,7 +332,7 @@ namespace VideoEditor.UI
             else if (tabControl3.SelectedIndex == 1)
             {
                 //TODO - create operation for text addition
-                if (e.Data!=null && e.Data.GetData(typeof(int)) != null)
+                if (e.Data != null && e.Data.GetData(typeof(int)) != null)
                 {
                     Point relativePoint = LanePanelXY(e.X, e.Y);
                     Project.SelectionManager.SelectObject(relativePoint);
@@ -330,7 +340,7 @@ namespace VideoEditor.UI
                     {
                         var index = (int)e.Data.GetData(typeof(int));
                         var addFragment = new AddTextFragmentOperation(UiList.NewText(UiList.Selectables[index].Text), (TimeSpan)Project.SelectionManager.SelectedTime, Project.SelectionManager.SelectedLane);
-                        Project.History.Execute(addFragment);
+                        Execute(addFragment);
 
                         LanePanel.Update();
                         LanePanel.Refresh();
@@ -359,7 +369,7 @@ namespace VideoEditor.UI
         private void button8_Click(object sender, EventArgs e)
         {
             IOperation AddLane = new AddNewLaneOperation(Project);
-            Project.History.Execute(AddLane);
+            Execute(AddLane);
 
             LanePanel.Update();
             LanePanel.Refresh();
@@ -488,8 +498,10 @@ namespace VideoEditor.UI
             if (fragmentPlacement == null) return;
 
             TextFragment fragment = (TextFragment)fragmentPlacement.Fragment;
+            maskedTextBox1.Text = fragment.Text;
 
             numericUpDown1.Value = fragment.FontSize;
+            
             comboBox1.Text = fragment.FontName;
 
             button26.BackColor = fragment.TextColor;
@@ -497,8 +509,8 @@ namespace VideoEditor.UI
             textBox10.Text = fragmentPlacement.Position.ToString();
             textBox11.Text = fragmentPlacement.EndPosition.ToString();
 
-            numericUpDown1.Value = (decimal)fragmentPlacement.X;
-            numericUpDown2.Value = (decimal)fragmentPlacement.Y;
+            numericUpDown2.Value = (decimal)fragmentPlacement.X;
+            numericUpDown3.Value = (decimal)fragmentPlacement.Y;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -534,7 +546,7 @@ namespace VideoEditor.UI
             if (Project.SelectionManager.SelectedLane != null)
             {
                 IOperation deleteLane = new DeleteLaneOperation(Project, Project.SelectionManager.SelectedLane);
-                Project.History.Execute(deleteLane);
+                Execute(deleteLane);
 
                 LanePanel.Update();
                 LanePanel.Refresh();
@@ -679,7 +691,7 @@ namespace VideoEditor.UI
             if (Project.SelectionManager.SelectedFragment != null)
             {
                 var Trim = new TrimOperation(Project, FragmentPlacement, TimeSpan.Zero, FragmentPlacement.Fragment.FileDuration);
-                Project.History.Execute(Trim);
+                Execute(Trim);
                 RefreshFragmentParametres();
 
                 LanePanel.Update();
@@ -707,7 +719,7 @@ namespace VideoEditor.UI
             if (ts != null)
             {
                 var Trim = new TrimOperation(Project, fragmentPlacement, (TimeSpan)ts, fragmentPlacement.Fragment.EndTime);
-                Project.History.Execute(Trim);
+                Execute(Trim);
                 RefreshFragmentParametres();
 
                 LanePanel.Update();
@@ -719,9 +731,18 @@ namespace VideoEditor.UI
         {
             if (TimeSpan.TryParse(start.Text, out var ts) && TimeSpan.TryParse(end.Text, out var te))
             {
+                var placement = Project.SelectionManager.SelectedFragment;
+                bool extendable = false;
+                if (placement != null)
+                {
+                    if (placement.Fragment.FragmentType == Fragment.Type.Image || placement.Fragment.FragmentType == Fragment.Type.Text)
+                    {
+                        extendable = true;
+                    }
+                }
                 if (ts < te)
                 {
-                    if (ts > min) return ts;
+                    if (ts > min||extendable) return ts;
                     else return min;
                 }
                 else
@@ -743,9 +764,19 @@ namespace VideoEditor.UI
             {
                 if (TimeSpan.TryParse(start.Text, out var ts) && TimeSpan.TryParse(end.Text, out var te))
                 {
+                    var placement = Project.SelectionManager.SelectedFragment;
+                    bool extendable = false;
+                    if (placement != null)
+                    {
+                         if (placement.Fragment.FragmentType == Fragment.Type.Image||placement.Fragment.FragmentType==Fragment.Type.Text)
+                        {
+                            extendable = true;
+                        }
+                    }
                     if (ts < te)
                     {
-                        if (ts < max) return ts;
+                        if (te < max||extendable) 
+                           return te;
                         else return max;
                     }
                     else
@@ -768,12 +799,12 @@ namespace VideoEditor.UI
             //Trim end
             var fragmentPlacement = Project.SelectionManager.SelectedFragment;
             if (fragmentPlacement == null) return;
-            var te = SetEnd(textBox2, textBox3, fragmentPlacement.Fragment.EndTime);
+            var te = SetEnd(textBox2, textBox3, fragmentPlacement.Fragment.FileDuration);
 
             if (te != null)
             {
                 var Trim = new TrimOperation(Project, fragmentPlacement, fragmentPlacement.Fragment.StartTime, (TimeSpan)te);
-                Project.History.Execute(Trim);
+                Execute(Trim);
                 RefreshFragmentParametres();
 
                 LanePanel.Update();
@@ -827,7 +858,7 @@ namespace VideoEditor.UI
             if (Project.SelectionManager.SelectedLane != null)
             {
                 var MoveUp = new MoveLaneUpOperation(Project, Project.SelectionManager.SelectedLane);
-                Project.History.Execute(MoveUp);
+                Execute(MoveUp);
 
                 LanePanel.Update();
                 LanePanel.Refresh();
@@ -842,7 +873,7 @@ namespace VideoEditor.UI
             if (Project.SelectionManager.SelectedLane != null)
             {
                 var MoveDown = new MoveLaneDownOperation(Project, Project.SelectionManager.SelectedLane);
-                Project.History.Execute(MoveDown);
+                Execute(MoveDown);
 
                 LanePanel.Update();
                 LanePanel.Refresh();
@@ -855,7 +886,7 @@ namespace VideoEditor.UI
             if (Project.SelectionManager.SelectedLane != null)
             {
                 var DoubleLane = new DoubleLaneOperation(Project, Project.SelectionManager.SelectedLane);
-                Project.History.Execute(DoubleLane);
+                Execute(DoubleLane);
 
                 LanePanel.Update();
                 LanePanel.Refresh();
@@ -889,7 +920,7 @@ namespace VideoEditor.UI
             if (Project.SelectionManager.SelectedFragment != null)
             {
                 var Copy = new CopyOperation(Project, Project.SelectionManager.SelectedFragment);
-                Project.History.Execute(Copy);
+                Execute(Copy);
             }
         }
 
@@ -899,7 +930,7 @@ namespace VideoEditor.UI
             if (Project.SelectionManager.SelectedFragment != null && Project.SelectionManager.SelectedLane != null)
             {
                 var Cut = new CutOperation(Project, Project.SelectionManager.SelectedLane, Project.SelectionManager.SelectedFragment);
-                Project.History.Execute(Cut);
+                Execute(Cut);
 
                 LanePanel.Update();
                 LanePanel.Refresh();
@@ -912,7 +943,7 @@ namespace VideoEditor.UI
             if (Project.SelectionManager.MemoryFragment != null && Project.SelectionManager.SelectedLane != null && Project.SelectionManager.SelectedTime != null)
             {
                 var Paste = new PasteOperation(Project.SelectionManager.MemoryFragment, Project.SelectionManager.SelectedLane, (TimeSpan)Project.SelectionManager.SelectedTime);
-                Project.History.Execute(Paste);
+                Execute(Paste);
 
                 LanePanel.Update();
                 LanePanel.Refresh();
@@ -925,7 +956,7 @@ namespace VideoEditor.UI
             if (Project.SelectionManager.SelectedFragment != null && Project.SelectionManager.SelectedLane != null)
             {
                 var Delete = new DeleteFragmentOperation(Project.SelectionManager.SelectedFragment, Project.SelectionManager.SelectedLane);
-                Project.History.Execute(Delete);
+                Execute(Delete);
 
                 LanePanel.Update();
                 LanePanel.Refresh();
@@ -944,7 +975,7 @@ namespace VideoEditor.UI
                     var CutOffset = Project.SelectionManager.SelectedTime - SelectedFragment.Position + SelectedFragment.Fragment.StartTime;
 
                     var Split = new SplitOperation(Project, Project.SelectionManager.SelectedLane, SelectedFragment, (TimeSpan)CutOffset);
-                    Project.History.Execute(Split);
+                    Execute(Split);
 
                     LanePanel.Update();
                     LanePanel.Refresh();
@@ -975,7 +1006,7 @@ namespace VideoEditor.UI
                     {
 
                         var Move = new MoveFragmentOperation(MovedFragmentLane, Project.SelectionManager.SelectedLane, (TimeSpan)GrabbedTime, (TimeSpan)Project.SelectionManager.SelectedTime);
-                        Project.History.Execute(Move);
+                        Execute(Move);
 
 
                         Project.SelectionManager.PendingEdit = EditAction.None;
@@ -1222,6 +1253,16 @@ namespace VideoEditor.UI
             }
         }
         //===========Text==============
+        private void maskedTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            //Text fragment text changed
+            var fragment = Project.SelectionManager.SelectedFragment;
+            if (fragment != null && fragment.Fragment.FragmentType == Fragment.Type.Text)
+            {
+                var textFragment = (TextFragment)(fragment.Fragment);
+                textFragment.Text = maskedTextBox1.Text;
+            }
+        }
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             var placement = Project.SelectionManager.SelectedFragment;
@@ -1313,7 +1354,7 @@ namespace VideoEditor.UI
             if (ts != null)
             {
                 var Trim = new TrimOperation(Project, fragmentPlacement, (TimeSpan)ts, fragmentPlacement.Fragment.EndTime);
-                Project.History.Execute(Trim);
+                Execute(Trim);
                 RefreshFragmentParametres();
 
                 LanePanel.Update();
@@ -1482,19 +1523,123 @@ namespace VideoEditor.UI
             Grid.RowCount++;
             Grid.Controls.Add(newEffectButton, 0, Grid.RowCount - 1);
             Grid.Controls.Add(newEffectList, 1, Grid.RowCount - 1);
+            Grid.RowCount++;
+            Label transitionNameLabel= new Label();
+            transitionNameLabel.Text = "Transitions:";
+            Grid.Controls.Add(transitionNameLabel, 0, Grid.RowCount - 1);
+            Grid.SetColumnSpan(transitionNameLabel, 2);
+            void DrawTransitionOptions(bool IsEndTransition)
+            {
+                FragmentPlacement? otherPlacement;
+                TimeSpan transitionPosition;
+                if (IsEndTransition)
+                {
+                    //End transition
+                    transitionPosition = placement.EndPosition;
+                    otherPlacement = lane[placement.EndPosition];
+                }
+                else
+                {
+                    //Start transition
+                    transitionPosition = placement.Position;
+                    var found = lane[placement.Position-TimeSpan.FromMilliseconds(1),placement.Position];
+                    otherPlacement = (found!=null&&found.Count>0)? found[found.Count-1]:null;
+                }
+                if (lane.GetTransitionFromTime(transitionPosition) == null && otherPlacement != null)
+                {
+                    //Add out transition button
+                    //if (lane[placement.EndPosition] == null) throw new NotImplementedException(); //disable;
+                    //list to select
+                    var newTransition = new Button();
+                    newTransition.Text = IsEndTransition ? "Add out transition" : "Add in transition";
+                    newTransition.AutoSize = true;
+                    var newOutTransitionList = new ComboBox();
+
+                    newOutTransitionList.DropDownStyle = ComboBoxStyle.DropDownList;
+                    newOutTransitionList.Items.AddRange(UiList.TransitionNames.ToArray());//what effects?
+                    newOutTransitionList.SelectedIndex = 0;
+                    newTransition.Click += (sender, e) =>
+                    {
+                        var newTransition = (UiList.NewTransition(newOutTransitionList.Text));
+                        newTransition.Duration = TimeSpan.FromSeconds(1); //default duration
+                        var AddTransitionOperation = new AddTransitionOperation(Project, lane, placement, otherPlacement, newTransition);
+                        Execute(AddTransitionOperation);
+                        ConstructEffectsPanel();
+
+                        LanePanel.Update();
+                        LanePanel.Refresh();
+                    };
+
+                    Grid.RowCount++;
+                    Grid.Controls.Add(newTransition, 0, Grid.RowCount - 1);
+                    Grid.SetColumnSpan(newTransition, 2);
+                    Grid.RowCount++;
+                    Grid.Controls.Add(newOutTransitionList, 0, Grid.RowCount - 1);
+                    Grid.SetColumnSpan(newOutTransitionList, 2);
+
+                }
+                else if (lane.GetTransitionFromTime(transitionPosition) != null)
+                {
+                    var transition = lane.GetTransitionFromTime(transitionPosition);
+                    if (transition != null)
+                    {
+                        //transition details
+                        Label transitionName = new Label();
+                        transitionName.Text = (IsEndTransition?"Out ":"In ")+ transition.Name;
+                        Label durationWord = new Label();
+                        durationWord.Text = "Duration:";
+                        TextBox durationBox = new TextBox();
+                        durationBox.Text = transition.Duration.ToString();
+                        Button deleteTransition = new Button();
+                        deleteTransition.Text = "Delete Transition";
+
+                        //add operations
+                        deleteTransition.Click += (sender, e) =>
+                        {
+                            IOperation deleteOperation = new RemoveTransitionOperation(Project.SelectionManager.SelectedLane, transition);
+                            Execute(deleteOperation);
+
+                            ConstructEffectsPanel();
+                            LanePanel.Update();
+                            LanePanel.Refresh();
+                        };
+                        void ChangeLength(object sender, EventArgs e)
+                        {
+                            if (TimeSpan.TryParse(durationBox.Text, out var te) == true)
+                            {
+                                IOperation deleteOperation = new TrimTransitionOperation(transition, te, lane);
+                                Execute(deleteOperation);
+
+                                ConstructEffectsPanel();
+                                LanePanel.Update();
+                                LanePanel.Refresh();
+
+                            }
+                        };
+                        durationBox.Leave += ChangeLength;
+                        durationBox.KeyDown += (sender, e) =>
+                        {
+                            if (e.KeyCode == Keys.Enter) ChangeLength(new object(), new EventArgs());
+                        };
+                        //Show transition details
+                        Grid.RowCount++;
+                        Grid.Controls.Add(transitionName, 0, Grid.RowCount - 1);
+                        Grid.SetColumnSpan(transitionName, 2);
+                        Grid.Controls.Add(deleteTransition, 0, Grid.RowCount - 1);
+                        Grid.SetColumnSpan(deleteTransition, 2);
+                        Grid.RowCount++;
+                        Grid.Controls.Add(durationWord, 0, Grid.RowCount - 1);
+                        Grid.SetColumn(durationWord, 2);
+                        Grid.RowCount++;
+                        Grid.Controls.Add(durationBox, 0, Grid.RowCount - 1);
+                        Grid.SetColumnSpan(durationBox, 2);
+
+                    }
+                }
+            }
             //Selection box with effects
-            if (fragment.OutTransition == null)
-            {
-                //Add out transition button
-                //if (lane[placement.EndPosition] == null) throw new NotImplementedException(); //disable;
-                //list to select
-
-
-            }
-            else
-            {
-
-            }
+            DrawTransitionOptions(IsEndTransition: false);
+            DrawTransitionOptions(IsEndTransition: true);
 
         }
 
@@ -1608,7 +1753,7 @@ namespace VideoEditor.UI
             if (ts != null)
             {
                 var Trim = new TrimOperation(Project, fragmentPlacement, (TimeSpan)ts, fragmentPlacement.Fragment.EndTime);
-                Project.History.Execute(Trim);
+                Execute(Trim);
                 RefreshFragmentParametres();
 
                 LanePanel.Update();
@@ -1631,7 +1776,7 @@ namespace VideoEditor.UI
                 else
                 {
                     var Trim = new TrimOperation(Project, fragmentPlacement, fragmentPlacement.Fragment.StartTime, te);
-                    Project.History.Execute(Trim);
+                    Execute(Trim);
                     RefreshFragmentParametres();
 
                     LanePanel.Update();
@@ -1674,5 +1819,7 @@ namespace VideoEditor.UI
                 listBox2.DoDragDrop(index, DragDropEffects.Copy);
             }
         }
+
+        
     }
 }

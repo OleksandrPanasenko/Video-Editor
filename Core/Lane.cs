@@ -1,9 +1,12 @@
+using VideoEditor.Core.Transitions;
+
 namespace VideoEditor.Core
 {
     public class Lane
     {
         public string Name { get; set; }
         public List<FragmentPlacement> Fragments { get; set; } = new List<FragmentPlacement>();
+        public List<ITransition> Transitions { get; set; } = new List<ITransition>();
         public TimeSpan? LaneStart { get { return Fragments.Count == 0 ? null : Fragments[0].Position; } }
         public TimeSpan? LaneEnd { get { return Fragments.Count == 0 ? null : Fragments[Fragments.Count-1].EndPosition; } }
         public Lane(string name)
@@ -116,6 +119,26 @@ namespace VideoEditor.Core
                 NewLane.AddFragment(newPlacement,newPlacement.Position);
             }
             return NewLane;
+        }
+        public bool IsMovable(TimeSpan position)
+        {
+            var fragment = this[position];
+            if(Transitions.Any(t=>t.From==fragment || t.To==fragment))
+            {
+                return false;
+            }
+            return true;
+        }
+        public ITransition GetTransitionFromTime(TimeSpan time)
+        {
+            foreach(var transition in Transitions)
+            {
+                if(transition.From.EndPosition <= time && transition.To.Position >= time)
+                {
+                    return transition;
+                }
+            }
+            return null;
         }
     }
 }

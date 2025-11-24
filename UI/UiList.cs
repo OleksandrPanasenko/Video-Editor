@@ -26,11 +26,12 @@ namespace Video_Editor
                                                         new FadeBlackTransition(),
                                                         new SlideLeftTransition(),
                                                         new SlideRightTransition()];
+        public static List<String>TransitionNames= TransitionsList.Select(o=>o.Name).ToList();
         public static ITransition NewTransition(string name)
         {
             foreach(var transition in TransitionsList)
             {
-                if(transition.GetType().Name == name) return (ITransition)Activator.CreateInstance(transition.GetType());
+                if(transition.Name == name) return (ITransition)Activator.CreateInstance(transition.GetType());
             }
             return null;
         }

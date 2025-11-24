@@ -1117,7 +1117,7 @@
             // 
             tableLayoutPanel4.AllowDrop = true;
             tableLayoutPanel4.ColumnCount = 3;
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 241F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel4.Controls.Add(tabControl4, 2, 0);
@@ -1790,6 +1790,7 @@
             maskedTextBox1.Name = "maskedTextBox1";
             maskedTextBox1.Size = new Size(115, 27);
             maskedTextBox1.TabIndex = 27;
+            maskedTextBox1.TextChanged += maskedTextBox1_TextChanged;
             // 
             // label73
             // 

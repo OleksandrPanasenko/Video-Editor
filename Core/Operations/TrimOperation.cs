@@ -10,7 +10,7 @@
         private readonly FragmentPlacement FragmentPlacement;
         public TrimOperation(Project project, FragmentPlacement fragmentPlacement, TimeSpan newStart, TimeSpan newEnd)
         {
-            if (newStart >= newEnd)
+            if (newStart > newEnd)
             {
                 throw new ArgumentException($"Start {newStart} is greater than (or equal to) end {newEnd}");
             }

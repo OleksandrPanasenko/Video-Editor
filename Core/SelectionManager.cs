@@ -55,6 +55,24 @@ namespace VideoEditor.Core
                     TimeSpan time = TimeSpan.FromSeconds((x + Params.LanePanelScrollX - Params.LaneLabelWidth) / Params.LaneTimeScale);// Maybe make ScrollX in seconds?
                     SelectedTime = time;
                     SelectedFragment = SelectedLane[time];
+
+                    if (SelectedFragment == null&&time!=null)
+                    {
+                        var transition= SelectedLane.GetTransitionFromTime(time);
+                        if (transition != null&&transition.From!=null&&transition.To!=null)
+                        {
+                            double yCoef = ((y + Params.LanePanelScrollY - Params.TimeRulerHeight) / (Params.LaneHeight + Params.LaneSpacing))- laneIndex;
+                            double xCoef = (time.TotalSeconds - transition.From.EndPosition.TotalSeconds) / (transition.Duration.TotalSeconds);
+                            if (yCoef > xCoef)
+                            {
+                                SelectedFragment = transition.From;
+                            }
+                            else
+                            {
+                                SelectedFragment = transition.To;
+                            }
+                        }
+                    }
                 }
                 else
                 {
