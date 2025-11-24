@@ -16,7 +16,7 @@ namespace VideoEditor.Core.Transitions
 
         public string GetArgs()
         {
-            throw new NotImplementedException();
+            return "dissolve";
         }
     }
 }

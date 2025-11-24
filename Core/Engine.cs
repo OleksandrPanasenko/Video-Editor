@@ -294,6 +294,194 @@ namespace Videoeditor.Core {
             //try { Directory.Delete(tempDir, true); } catch(Exception ex)  { throw ex;/* ignore */ }
         }
 
+        public async Task RenderOptimizedSCFGAsync(RenderParams args, string outputPath)
+        {
+            if (ProjectContext.CurrentProject.Lanes.Count == 0) return;
+
+            // --- SETUP: Intermediate File and Parameters ---
+            string tempDir = Path.Combine(_project.Path, "cache", "Render_" + Guid.NewGuid());
+            Directory.CreateDirectory(tempDir);
+            string intermediateMovPath = Path.Combine(tempDir, "intermediate_output.mov");
+
+            // Parse Resolution
+            var res = args.Resolution.Split('x');
+            int targetWidth = int.Parse(res[0]);
+            int targetHeight = int.Parse(res[1]);
+
+            // --- 1. BUILD SINGLE COMPLEX FILTER GRAPH (SCFG) ---
+            var inputArgs = new StringBuilder();
+            var filterComplex = new StringBuilder();
+            var audioMixInputs = new StringBuilder();
+            var inputMap = new Dictionary<string, int>();
+            int inputIndex = 0;
+            int laneCount = 0;
+
+            foreach (var lane in _project.Lanes)
+            {
+                if (lane.Fragments.Count == 0) continue;
+
+                var laneVideoInputs = new List<string>(); // Input tags for xfade/concat
+                var laneAudioInputs = new List<string>();
+
+                // Assume lane.Transitions is a list of objects associated with the transition time/type
+                // For simplicity, we'll assume a basic fade transition for all.
+                // In a real app, you'd calculate the exact start time of the transition based on placement.Position.
+                double transitionDuration = 0.5; // Example fixed duration
+
+                for (int i = 0; i < lane.Fragments.Count; i++)
+                {
+                    var placement = lane.Fragments[i];
+                    var fragment = placement.Fragment;
+                    string vTag = $"L{laneCount}C{i}v";
+                    string aTag = $"L{laneCount}C{i}a";
+
+                    // --- Input Mapping ---
+                    if (!inputMap.ContainsKey(fragment.FilePath))
+                    {
+                        inputMap[fragment.FilePath] = inputIndex;
+                        
+                        inputArgs.Append($"-i \"{fragment.FilePath}\" ");
+                        inputIndex++;
+                    }
+                    int fileIndex = inputMap[fragment.FilePath];
+
+                    // --- Opacity and Hidden Logic (Video) ---
+                    string finalOpacity = fragment.Hidden ? "0" : fragment.Opacity.ToString(CultureInfo.InvariantCulture);
+
+                    // Trim, Scale, Opacity, and apply Text/Effects
+                    // NOTE: Output is yuva444p for alpha channel support!
+                    filterComplex.Append(
+                        $"[{fileIndex}:v]trim=start={fragment.StartTime.TotalSeconds.ToString(CultureInfo.InvariantCulture)}:duration={fragment.Duration.TotalSeconds.ToString(CultureInfo.InvariantCulture)}," +
+                        $"setpts=PTS-STARTPTS,scale={targetWidth}:{targetHeight}:force_original_aspect_ratio=decrease,pad={targetWidth}:{targetHeight}:(ow-iw)/2:(oh-ih)/2," +
+                        $"format=yuva444p,colorchannelmixer=aa={finalOpacity}[{vTag}];"
+                    );
+                    laneVideoInputs.Add(vTag);
+
+                    // --- Volume and Muted Logic (Audio) ---
+                    string audioSourceFilter = "";
+                    string audioInputTag = "";
+                    bool usesAnullsrc = false;
+                    string finalVolume = fragment.Muted ? "0" : fragment.Volume.ToString(CultureInfo.InvariantCulture);
+                    string durationStr = fragment.Duration.TotalSeconds.ToString(CultureInfo.InvariantCulture);
+                    // If the fragment is an Image or Text, we need to generate silent audio for its duration.
+                    if (fragment.FragmentType == Fragment.Type.Image || fragment.FragmentType == Fragment.Type.Text||fragment.FilePath.EndsWith(".gif"))
+                    {
+                        // Generate silence within the filter_complex for the duration of the clip.
+                        string anullSrcTag = $"anull{laneCount}c{i}";
+                        filterComplex.AppendLine(
+                            $"anullsrc=channel_layout=stereo:sample_rate=48000:duration={durationStr}[{anullSrcTag}];"
+                        );
+                        audioInputTag = anullSrcTag; // Source is the generated silence
+                        usesAnullsrc = true;
+                    }
+                    else
+                    {
+                        // Audio comes from the input file (Video or Audio Fragment)
+                        audioInputTag = $"{fileIndex}:a";
+                    }
+
+                    if (usesAnullsrc)
+                    {
+                        // Stream starts at 0, lasts for durationStr (already set in anullsrc).
+                        filterComplex.Append(
+                            $"[{audioInputTag}]asetpts=N/SR/TB,volume={finalVolume}[{aTag}];"
+                        );
+                    }
+                    else
+                    {
+                        // Stream comes from a file, requiring trimming and time manipulation.
+                        filterComplex.Append(
+                            // We use the file's duration to avoid issues with fragmented streams
+                            $"[{audioInputTag}]atrim=start={fragment.StartTime.TotalSeconds.ToString(CultureInfo.InvariantCulture)}:duration={durationStr}," +
+                            $"asetpts=N/SR/TB,volume={finalVolume}[{aTag}];"
+                        );
+                    }
+
+
+                   
+                    laneAudioInputs.Add($"[{aTag}]");
+                }
+
+                // --- Stitch Lane Video Clips with XFADE ---
+                string currentVTag = laneVideoInputs.First();
+                for (int i = 1; i < laneVideoInputs.Count; i++)
+                {
+                    string nextVTag = laneVideoInputs[i];
+                    string outputVTag = (i == laneVideoInputs.Count - 1) ? $"lane{laneCount}v" : $"tmp_v_{laneCount}_{i}";
+
+                    // Calculate the exact offset for the xfade (time where the second clip starts relative to the timeline start).
+                    // This is complex and relies on pre-calculating the final time of the combined clips *before* the transition.
+                    // For a robust system, you'd calculate total duration, then subtract transition duration.
+                    // Simplified approach using a placeholder:
+                    double offset = (lane.Fragments[i - 1].Position.TotalSeconds + lane.Fragments[i - 1].Fragment.Duration.TotalSeconds) - transitionDuration;
+
+                    // XFade: duration=T (how long the fade lasts), offset=O (when the fade starts in the new stream)
+                    // Assumes a simple 'fade' transition type for now.
+                    filterComplex.AppendLine(
+                        $"[{currentVTag}][{nextVTag}]xfade=transition=fade:duration={transitionDuration.ToString(CultureInfo.InvariantCulture)}:offset={offset.ToString(CultureInfo.InvariantCulture)}[{outputVTag}];"
+                    );
+                    currentVTag = outputVTag;
+                }
+
+                // --- Concatenate Lane Audio Clips (AMIX is not used here) ---
+                // We use concat for audio to avoid mixing issues when clips are sequential
+                string concatATag = $"lane{laneCount}a";
+                filterComplex.AppendLine($"{string.Join("", laneAudioInputs)}concat=n={laneAudioInputs.Count}:v=0:a=1[{concatATag}];");
+
+                audioMixInputs.Append($"[{concatATag}]");
+                laneCount++;
+            }
+
+            // --- Final Composition (Overlay and Mix) ---
+            // 1. Video Overlay (Layering lanes)
+            string finalVideoTag = "final_v";
+            string currentOverlayVTag = "lane0v";
+
+            for (int i = 1; i < laneCount; i++)
+            {
+                string nextVTag = $"lane{i}v";
+                string outputVTag = (i == laneCount - 1) ? finalVideoTag : $"tmp_overlay{i}";
+                // Overlay using the alpha channel built with yuva444p
+                filterComplex.AppendLine($"[{currentOverlayVTag}][{nextVTag}]overlay=x=0:y=0:format=auto:eof_action=pass[{outputVTag}];");
+                currentOverlayVTag = outputVTag;
+            }
+            if (laneCount == 1) finalVideoTag = "lane0v"; // If only one lane, use it directly
+
+            // 2. Audio Mix (Combine all lane audio streams)
+            string finalAudioTag = "final_a";
+            if (laneCount > 1)
+            {
+                filterComplex.AppendLine($"{audioMixInputs}amix=inputs={laneCount}:normalize=0[final_a];");
+            }
+            else
+            {
+                filterComplex.AppendLine($"[lane0a]acopy[{finalAudioTag}];");
+            }
+            // --- PASS 1: SCFG to Intermediate MOV (main work) ---
+            string pass1Args =
+                $"{inputArgs.ToString().Trim()} -filter_complex \"{filterComplex.ToString().Trim()}\" " +
+                // Map the final streams
+                $"-map \"[{finalVideoTag}]\" -map \"[{finalAudioTag}]\" " +
+                // Use a high-quality, alpha-supporting format
+                $"-c:v prores_ks -pix_fmt yuva444p -c:a pcm_s16le -ar 48000 -y \"{intermediateMovPath}\"";
+
+            await RunFFmpegAsync(pass1Args);
+
+            // --- PASS 2: Convert MOV to Final MP4 (strips alpha, applies final compression) ---
+            // Note: We use your RenderParams settings here.
+            string pass2Args =
+                $"-i \"{intermediateMovPath}\" -r {args.Fps} " +
+                // We must manually add the pix_fmt yuv420p to strip the alpha channel
+                $"-pix_fmt yuv420p " +
+                $"{args.BuildArguments(outputPath)}";
+
+            // Note: args.BuildArguments already includes -c:v libx264, etc.
+
+            await RunFFmpegAsync(pass2Args);
+
+            // Cleanup
+            // try { Directory.Delete(tempDir, true); } catch { /* ignore */ }
+        }
 
 
     }

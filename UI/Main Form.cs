@@ -37,7 +37,7 @@ namespace VideoEditor.UI
                 Project.History.Execute(operation);
             }catch(Exception ex)
             {
-                MessageBox.Show($"Operation failed: {ex.Message}\n\n{ex.StackTrace}");
+                MessageBox.Show($"Operation failed: {ex.Message}");
             }
         }
         public Main_Form()

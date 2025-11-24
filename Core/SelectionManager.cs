@@ -63,7 +63,7 @@ namespace VideoEditor.Core
                         {
                             double yCoef = ((y + Params.LanePanelScrollY - Params.TimeRulerHeight) / (Params.LaneHeight + Params.LaneSpacing))- laneIndex;
                             double xCoef = (time.TotalSeconds - transition.From.EndPosition.TotalSeconds) / (transition.Duration.TotalSeconds);
-                            if (yCoef > xCoef)
+                            if (yCoef < (1-xCoef))
                             {
                                 SelectedFragment = transition.From;
                             }

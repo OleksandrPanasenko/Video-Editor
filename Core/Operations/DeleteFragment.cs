@@ -18,6 +18,10 @@ namespace Core.Operations
         }
         public void Apply()
         {
+            if(Lane.HasTransition(FragmentPlacement))
+            {
+                throw new InvalidOperationException("Fragment has transitions; delete transitions first");
+            }
             Lane.RemoveFragment(FragmentPlacement);
         }
         public void Undo()

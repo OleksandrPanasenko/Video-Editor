@@ -30,12 +30,27 @@ namespace Core.Operations
 
             OldTimeStart = FragmentPlacement.Position;
             NewTimeStart = newTime-(oldTime-OldTimeStart);
-            
+            if(newTime<TimeSpan.Zero)
+            {
+                NewTimeStart = TimeSpan.Zero;
+            }
         }
         public void Apply()
         {
+            if (OldLane.HasTransition(FragmentPlacement)){
+                throw new InvalidOperationException("Can't move fragment: Fragment has transitions.");
+            }
             OldLane.RemoveFragment(FragmentPlacement);
-            NewLane.AddFragment(FragmentPlacement,NewTimeStart);
+            try
+            {
+                NewLane.AddFragment(FragmentPlacement, NewTimeStart);
+            }
+            catch (InvalidOperationException e)
+            {
+                //Revert
+                OldLane.AddFragment(FragmentPlacement, OldTimeStart);
+                throw new InvalidOperationException("Can't move fragment: "+e.Message);
+            }
         }
 
         public void Undo()

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Editor", "UI\Video Editor.csproj", "{C68DA57E-4396-4F6F-B263-ED5A24BF282D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{543FF927-797B-47C2-98DA-2FBC8C0B9CB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C68DA57E-4396-4F6F-B263-ED5A24BF282D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C68DA57E-4396-4F6F-B263-ED5A24BF282D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C68DA57E-4396-4F6F-B263-ED5A24BF282D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{543FF927-797B-47C2-98DA-2FBC8C0B9CB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{543FF927-797B-47C2-98DA-2FBC8C0B9CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{543FF927-797B-47C2-98DA-2FBC8C0B9CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{543FF927-797B-47C2-98DA-2FBC8C0B9CB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

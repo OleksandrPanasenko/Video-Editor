@@ -140,5 +140,17 @@ namespace VideoEditor.Core
             }
             return null;
         }
+        public bool HasEndTransition(FragmentPlacement fragment)
+        {
+            return Transitions.Any(Transitions => Transitions.From == fragment);
+        }
+        public bool HasStartTransition(FragmentPlacement fragment)
+        {
+            return Transitions.Any(Transitions => Transitions.To == fragment);
+        }
+        public bool HasTransition(FragmentPlacement fragment)
+        {
+            return HasStartTransition(fragment) || HasEndTransition(fragment);
+        }
     }
 }

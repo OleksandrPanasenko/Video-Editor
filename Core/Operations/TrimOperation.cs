@@ -8,6 +8,7 @@
         private readonly TimeSpan NewStart;
         private readonly TimeSpan NewEnd;
         private readonly FragmentPlacement FragmentPlacement;
+        private readonly Lane Lane;
         public TrimOperation(Project project, FragmentPlacement fragmentPlacement, TimeSpan newStart, TimeSpan newEnd)
         {
             if (newStart > newEnd)
@@ -22,9 +23,18 @@
 
             NewStart = (newStart >= TimeSpan.Zero||fragment.FragmentType==Fragment.Type.Image) ? newStart:TimeSpan.Zero;//Image can be extended
             NewEnd = (newEnd<=fragment.FileDuration || fragment.FragmentType == Fragment.Type.Image) ? newEnd : fragment.FileDuration;//Image can be extended
+            Lane=project.Lanes.FirstOrDefault(l => l.Fragments.Contains(FragmentPlacement));
         }
         public void Apply()
         {
+            if(Lane != null && Lane.HasEndTransition(FragmentPlacement)&&NewEnd!=OldEnd)
+            {
+                throw new InvalidOperationException("Can't trim fragment: Fragment has end transitions.");
+            }
+            else if (Lane != null && Lane.HasStartTransition(FragmentPlacement) && NewStart != OldStart)
+            {
+                throw new InvalidOperationException("Can't trim fragment: Fragment has start transitions.");
+            }
             FragmentPlacement.Position += (NewStart - OldStart);
 
             FragmentPlacement.Fragment.StartTime = NewStart;

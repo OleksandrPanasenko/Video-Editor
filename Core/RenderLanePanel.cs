@@ -158,6 +158,10 @@ namespace VideoEditor.Core
                     {
                         g.FillPolygon(brush, pointsSecond);
                     }
+                    using (var pen = new Pen(Config.LaneBorderColor))
+                    {
+                        g.DrawLine(pen, BottomLeft,TopRight);
+                    }
                 }
             }
         }
