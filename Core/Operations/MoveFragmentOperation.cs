@@ -56,7 +56,7 @@ namespace Core.Operations
         public void Undo()
         {
             NewLane.RemoveFragment(FragmentPlacement);
-            OldLane.AddFragment(FragmentPlacement, NewTimeStart);
+            OldLane.AddFragment(FragmentPlacement, OldTimeStart);
         }
     }
 }

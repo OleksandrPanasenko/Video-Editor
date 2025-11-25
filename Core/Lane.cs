@@ -46,6 +46,10 @@ namespace VideoEditor.Core
                     //Try to append before
                     if (this[First.Position - NewPlacement.Fragment.Duration, First.Position] == null)
                     {
+                        if (First.Position - NewPlacement.Fragment.Duration < TimeSpan.Zero)
+                        {
+                            throw new InvalidOperationException("Cannot add fragment: Time position is before the start of the timeline.");
+                        }
                         position = First.Position - NewPlacement.Fragment.Duration;
                     }
                     else

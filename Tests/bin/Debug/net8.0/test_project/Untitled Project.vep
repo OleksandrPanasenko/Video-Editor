@@ -1,0 +1,92 @@
+{
+  "Name": "Untitled Project",
+  "Path": "test_project",
+  "Configuration": {
+    "WindowWidth": 1280,
+    "WindowHeight": 720,
+    "WindowX": 0,
+    "WindowY": 0,
+    "LeftTabIndex": 0,
+    "RightTabIndex": 0,
+    "LanePanelWidth": 1000,
+    "LanePanelHeight": 400,
+    "LanePanelScrollX": 0,
+    "LanePanelScrollY": 0,
+    "LaneHeight": 100,
+    "LaneSpacing": 10,
+    "LaneTimeScale": 100,
+    "LaneLabelWidth": 100,
+    "TimeRulerHeight": 48,
+    "TimeMarkerWidth": 4
+  },
+  "SelectionManager": {
+    "SelectedFragment": null,
+    "SelectedTime": null,
+    "DragStartTime": null,
+    "SelectedLane": null,
+    "MemoryFragment": null,
+    "PendingEdit": 0,
+    "Params": {
+      "WindowWidth": 1280,
+      "WindowHeight": 720,
+      "WindowX": 0,
+      "WindowY": 0,
+      "LeftTabIndex": 0,
+      "RightTabIndex": 0,
+      "LanePanelWidth": 1000,
+      "LanePanelHeight": 400,
+      "LanePanelScrollX": 0,
+      "LanePanelScrollY": 0,
+      "LaneHeight": 100,
+      "LaneSpacing": 10,
+      "LaneTimeScale": 100,
+      "LaneLabelWidth": 100,
+      "TimeRulerHeight": 48,
+      "TimeMarkerWidth": 4
+    }
+  },
+  "Lanes": [
+    {
+      "Name": "Lane 1",
+      "Fragments": [
+        {
+          "Fragment": {
+            "FilePath": "a.mp4",
+            "FileDuration": "00:00:00",
+            "FileName": null,
+            "Subtitles": false,
+            "Name": "a.mp4",
+            "StartTime": "00:00:00",
+            "EndTime": "00:00:10",
+            "Duration": "00:00:10",
+            "Muted": false,
+            "Hidden": false,
+            "Width": 0,
+            "Height": 0,
+            "Effects": [],
+            "OutTransition": null,
+            "FragmentType": 0
+          },
+          "X": 0,
+          "Y": 0,
+          "Position": "00:00:00",
+          "EndPosition": "00:00:10"
+        }
+      ],
+      "Transitions": [],
+      "LaneStart": "00:00:00",
+      "LaneEnd": "00:00:10"
+    },
+    {
+      "Name": "Lane 2",
+      "Fragments": [],
+      "Transitions": [],
+      "LaneStart": null,
+      "LaneEnd": null
+    }
+  ],
+  "MediaFiles": [],
+  "ProjectStart": "00:00:00",
+  "ProjectEnd": "00:00:10",
+  "ProjectDuration": "00:00:10"
+}

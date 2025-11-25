@@ -23,7 +23,7 @@ namespace VideoEditor.Core.Operations
             {
                 if (a.Position != b.EndPosition)
                 {
-                    throw new ArgumentException("Fragments are not adjacent");
+                    throw new InvalidOperationException("Fragments are not adjacent");
                 }
                 else
                 {
@@ -53,18 +53,16 @@ namespace VideoEditor.Core.Operations
         public void Apply()
         {
             
-            new TrimOperation(Project, A, A.Fragment.StartTime, A.Fragment.EndTime - Transition.Duration).Apply();
-            new TrimOperation(Project, B, B.Fragment.StartTime+Transition.Duration, B.Fragment.EndTime).Apply();
-            new MoveFragmentOperation(Lane, Lane, B.Position, B.Position - Transition.Duration).Apply();
+            A.Fragment.EndTime=A.Fragment.EndTime-Transition.Duration;
+            B.Fragment.StartTime=B.Fragment.StartTime+Transition.Duration;
             Lane.Transitions.Add(Transition);
         }
 
         public void Undo()
         {
             Lane.Transitions.Remove(Transition);
-            new MoveFragmentOperation(Lane, Lane, B.Position, B.Position + Transition.Duration).Apply();
-            new TrimOperation(Project, B, B.Fragment.StartTime - Transition.Duration, B.Fragment.EndTime).Apply();
-            new TrimOperation(Project, A, A.Fragment.StartTime, A.Fragment.EndTime + Transition.Duration).Apply();
+            A.Fragment.EndTime = A.Fragment.EndTime + Transition.Duration;
+            B.Fragment.StartTime = B.Fragment.StartTime - Transition.Duration;
         }
     }
 }
