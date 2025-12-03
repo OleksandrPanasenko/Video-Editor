@@ -55,8 +55,8 @@ namespace Video_Editor
             RenderArgs.AudioFormat = comboBox4.Text;
             if (ProjectContext.CurrentProject != null){
 
-                new RenderProgress().Show();
-                await ProjectContext.CurrentProject.engine.RenderOptimizedSCFGAsync(RenderArgs,Path.Join(textBox2.Text, $"{textBox1.Text}.{comboBox5.Text}"));
+                //new RenderProgress().Show();
+                await ProjectContext.CurrentProject.engine.RenderAsync(RenderArgs,Path.Join(textBox2.Text, $"{textBox1.Text}.{comboBox5.Text}"));
 
             }
         }

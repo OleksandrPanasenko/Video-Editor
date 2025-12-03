@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "9v+s5v5UMJSaLmOfTK9qI4mK2gr6KTNYDcuVbx4WWa/nDRgnXEgaY5W7F0LVbHYuPm/dbjksEGnJYjpDhqdpEQ==",
+  "dgSpecHash": "vEykpP9erDdSAf2Ukxfd6j0voLyGDPZNtbaBN7p4MVbJFBb9aCa/be7RCy/Orn0VXQLapRjOQMoLZTngp5i92A==",
   "success": true,
   "projectFilePath": "D:\\Study\\VideoEditor\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\op101\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.8\\microsoft.win32.systemevents.9.0.8.nupkg.sha512",
+    "C:\\Users\\op101\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
     "C:\\Users\\op101\\.nuget\\packages\\system.drawing.common\\9.0.8\\system.drawing.common.9.0.8.nupkg.sha512",
     "C:\\Users\\op101\\.nuget\\packages\\system.io.pipelines\\9.0.10\\system.io.pipelines.9.0.10.nupkg.sha512",
     "C:\\Users\\op101\\.nuget\\packages\\system.text.encodings.web\\9.0.10\\system.text.encodings.web.9.0.10.nupkg.sha512",

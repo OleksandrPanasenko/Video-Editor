@@ -1767,6 +1767,7 @@
             // 
             numericUpDown1.Dock = DockStyle.Left;
             numericUpDown1.Location = new Point(92, 36);
+            numericUpDown1.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(54, 27);
             numericUpDown1.TabIndex = 1;
@@ -1888,7 +1889,7 @@
             // 
             listBox2.FormattingEnabled = true;
             listBox2.ItemHeight = 37;
-            listBox2.Items.AddRange(new object[] { "Text", "Text", "Text" });
+            listBox2.Items.AddRange(new object[] { "Simple text", "Title", "Highlight" });
             listBox2.Location = new Point(0, 1);
             listBox2.Name = "listBox2";
             listBox2.Size = new Size(192, 226);

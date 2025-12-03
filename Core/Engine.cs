@@ -24,43 +24,7 @@ namespace Videoeditor.Core {
         //Render video
         public async Task RenderAsync(RenderParams args, string outputPath)
         {
-            //Create temporary directory for render
-            string tempDir = Path.Combine(_project.Path, "cache", "Render_" + Guid.NewGuid());
-            Directory.CreateDirectory(tempDir);
-
-            //File to store addresses of temporary videos
-            var listFile = Path.Combine(tempDir, "list.txt");
-            var sb = new StringBuilder();
-
-            //Iterate through all lanes and fragments
-            int index = 0;
-            foreach (var fragmentPlacement in ProjectContext.CurrentProject.Lanes[0].Fragments)
-            {
-                var fragment=fragmentPlacement.Fragment;
-                string input = fragment.FilePath;
-                string tempOut = Path.Combine(tempDir, $"part{index++}.mov");
-
-                // Convert all inputs to video clips
-                if (fragment.FragmentType == Fragment.Type.Image)
-                {
-                    await RunFFmpegAsync($"-framerate 1 -t {fragment.Duration.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)} -i \"{input}\" -vf scale=1280:720,fps=30,format=yuva420p -y \"{tempOut}\"");
-                }
-                else if (fragment.FragmentType == Fragment.Type.Audio)
-                {
-                    await RunFFmpegAsync($"-f lavfi -i \"color=c=black:s=1280x720:d={fragment.Duration.TotalSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)}\" -i \"{input}\" -shortest -c:v libx264 -c:a aac -y \"{tempOut}\"");
-                }
-                else // video
-                {
-                    await RunFFmpegAsync($"-i \"{input}\" -vf scale=1280:720,fps=30 -c:v libx264 -c:a aac -y \"{tempOut}\"");
-                }
-
-                sb.AppendLine($"file '{tempOut.Replace("\\", "/")}'");
-            }
-
-            await File.WriteAllTextAsync(listFile, sb.ToString());
-
-            // Concatenate all parts
-            await RunFFmpegAsync($"-f concat -safe 0 -i \"{listFile}\" -c:v libx264 -pix_fmt yuva420p -c:a aac -y \"{outputPath}\"");
+            await RenderPreviewAsync(outputPath, 0, _project.ProjectDuration.TotalSeconds);
         }
 
         private static async Task RunFFmpegAsync(string arguments)
@@ -102,6 +66,7 @@ namespace Videoeditor.Core {
 
         public async Task RenderPreviewAsync(string outputPath, double timestamp, double durationSeconds)
         {
+            
             //Delete to ensure the new preview is displayed
             File.Delete(outputPath);
             
@@ -170,7 +135,7 @@ namespace Videoeditor.Core {
                             "-map 0:v -map 1:a "+
                             $"-shortest -c:v prores_ks -pix_fmt yuva444p10le -profile:v 4 -c:a pcm_s16le -ar 48000 -y \"{tempOut}\"";
                     }
-                    else // video
+                    else if(fragment.FragmentType == Fragment.Type.Video)
                     {
                         if (Path.GetExtension(fragment.FilePath) == ".gif")
                         {
@@ -188,9 +153,28 @@ namespace Videoeditor.Core {
                             args =
                             $"-ss {(fragment.StartTime.TotalSeconds + clipStart).ToString(CultureInfo.InvariantCulture)} " +
                             $"-t {clipLengthStr} " +
-                            $"-i \"{input}\" -vf scale=640:360,fps=15 -c:v prores_ks -pix_fmt yuva444p10le -profile:v 4 -c:a pcm_s16le -ar 48000 -y \"{tempOut}\"";
+                            $"-i \"{input}\" "+
+                            $"-f lavfi -i \"anullsrc=channel_layout=stereo:sample_rate=48000:duration={clipLengthStr}\" "+//silent audio
+                            "-map 0:v -map 0:a? -map 1:a " +//map audio if exists otherwise silent audio
+                            $"-vf scale=640:360,fps=15 -c:v prores_ks -pix_fmt yuva444p10le -profile:v 4 -c:a pcm_s16le -ar 48000 -y \"{tempOut}\"";
                         }
 
+                    }
+                    else //if(fragment.FragmentType == Fragment.Type.Text)
+                    {
+                        string color = laneIndex == 0 ? "black" : "black@0.0";
+                        var text = (TextFragment)fragment;
+                        string colorSource = $"-f lavfi -i \"color=c={color}:s=640x360:d={clipLengthStr}\"";
+                        string audioSource = $"-f lavfi -i \"anullsrc=channel_layout=stereo:sample_rate=48000:duration={clipLengthStr}\"";
+                        string textFilter = $"drawtext=text='{text.Text.Replace("'", @"\'")}':" + // Escape single quotes in text
+                                            $"font='{text.FontName}':" + // Path to .ttf or .otf file
+                                            $"fontsize={text.FontSize}:" +
+                                            $"fontcolor={text.TextColor.Name}:" + // e.g., 'white', '0xRRGGBB'
+                                            $"x=(w-text_w)/2:y=(h-text_h)/2";
+                        args = $"{colorSource} {audioSource} " +
+                               $"-filter_complex \"[0:v]{textFilter},fps=15[v]\" " + // Apply drawtext to the color source
+                               $"-map \"[v]\" -map 1:a " + // Map video from filter_complex and audio from anullsrc
+                               $"-shortest -c:v prores_ks -pix_fmt yuva444p10le -profile:v 4 -c:a pcm_s16le -ar 48000 -y \"{tempOut}\"";
                     }
 
                     //Make gap (empty video with silence)
@@ -407,7 +391,7 @@ namespace Videoeditor.Core {
                 for (int i = 1; i < laneVideoInputs.Count; i++)
                 {
                     string nextVTag = laneVideoInputs[i];
-                    string outputVTag = (i == laneVideoInputs.Count - 1) ? $"lane{laneCount}v" : $"tmp_v_{laneCount}_{i}";
+                    string outputVTag = $"tmp_v_{laneCount}_{i}";
 
                     // Calculate the exact offset for the xfade (time where the second clip starts relative to the timeline start).
                     // This is complex and relies on pre-calculating the final time of the combined clips *before* the transition.
@@ -422,10 +406,20 @@ namespace Videoeditor.Core {
                     );
                     currentVTag = outputVTag;
                 }
-
+                string finalLaneVTag = $"lane{laneCount}v";
+                
+                filterComplex.AppendLine($"[{currentVTag}]copy[{finalLaneVTag}];");
                 // --- Concatenate Lane Audio Clips (AMIX is not used here) ---
                 // We use concat for audio to avoid mixing issues when clips are sequential
                 string concatATag = $"lane{laneCount}a";
+                if (laneAudioInputs.Count == 1)
+                {
+                    filterComplex.AppendLine($"[{laneAudioInputs.First()}]acopy[{concatATag}];");
+                }
+                else if(laneAudioInputs.Count>1)
+                {
+                    string audioInputsJoined = string.Join("", laneAudioInputs.Select(tag => $"[{tag}]"));
+                }
                 filterComplex.AppendLine($"{string.Join("", laneAudioInputs)}concat=n={laneAudioInputs.Count}:v=0:a=1[{concatATag}];");
 
                 audioMixInputs.Append($"[{concatATag}]");
@@ -445,13 +439,13 @@ namespace Videoeditor.Core {
                 filterComplex.AppendLine($"[{currentOverlayVTag}][{nextVTag}]overlay=x=0:y=0:format=auto:eof_action=pass[{outputVTag}];");
                 currentOverlayVTag = outputVTag;
             }
-            if (laneCount == 1) finalVideoTag = "lane0v"; // If only one lane, use it directly
+            if (laneCount == 1) filterComplex.Append($"[{currentOverlayVTag}]copy[{finalVideoTag}];");// If only one lane, use it directly
 
             // 2. Audio Mix (Combine all lane audio streams)
             string finalAudioTag = "final_a";
             if (laneCount > 1)
             {
-                filterComplex.AppendLine($"{audioMixInputs}amix=inputs={laneCount}:normalize=0[final_a];");
+                filterComplex.AppendLine($"{audioMixInputs}amix=inputs={laneCount}:normalize=0[{finalAudioTag}];");
             }
             else
             {

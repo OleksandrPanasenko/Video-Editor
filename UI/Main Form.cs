@@ -506,8 +506,8 @@ namespace VideoEditor.UI
 
             button26.BackColor = fragment.TextColor;
 
-            textBox10.Text = fragmentPlacement.Position.ToString();
-            textBox11.Text = fragmentPlacement.EndPosition.ToString();
+            textBox10.Text = fragmentPlacement.Fragment.StartTime.ToString();
+            textBox11.Text = fragmentPlacement.Fragment.EndTime.ToString();
 
             numericUpDown2.Value = (decimal)fragmentPlacement.X;
             numericUpDown3.Value = (decimal)fragmentPlacement.Y;
@@ -1136,7 +1136,7 @@ namespace VideoEditor.UI
                     await Project.engine.RenderPreviewAsync($"preview{preview_index}.mp4", (previewTimePosition).TotalSeconds, 1.0);
                     axWindowsMediaPlayer1.URL = Path.GetFullPath($"preview{preview_index}.mp4");
                     axWindowsMediaPlayer1.Ctlcontrols.play();
-                    MessageBox.Show(axWindowsMediaPlayer1.URL);
+                    //MessageBox.Show(axWindowsMediaPlayer1.URL);
                     Project.SelectionManager.SelectedTime += TimeSpan.FromSeconds(1);
 
                     LanePanel.Update();
@@ -1366,17 +1366,34 @@ namespace VideoEditor.UI
 
         private void textBox11_Leave(object sender, EventArgs e)
         {
-            //End text
+            var fragmentPlacement = Project.SelectionManager.SelectedFragment;
+            if (fragmentPlacement == null) return;
+            TimeSpan? te = SetEnd(textBox10, textBox11, TimeSpan.Zero);
+            if (te != null)
+            {
+                var Trim = new TrimOperation(Project, fragmentPlacement, fragmentPlacement.Fragment.StartTime, (TimeSpan)te);
+                Execute(Trim);
+                RefreshFragmentParametres();
+
+                LanePanel.Update();
+                LanePanel.Refresh();
+            }
         }
 
         private void textBox10_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if(e.KeyChar== (char)Keys.Enter)
+            {
+                textBox10_Leave(sender, e);
+            }
         }
 
         private void textBox11_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                textBox11_Leave(sender, e);
+            }
         }
         //--------Position
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
@@ -1813,9 +1830,10 @@ namespace VideoEditor.UI
         private void listBox2_MouseDown(object sender, MouseEventArgs e)
         {
             //Drag text fragment
-            int index = listBox1.IndexFromPoint(e.Location);
+            int index = listBox2.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches)
             {
+                
                 listBox2.DoDragDrop(index, DragDropEffects.Copy);
             }
         }

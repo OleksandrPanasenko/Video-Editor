@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 using VideoEditor.Core;
 
@@ -26,12 +26,12 @@ namespace VideoEditor.Infrastructure
         {
             if (!File.Exists(RecentPath)) return new RecentProjectsList();
             var json = File.ReadAllText(RecentPath);
-            return JsonSerializer.Deserialize<RecentProjectsList>(json);
+            return JsonConvert.DeserializeObject<RecentProjectsList>(json);
         }
 
         public static void SaveRecent(RecentProjectsList list)
         {
-            var json = JsonSerializer.Serialize(list, new JsonSerializerOptions { WriteIndented = true });
+            var json = JsonConvert.SerializeObject(list, new JsonSerializerSettings { Formatting = Formatting.Indented});
             File.WriteAllText(RecentPath, json);
         }
 
@@ -39,14 +39,14 @@ namespace VideoEditor.Infrastructure
         {
             //Resolve code not loading issue
             if (!File.Exists(SettingsPath)) return null;
-            var options = new JsonSerializerOptions
+            var options = new JsonSerializerSettings
             {
                 Converters = { new ColorJsonConverter() }
             };
             var json = File.ReadAllText(SettingsPath);
 
             try {
-                return JsonSerializer.Deserialize<AppSettings>(json, options);
+                return JsonConvert.DeserializeObject<AppSettings>(json, options);
             }catch(JsonException ex)
             {
                 return null;
@@ -60,13 +60,13 @@ namespace VideoEditor.Infrastructure
         public static void SaveSettings(AppSettings settings)
         {
             //Custom save to fix color not loading
-            var options = new JsonSerializerOptions
+            var options = new JsonSerializerSettings
             {
                 Converters = { new ColorJsonConverter() },
-                WriteIndented = true // Makes the JSON file easier to read
+                Formatting=Formatting.Indented // Makes the JSON file easier to read
             };
 
-            var json = JsonSerializer.Serialize(settings, options);
+            var json = JsonConvert.SerializeObject(settings, options);
             File.WriteAllText(SettingsPath, json);
         }
 

@@ -56,6 +56,8 @@ namespace VideoEditor.Core
         public enum Type {Video, Audio, Image, Text, Unknown};
         public static Type FileType(string path)
         {
+            if (string.IsNullOrEmpty(path))
+                return Type.Unknown;
             string ext = System.IO.Path.GetExtension(path).ToLowerInvariant();
 
             if (new[] { ".mp4", ".avi", ".mkv", ".mov", ".gif" }.Contains(ext))

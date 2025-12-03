@@ -1,4 +1,6 @@
 {
+  "History": {},
+  "engine": {},
   "Name": "Untitled Project",
   "Path": "test_project",
   "Configuration": {
@@ -10,11 +12,11 @@
     "RightTabIndex": 0,
     "LanePanelWidth": 1000,
     "LanePanelHeight": 400,
-    "LanePanelScrollX": 0,
-    "LanePanelScrollY": 0,
+    "LanePanelScrollX": 0.0,
+    "LanePanelScrollY": 0.0,
     "LaneHeight": 100,
     "LaneSpacing": 10,
-    "LaneTimeScale": 100,
+    "LaneTimeScale": 100.0,
     "LaneLabelWidth": 100,
     "TimeRulerHeight": 48,
     "TimeMarkerWidth": 4
@@ -35,11 +37,11 @@
       "RightTabIndex": 0,
       "LanePanelWidth": 1000,
       "LanePanelHeight": 400,
-      "LanePanelScrollX": 0,
-      "LanePanelScrollY": 0,
+      "LanePanelScrollX": 0.0,
+      "LanePanelScrollY": 0.0,
       "LaneHeight": 100,
       "LaneSpacing": 10,
-      "LaneTimeScale": 100,
+      "LaneTimeScale": 100.0,
       "LaneLabelWidth": 100,
       "TimeRulerHeight": 48,
       "TimeMarkerWidth": 4
@@ -51,6 +53,8 @@
       "Fragments": [
         {
           "Fragment": {
+            "Volume": 1.0,
+            "Opacity": 1.0,
             "FilePath": "a.mp4",
             "FileDuration": "00:00:00",
             "FileName": null,
@@ -61,14 +65,14 @@
             "Duration": "00:00:10",
             "Muted": false,
             "Hidden": false,
-            "Width": 0,
-            "Height": 0,
+            "Width": 0.0,
+            "Height": 0.0,
             "Effects": [],
             "OutTransition": null,
             "FragmentType": 0
           },
-          "X": 0,
-          "Y": 0,
+          "X": 0.0,
+          "Y": 0.0,
           "Position": "00:00:00",
           "EndPosition": "00:00:10"
         }

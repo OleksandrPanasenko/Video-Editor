@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 using VideoEditor.Core;
 
@@ -14,31 +14,27 @@ namespace VideoEditor.Infrastructure
         public static void Save(Project project, string path)
         {
             project.Path = path;
-            var json = JsonSerializer.Serialize(project, new JsonSerializerOptions
+            var json = JsonConvert.SerializeObject(project, new JsonSerializerSettings
             {
-                WriteIndented = true
+                Formatting = Formatting.Indented,
+                TypeNameHandling = TypeNameHandling.Auto
             });
             
             string file_path = Path.Combine(path, project.Name+".vep");
             File.WriteAllText(file_path, json);
         }
 
-        /*public static void SaveAs(Project project, string path)
-        {
-            project.Path=path;
-            var json = JsonSerializer.Serialize(project, new JsonSerializerOptions
-            {
-                WriteIndented = true
-            });
-            File.WriteAllText(path, json);
-        }*/
 
         public static Project Load(string path)
         {
             if (!File.Exists(path)) throw new FileNotFoundException(path);
-
+            var settings= new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+                ObjectCreationHandling = ObjectCreationHandling.Replace
+            };
             var json = File.ReadAllText(path);
-            Project project= JsonSerializer.Deserialize<Project>(json);
+            Project project= JsonConvert.DeserializeObject<Project>(json,settings);
             if (project == null) throw new FileNotFoundException();
             //project.Path = path;
             //To avoid endless serialization

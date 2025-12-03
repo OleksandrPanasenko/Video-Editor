@@ -4,7 +4,7 @@ using System.Diagnostics.Tracing;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace VideoEditor.Core
@@ -24,6 +24,7 @@ namespace VideoEditor.Core
 
         //public bool IsDragging { get; set; }
         public ProjectConfig? Params { get { return Project.Configuration; }}
+        
         public SelectionManager(Project project)
         {
             Project = project;

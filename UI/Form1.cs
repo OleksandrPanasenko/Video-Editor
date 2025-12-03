@@ -9,16 +9,20 @@ namespace VideoEditor.UI
         public Form1()
         {
             InitializeComponent();
+            RefreshRecent();
+        }
+        public void RefreshRecent()
+        {
             listBox1.Items.Clear();
-            var recentList=ConfigManager.LoadRecent();
-            if (recentList != null) {
+            var recentList = ConfigManager.LoadRecent();
+            if (recentList != null)
+            {
                 foreach (var recent in recentList.Recent)
                 {
                     listBox1.Items.Add($"{recent.Name} - {recent.LastSaved.ToString()}");
                 }
             }
         }
-
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -98,11 +102,12 @@ namespace VideoEditor.UI
                     // Open the main editor
                     OpenMain();
                 }
-                catch (FileNotFoundException)
+                catch 
                 {
                     RecentProjects.Recent.Remove(RecentProject);
                     ConfigManager.SaveRecent(RecentProjects);
                     MessageBox.Show("Project not found");
+                    RefreshRecent();
                 }
             }
         }

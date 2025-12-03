@@ -53,10 +53,15 @@ D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\Video Editor.runtimeconfig.json
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\Video Editor.dll
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\Video Editor.pdb
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\Microsoft.Win32.SystemEvents.dll
+D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.Drawing.Common.dll
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.Private.Windows.Core.dll
+D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.IO.Pipelines.dll
+D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.Text.Encodings.Web.dll
+D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.Text.Json.dll
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\Xabe.FFmpeg.dll
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\Core.dll
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\Infrastructure.dll
 D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\Core.pdb
@@ -67,9 +72,14 @@ D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video Editor.csproj.AssemblyRef
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Interop.WMPLib.dll
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\AxInterop.WMPLib.dll
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video Editor.csproj.ResolveComReference.cache
+D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.CreateProject.resources
+D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.ExportForm.resources
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\VideoEditor.UI.Form1.resources
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\VideoEditor.UI.Main_Form.resources
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.Properties.Resources.resources
+D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.RenderProgress.resources
+D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.Select_Effect_Type.resources
+D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.Settings.resources
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video Editor.csproj.GenerateResource.cache
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video Editor.GeneratedMSBuildEditorConfig.editorconfig
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video Editor.AssemblyInfoInputs.cache
@@ -82,12 +92,3 @@ D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\refint\Video Editor.dll
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video Editor.pdb
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video Editor.genruntimeconfig.cache
 D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\ref\Video Editor.dll
-D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.CreateProject.resources
-D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.IO.Pipelines.dll
-D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.Text.Encodings.Web.dll
-D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\System.Text.Json.dll
-D:\Study\VideoEditor\UI\bin\Debug\net8.0-windows\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
-D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.RenderProgress.resources
-D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.Settings.resources
-D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.ExportForm.resources
-D:\Study\VideoEditor\UI\obj\Debug\net8.0-windows\Video_Editor.Select_Effect_Type.resources

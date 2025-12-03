@@ -30,7 +30,7 @@ namespace Core.Operations
 
             OldTimeStart = FragmentPlacement.Position;
             NewTimeStart = newTime-(oldTime-OldTimeStart);
-            if(newTime<TimeSpan.Zero)
+            if(NewTimeStart<TimeSpan.Zero)
             {
                 NewTimeStart = TimeSpan.Zero;
             }

@@ -21,8 +21,8 @@
             OldStart = fragment.StartTime;
             OldEnd = fragment.EndTime;
 
-            NewStart = (newStart >= TimeSpan.Zero||fragment.FragmentType==Fragment.Type.Image) ? newStart:TimeSpan.Zero;//Image can be extended
-            NewEnd = (newEnd<=fragment.FileDuration || fragment.FragmentType == Fragment.Type.Image) ? newEnd : fragment.FileDuration;//Image can be extended
+            NewStart = (newStart >= TimeSpan.Zero||fragment.FragmentType==Fragment.Type.Image|| fragment.FragmentType == Fragment.Type.Text) ? newStart:TimeSpan.Zero;//Image can be extended
+            NewEnd = (newEnd<=fragment.FileDuration || fragment.FragmentType == Fragment.Type.Image || fragment.FragmentType == Fragment.Type.Text) ? newEnd : fragment.FileDuration;//Image can be extended
             Lane=project.Lanes.FirstOrDefault(l => l.Fragments.Contains(FragmentPlacement));
         }
         public void Apply()

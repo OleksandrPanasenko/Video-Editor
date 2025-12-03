@@ -33,6 +33,14 @@
           }
         }
       },
+      "Newtonsoft.Json/13.0.4": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.4.30916"
+          }
+        }
+      },
       "System.Drawing.Common/9.0.8": {
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "9.0.8"
@@ -94,6 +102,7 @@
       },
       "Core/1.0.0": {
         "dependencies": {
+          "Newtonsoft.Json": "13.0.4",
           "System.Drawing.Common": "9.0.8",
           "System.Text.Json": "9.0.10",
           "Xabe.FFmpeg": "6.0.2"
@@ -104,7 +113,8 @@
       },
       "Infrastructure/1.0.0": {
         "dependencies": {
-          "Core": "1.0.0"
+          "Core": "1.0.0",
+          "Newtonsoft.Json": "13.0.4"
         },
         "runtime": {
           "Infrastructure.dll": {}
@@ -140,6 +150,13 @@
       "sha512": "sha512-64oQBN8I8EOcyHGNt6+rlcqm4tlcKfqOpswtBCJZnpzBQ15L6IFKqjnbjbOWBpG9wKq9A/aC2LFSmSqplbwTYA==",
       "path": "microsoft.win32.systemevents/9.0.8",
       "hashPath": "microsoft.win32.systemevents.9.0.8.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pdgNNMai3zv51W5aq268sujXUyx7SNdE2bj1wZcWjAQrKMFZV260lbqYop1d2GM67JI1huLRwxo9ZqnfF/lC6A==",
+      "path": "newtonsoft.json/13.0.4",
+      "hashPath": "newtonsoft.json.13.0.4.nupkg.sha512"
     },
     "System.Drawing.Common/9.0.8": {
       "type": "package",
