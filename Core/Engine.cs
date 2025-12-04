@@ -15,18 +15,13 @@ using Xabe.FFmpeg;
 namespace Videoeditor.Core { 
     public class Engine
     {
-
         Project _project { get => ProjectContext.CurrentProject; }
-        public void EditVideo(string inputPath, string outputPath)
-        {
-            
-        }
         //Render video
         public async Task RenderAsync(RenderParams args, string outputPath)
         {
             await RenderPreviewAsync(outputPath, 0, _project.ProjectDuration.TotalSeconds);
         }
-
+        //Execute ffmpeg process
         private static async Task RunFFmpegAsync(string arguments)
         {
             var ffmpegPath = @"C:\ffmpeg\ffmpeg.exe";
@@ -55,18 +50,9 @@ namespace Videoeditor.Core {
                 throw new Exception($"FFmpeg failed with code {proc.ExitCode}: {stdErr}");
         }
 
-        public void RenderVideo(string projectFilePath, string outputPath)
-        {
-            // Example: Render a video project (this is a placeholder, actual implementation may vary)
-            // Load project file and render using FFmpeg or other libraries
-            /*var ffmpeg = new NReco.VideoConverter.FFMpegConverter();
-            ffmpeg.ConvertMedia(projectFilePath, null, outputPath, null);*/
-
-        }
-
+        //Render preview fragment
         public async Task RenderPreviewAsync(string outputPath, double timestamp, double durationSeconds)
         {
-            
             //Delete to ensure the new preview is displayed
             File.Delete(outputPath);
             
@@ -462,19 +448,16 @@ namespace Videoeditor.Core {
             await RunFFmpegAsync(pass1Args);
 
             // --- PASS 2: Convert MOV to Final MP4 (strips alpha, applies final compression) ---
-            // Note: We use your RenderParams settings here.
             string pass2Args =
                 $"-i \"{intermediateMovPath}\" -r {args.Fps} " +
-                // We must manually add the pix_fmt yuv420p to strip the alpha channel
+                // manually add the pix_fmt yuv420p to strip the alpha channel
                 $"-pix_fmt yuv420p " +
                 $"{args.BuildArguments(outputPath)}";
-
-            // Note: args.BuildArguments already includes -c:v libx264, etc.
 
             await RunFFmpegAsync(pass2Args);
 
             // Cleanup
-            // try { Directory.Delete(tempDir, true); } catch { /* ignore */ }
+            try { Directory.Delete(tempDir, true); } catch { /* ignore */ }
         }
 
 

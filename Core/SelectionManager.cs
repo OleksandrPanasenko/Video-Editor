@@ -11,13 +11,16 @@ namespace VideoEditor.Core
 {
     public class SelectionManager
     {
+        //Manages selected fragment, time and lane in the project
         [JsonIgnore]
         public Project? Project { get; set; }
+        //Selected items
         public FragmentPlacement? SelectedFragment { get; set; }
         public TimeSpan? SelectedTime { get; set; }
+        // For drag operations
         public TimeSpan? DragStartTime { get; set; }
         public Lane? SelectedLane { get; set; }
-
+        //For memory operations (cut/copy/paste)
         public FragmentPlacement? MemoryFragment { get; set; }
         public enum EditAction {None, Move, Split, TrimStart, TrimEnd }
         public EditAction PendingEdit { get; set; }= EditAction.None;
@@ -29,12 +32,14 @@ namespace VideoEditor.Core
         {
             Project = project;
         }
+        // Clear current selection
         public void ClearSelection()
         {
             SelectedFragment = null;
             SelectedTime = null;
             SelectedLane = null;
         }
+        //Select at point
         public void SelectObject(int x, int y)
         {
             if (y < 0 || x < 0 || y > Params.LanePanelHeight || x > Params.LanePanelWidth)
@@ -43,6 +48,7 @@ namespace VideoEditor.Core
             }
             else
             {
+                //Select lane
                 int laneIndex = (int)((y + Params.LanePanelScrollY-Params.TimeRulerHeight) / (Params.LaneHeight + Params.LaneSpacing));
                 if (laneIndex >= Project.Lanes.Count)
                 {
@@ -52,11 +58,12 @@ namespace VideoEditor.Core
                 SelectedLane = Project.Lanes[laneIndex];
                 if (x > Params.LaneLabelWidth)
                 {
-
+                    //Select time
                     TimeSpan time = TimeSpan.FromSeconds((x + Params.LanePanelScrollX - Params.LaneLabelWidth) / Params.LaneTimeScale);// Maybe make ScrollX in seconds?
                     SelectedTime = time;
+                    //Select fragment
                     SelectedFragment = SelectedLane[time];
-
+                    //Select fragment if pressed at transition
                     if (SelectedFragment == null&&time!=null)
                     {
                         var transition= SelectedLane.GetTransitionFromTime(time);
@@ -82,7 +89,7 @@ namespace VideoEditor.Core
                 }
             }
         }
-        public void SelectTime(int x, int y)
+        public void SelectTime(int x, int y) //Select time from lane panel coordinates
         {
             if (y > Params.TimeRulerHeight || x > Params.LaneLabelWidth || y < Params.LanePanelHeight || x < Params.LanePanelWidth)
             {

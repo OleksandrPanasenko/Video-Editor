@@ -15,10 +15,10 @@ namespace VideoEditor.Core.Transitions
     [JsonDerivedType(typeof(SlideRightTransition), "slideright")]
     public interface ITransition
     {
-        public TimeSpan Duration { get; set; }
-        public FragmentPlacement From { get; set; }
-        public FragmentPlacement To { get; set; }
-        public string Name { get; }
-        public string GetArgs();
+        public TimeSpan Duration { get; set; }// Transition duration
+        public FragmentPlacement From { get; set; }// Starting fragment placement
+        public FragmentPlacement To { get; set; }// Ending fragment placement
+        public string Name { get; }// Transition name
+        public string GetArgs();// Get arguments for ffmpeg
     }
 }

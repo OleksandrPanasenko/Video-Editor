@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -56,7 +57,11 @@ namespace Video_Editor
             if (ProjectContext.CurrentProject != null){
 
                 //new RenderProgress().Show();
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
                 await ProjectContext.CurrentProject.engine.RenderAsync(RenderArgs,Path.Join(textBox2.Text, $"{textBox1.Text}.{comboBox5.Text}"));
+                stopwatch.Stop();
+                MessageBox.Show($"Export completed in {stopwatch.Elapsed.TotalSeconds} seconds.","Export",MessageBoxButtons.OK,MessageBoxIcon.Information);
 
             }
         }

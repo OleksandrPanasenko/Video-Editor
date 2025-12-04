@@ -36,8 +36,8 @@ namespace VideoEditor.Core.Operations
         }
         public void Apply()
         {
-            //Add check for overlapping of end fragment
-            TimeSpan difference=NewDuration - OldDuration;
+            //Add check for end fragment overlapping
+            TimeSpan difference =NewDuration - OldDuration;
             if (difference == TimeSpan.Zero) return;
             else
             {

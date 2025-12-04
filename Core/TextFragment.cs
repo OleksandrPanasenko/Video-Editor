@@ -9,7 +9,7 @@ namespace VideoEditor.Core
 {
     public class TextFragment: Fragment
     {
-        public TextFragment() { }
+        public TextFragment() { } //Empty constructor for deserialization
         public TextFragment(string text, string fontName, int fontSize, Color fontColor)
         {
             this.Text = text;
@@ -17,7 +17,7 @@ namespace VideoEditor.Core
             this.FontSize = fontSize;
             this.FontName = fontName;
         }
-        public string Text { get; set; }
+        public string Text { get; set; }// Text content
         public string FontName { get; set; } = "Arial";
         public int FontSize { get; set; } = 24;
         public Color TextColor { get; set; } = Color.White;

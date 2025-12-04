@@ -14,12 +14,12 @@ namespace VideoEditor.Core.Effects
     [JsonDerivedType(typeof(GrayScaleEffect), typeDiscriminator: "GrayScale")]
     public interface IEffect
     {
-        public string Name { get; }
-        public double Intensity { get; set; }
-        public string LabelIntensity { get;}
-        public TimeSpan StartTime { get; set; }
-        public TimeSpan EndTime { get; set; }
-        public string GetArgs();
+        public string Name { get; } // Effect name
+        public double Intensity { get; set; }// Effect intensity from 0 to 1
+        public string LabelIntensity { get;}// Actual intensity to display
+        public TimeSpan StartTime { get; set; }// Effect start time relative to file start
+        public TimeSpan EndTime { get; set; }// Effect end time relative to file start
+        public string GetArgs();//Get arguments for ffmpeg
         
     }
 }

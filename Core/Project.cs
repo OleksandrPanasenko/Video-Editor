@@ -7,28 +7,25 @@ namespace VideoEditor.Core
     //project metadata, files and lanes
     public class Project
     {
-        public string Name { get; set; }
-        public string Path { get; set; }
-        public ProjectConfig Configuration { get; set; } = new ProjectConfig();
-        public SelectionManager SelectionManager { get; set; }
-        public List<Lane> Lanes { get; set; } = new List<Lane>();
-        public List<string> MediaFiles { get; set; } = new List<string>();
-        public History History;
+        public string Name { get; set; } // Project name
+        public string Path { get; set; } // Project file path
+        public ProjectConfig Configuration { get; set; } = new ProjectConfig(); // Project configuration settings
+        public SelectionManager SelectionManager { get; set; } //Manages selected items in the project
+        public List<Lane> Lanes { get; set; } = new List<Lane>(); // List of lanes in the project
+        public List<string> MediaFiles { get; set; } = new List<string>(); // List of media file paths used in the project
+        public History History; // Undo/Redo history manager
         [JsonIgnore]
-        public Graphics Graphics { get; set; }
-        public Engine engine = new Engine();
-        public TimeSpan ProjectStart{ get {
-                var Start=TimeSpan.Zero;
-                foreach (var lane in Lanes)
-                {
-                    if (lane.LaneStart!=null & lane.LaneStart > Start)
-                    {
-                        Start = (TimeSpan)lane.LaneStart;
-                    }
-                }
-                return Start;
-            } }
-        public TimeSpan ProjectEnd
+        public Graphics Graphics { get; set; } // Graphics context for rendering
+        public Engine engine = new Engine(); // Video processing engine
+        public TimeSpan ProjectStart // Project start time across all lanes
+        { 
+            get 
+            {
+                TimeSpan? minStart = Lanes.Min(lane => lane.LaneStart);
+                return minStart ?? TimeSpan.Zero;
+            } 
+        }
+        public TimeSpan ProjectEnd // Project end time across all lanes
         {
             get
             {
@@ -72,7 +69,7 @@ namespace VideoEditor.Core
         {
             Lanes.RemoveAt(laneNumber);
         }
-        //Render 
+        //Render lane panel
         public void RenderPanel()
         {
             var renderer = new RenderLanePanel(this, Graphics);

@@ -4,8 +4,11 @@ namespace VideoEditor.Core
 {
     public class Lane
     {
+        //Lane contains fragments and transitions between them
         public string Name { get; set; }
+        // List of fragments in the lane
         public List<FragmentPlacement> Fragments { get; set; } = new List<FragmentPlacement>();
+        // List of transitions in the lane
         public List<ITransition> Transitions { get; set; } = new List<ITransition>();
         public TimeSpan? LaneStart { get { return Fragments.Count == 0 ? null : Fragments[0].Position; } }
         public TimeSpan? LaneEnd { get { return Fragments.Count == 0 ? null : Fragments[Fragments.Count-1].EndPosition; } }
@@ -13,6 +16,7 @@ namespace VideoEditor.Core
         {
             Name = name;
         }
+        //Add fragment at the end
         public void AddFragment(FragmentPlacement NewPlacement)
         {
             Fragments.Add(NewPlacement);
@@ -21,6 +25,7 @@ namespace VideoEditor.Core
                 NewPlacement.Position = Fragments[Fragments.Count - 2].EndPosition;
             }
         }
+        //Add fragment at specific position, adjusting position if overlapping
         public void AddFragment(FragmentPlacement NewPlacement, TimeSpan position)
         {
             if (this[position,position+ NewPlacement.Fragment.Duration] != null)
@@ -83,6 +88,7 @@ namespace VideoEditor.Core
             placement.Position = newPosition;
             Fragments = Fragments.OrderBy(f => f.Position).ToList();
         }
+        // Indexer to get fragment at specific time
         public FragmentPlacement this[TimeSpan time]
         {
             get
@@ -97,6 +103,7 @@ namespace VideoEditor.Core
                 return null; // No fragment found at the specified time
             }
         }
+        // Indexer to get fragments overlapping a time range
         public List<FragmentPlacement> this[TimeSpan timeStart, TimeSpan timeEnd]
         {
             get
@@ -113,7 +120,7 @@ namespace VideoEditor.Core
                 else return null; // No fragment found in the specified time range
             }
         }
-
+        // Create a deep copy of the lane
         public Lane DeepCopy()
         {
             Lane NewLane = new Lane(Name + "_copy");
@@ -133,6 +140,7 @@ namespace VideoEditor.Core
             }
             return true;
         }
+        // Get transition at specific time
         public ITransition GetTransitionFromTime(TimeSpan time)
         {
             foreach(var transition in Transitions)

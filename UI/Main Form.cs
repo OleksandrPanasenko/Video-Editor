@@ -1,4 +1,5 @@
-﻿using Core.Operations;
+﻿using AxWMPLib;
+using Core.Operations;
 using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
@@ -1132,15 +1133,30 @@ namespace VideoEditor.UI
                 int preview_index = 0;
                 while (IsRenderPreviewin)
                 {
-                    TimeSpan previewTimePosition = (TimeSpan)Project.SelectionManager.SelectedTime;
-                    await Project.engine.RenderPreviewAsync($"preview{preview_index}.mp4", (previewTimePosition).TotalSeconds, 1.0);
-                    axWindowsMediaPlayer1.URL = Path.GetFullPath($"preview{preview_index}.mp4");
-                    axWindowsMediaPlayer1.Ctlcontrols.play();
-                    //MessageBox.Show(axWindowsMediaPlayer1.URL);
-                    Project.SelectionManager.SelectedTime += TimeSpan.FromSeconds(1);
+                    try
+                    {
+                        TimeSpan previewTimePosition = (TimeSpan)Project.SelectionManager.SelectedTime;
+                        await Project.engine.RenderPreviewAsync($"preview{preview_index}.mp4", (previewTimePosition).TotalSeconds, 1.0);
+                        axWindowsMediaPlayer1.URL = Path.GetFullPath($"preview{preview_index}.mp4");
+                        axWindowsMediaPlayer1.Ctlcontrols.play();
+                        //MessageBox.Show(axWindowsMediaPlayer1.URL);
+                        Project.SelectionManager.SelectedTime += TimeSpan.FromSeconds(1);
 
-                    LanePanel.Update();
-                    LanePanel.Refresh();
+                        LanePanel.Update();
+                        LanePanel.Refresh();
+                    }catch
+                    {
+                        if (Project.SelectionManager.SelectedTime < Project.ProjectEnd)
+                        {
+                            Project.SelectionManager.SelectedTime += TimeSpan.FromSeconds(1);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Preview render error");
+                            IsRenderPreviewin = false;
+                        }
+                        
+                    }
                 }
             }
             else
@@ -1152,6 +1168,7 @@ namespace VideoEditor.UI
         }
         private void button42_Click(object sender, EventArgs e)
         {
+            axWindowsMediaPlayer1.Ctlcontrols.stop();
             IsRenderPreviewin = false;
         }
 
@@ -1833,11 +1850,8 @@ namespace VideoEditor.UI
             int index = listBox2.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches)
             {
-                
                 listBox2.DoDragDrop(index, DragDropEffects.Copy);
             }
         }
-
-        
     }
 }

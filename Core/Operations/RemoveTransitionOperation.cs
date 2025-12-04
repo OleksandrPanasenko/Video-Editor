@@ -24,7 +24,6 @@ namespace VideoEditor.Core.Operations
                 var existing= Lane[Transition.To.EndPosition, Transition.To.EndPosition + Transition.Duration];
                 if (existing != null)
                 {
-                    //Account from void fragment and 
                     if ((existing.Count == 1 && (existing[0] == Transition.To || existing[0].Position== Transition.To.EndPosition+Transition.Duration)) ||
                         (existing.Count == 2 && (existing[0] == Transition.To && existing[1].Position == Transition.To.EndPosition+Transition.Duration)))
                     throw new InvalidOperationException("Cannot remove transition, next fragment is occupied");
